@@ -3,19 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE REALONES STORE | Neural Commerce Interface</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+    <title>THE REALONES STORE | Luxury Fashion Interface</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Playfair+Display:wght@400;600;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
+            /* Luxury + Tech Hybrid Palette */
+            --gold: #d4af37;
+            --gold-light: #f4e4ba;
+            --charcoal: #1a1a1a;
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --cream: #f8f5f0;
+            
+            /* Tech Accents */
             --neon-cyan: #00f7ff;
-            --neon-magenta: #ff00ea;
-            --neon-amber: #ffb300;
-            --deep-void: #050505;
-            --glass-bg: rgba(5, 5, 5, 0.7);
-            --glass-border: rgba(0, 247, 255, 0.2);
-            --gradient-1: linear-gradient(135deg, #00f7ff 0%, #ff00ea 50%, #ffb300 100%);
-            --gradient-2: linear-gradient(45deg, #ff00ea 0%, #7c3aed 100%);
-            --gradient-3: conic-gradient(from 0deg, #00f7ff, #ff00ea, #ffb300, #00f7ff);
+            --neon-gold: #ffd700;
+            --glass-bg: rgba(26, 26, 26, 0.85);
+            --glass-border: rgba(212, 175, 55, 0.3);
+            
+            /* Gradients */
+            --gradient-luxury: linear-gradient(135deg, #d4af37 0%, #f4e4ba 50%, #d4af37 100%);
+            --gradient-tech: linear-gradient(135deg, rgba(0,247,255,0.1) 0%, rgba(212,175,55,0.1) 100%);
         }
 
         * {
@@ -26,13 +34,12 @@
 
         body {
             font-family: 'Rajdhani', sans-serif;
-            background: var(--deep-void);
-            color: #fff;
+            background: var(--black);
+            color: var(--white);
             overflow-x: hidden;
-            min-height: 100vh;
         }
 
-        /* Animated Background Grid */
+        /* Animated Cyber Grid Background */
         .cyber-grid {
             position: fixed;
             top: 0;
@@ -40,9 +47,9 @@
             width: 100%;
             height: 100%;
             background-image: 
-                linear-gradient(rgba(0, 247, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 247, 255, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
+                linear-gradient(rgba(212, 175, 55, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212, 175, 55, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
             animation: gridPulse 8s ease-in-out infinite;
             pointer-events: none;
             z-index: -2;
@@ -53,7 +60,7 @@
             50% { opacity: 0.6; }
         }
 
-        /* Floating Particles */
+        /* Floating Gold Particles */
         .particles {
             position: fixed;
             top: 0;
@@ -67,15 +74,1800 @@
 
         .particle {
             position: absolute;
-            width: 4px;
-            height: 4px;
-            background: var(--neon-cyan);
+            width: 3px;
+            height: 3px;
+            background: var(--gold);
             border-radius: 50%;
-            box-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
-            animation: float 15s infinite;
-            opacity: 0.6;
+            box-shadow: 0 0 10px var(--gold), 0 0 20px var(--gold);
+            animation: float 20s infinite;
+            opacity: 0.4;
         }
 
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.4; }
+            90% { opacity: 0.4; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* Navigation - Glassmorphism Luxury */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 1rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--gradient-luxury);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.3s;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gradient-luxury);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::before {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--gold);
+            transition: all 0.3s;
+        }
+
+        .cart-icon:hover {
+            transform: scale(1.1);
+            text-shadow: 0 0 15px var(--gold);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--gold);
+            color: var(--black);
+            font-size: 0.7rem;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); box-shadow: 0 0 10px var(--gold); }
+        }
+
+        /* Hero Section - Kinetic Luxury */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--charcoal) 0%, var(--black) 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50%" x="50%" dominant-baseline="middle" text-anchor="middle" font-family="serif" font-size="15" fill="rgba(212,175,55,0.02)">THE REALONES</text></svg>');
+            background-size: 400px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+        }
+
+        .hero-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            letter-spacing: 3px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .kinetic-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .kinetic-title .char {
+            display: inline-block;
+            animation: kineticLuxury 3s ease-in-out infinite;
+            animation-delay: calc(var(--char-index) * 0.08s);
+            background: var(--gradient-luxury);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        @keyframes kineticLuxury {
+            0%, 100% { transform: translateY(0); text-shadow: 0 0 20px rgba(212,175,55,0.3); }
+            50% { transform: translateY(-10px); text-shadow: 0 0 40px rgba(212,175,55,0.6); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.8);
+            font-weight: 300;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-luxury);
+            transition: left 0.4s;
+            z-index: -1;
+        }
+
+        .cta-button:hover {
+            color: var(--black);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+        }
+
+        .cta-button:hover::before {
+            left: 0;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-tag {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--gold);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .section-line {
+            width: 80px;
+            height: 2px;
+            background: var(--gradient-luxury);
+            margin: 0 auto;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        /* Bento Grid Products - Tech Layout with Luxury Styling */
+        .products-section {
+            background: linear-gradient(180deg, var(--black) 0%, var(--charcoal) 100%);
+            margin: 0;
+            max-width: 100%;
+            padding: 6rem 2rem;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-auto-rows: minmax(300px, auto);
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .bento-item {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .bento-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(212,175,55,0.1), transparent, rgba(212,175,55,0.1));
+            opacity: 0;
+            transition: opacity 0.5s;
+            z-index: -1;
+            animation: rotate 15s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .bento-item:hover::before {
+            opacity: 1;
+        }
+
+        .bento-item:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: var(--gold);
+            box-shadow: 0 30px 60px rgba(212, 175, 55, 0.15), inset 0 0 30px rgba(212, 175, 55, 0.05);
+        }
+
+        .bento-item.featured {
+            grid-column: span 6;
+            grid-row: span 2;
+        }
+
+        .bento-item.large {
+            grid-column: span 4;
+            grid-row: span 2;
+        }
+
+        .bento-item.medium {
+            grid-column: span 3;
+            grid-row: span 1;
+        }
+
+        .bento-item.small {
+            grid-column: span 3;
+            grid-row: span 1;
+        }
+
+        .product-image-container {
+            width: 100%;
+            height: 70%;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, rgba(212,175,55,0.1) 0%, rgba(0,0,0,0.3) 100%);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s;
+            filter: brightness(0.9) contrast(1.05);
+        }
+
+        .bento-item:hover .product-image {
+            filter: brightness(1.1) contrast(1.1);
+            transform: scale(1.08);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--gold);
+            color: var(--black);
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-radius: 5px;
+            z-index: 2;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .product-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-category {
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .product-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: var(--white);
+            line-height: 1.3;
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+            margin-bottom: 1rem;
+        }
+
+        .add-to-cart-btn {
+            width: 100%;
+            padding: 1rem;
+            background: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s;
+            border-radius: 8px;
+        }
+
+        .add-to-cart-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gold);
+            transition: left 0.4s;
+            z-index: -1;
+        }
+
+        .add-to-cart-btn:hover::before {
+            left: 0;
+        }
+
+        .add-to-cart-btn:hover {
+            color: var(--black);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Product Modal - 3D Viewer */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(15px);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: var(--glass-bg);
+            border: 2px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 3rem;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 0 60px rgba(212, 175, 55, 0.2);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-modal:hover {
+            background: var(--gold);
+            color: var(--black);
+            transform: rotate(90deg);
+        }
+
+        .product-viewer-3d {
+            width: 100%;
+            height: 400px;
+            background: radial-gradient(circle at center, rgba(212,175,55,0.1) 0%, transparent 70%);
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            border: 1px solid var(--glass-border);
+        }
+
+        .product-3d-image {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 20px;
+            animation: float3d 6s ease-in-out infinite;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 40px rgba(212,175,55,0.3);
+        }
+
+        @keyframes float3d {
+            0%, 100% { transform: translateY(0) rotateY(0deg); }
+            50% { transform: translateY(-20px) rotateY(5deg); }
+        }
+
+        .modal-product-details h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .modal-product-price {
+            font-size: 1.8rem;
+            color: var(--gold);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .modal-product-desc {
+            line-height: 1.8;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            color: rgba(255,255,255,0.8);
+            font-size: 1.1rem;
+        }
+
+        .checkout-btn-modal {
+            width: 100%;
+            padding: 1.2rem;
+            background: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .checkout-btn-modal::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-luxury);
+            transition: left 0.4s;
+            z-index: -1;
+        }
+
+        .checkout-btn-modal:hover::before {
+            left: 0;
+        }
+
+        .checkout-btn-modal:hover {
+            color: var(--black);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+        }
+
+        /* Cart Sidebar - Glassmorphism */
+        .cart-container {
+            position: fixed;
+            right: -450px;
+            top: 0;
+            width: 450px;
+            height: 100vh;
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            border-left: 2px solid var(--glass-border);
+            z-index: 1500;
+            transition: right 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            padding: 2rem;
+            overflow-y: auto;
+            box-shadow: -10px 0 40px rgba(0,0,0,0.5);
+        }
+
+        .cart-container.open {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid var(--glass-border);
+        }
+
+        .cart-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .close-cart {
+            background: none;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-cart:hover {
+            background: var(--gold);
+            color: var(--black);
+            transform: rotate(90deg);
+        }
+
+        .cart-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .cart-item:hover {
+            border-color: var(--gold);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
+            transform: translateX(5px);
+        }
+
+        .cart-item-image {
+            width: 70px;
+            height: 70px;
+            border-radius: 10px;
+            object-fit: cover;
+            border: 2px solid var(--gold);
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+            color: var(--white);
+        }
+
+        .cart-item-price {
+            color: var(--gold);
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .qty-btn {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 700;
+        }
+
+        .qty-btn:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        .remove-item {
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.5);
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .remove-item:hover {
+            color: #ff4444;
+            transform: scale(1.1);
+        }
+
+        .cart-total-section {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px solid var(--glass-border);
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .total-amount {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--gold);
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 1.3rem;
+            background: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .checkout-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-luxury);
+            transition: left 0.4s;
+            z-index: -1;
+        }
+
+        .checkout-btn:hover::before {
+            left: 0;
+        }
+
+        .checkout-btn:hover {
+            color: var(--black);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .checkout-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        /* Cart Toggle Button - Floating */
+        .cart-toggle {
+            position: fixed;
+            right: 2rem;
+            bottom: 2rem;
+            width: 70px;
+            height: 70px;
+            background: var(--glass-bg);
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            color: var(--gold);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1400;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .cart-toggle:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.5);
+        }
+
+        /* AI Assistant - Neural Interface */
+        .ai-assistant {
+            position: fixed;
+            left: 2rem;
+            bottom: 2rem;
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-luxury);
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1400;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+            transition: all 0.3s;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .ai-assistant:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.8);
+        }
+
+        .ai-chat {
+            position: fixed;
+            left: 2rem;
+            bottom: 90px;
+            width: 350px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            z-index: 1400;
+            display: none;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .ai-chat.active {
+            display: block;
+            animation: slideUp 0.4s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .ai-chat h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .ai-chat p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* About Section - Split Design */
+        .about {
+            background: linear-gradient(135deg, var(--charcoal) 0%, var(--black) 100%);
+            padding: 6rem 2rem;
+            margin: 0;
+            max-width: 100%;
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .about-image {
+            height: 600px;
+            background: linear-gradient(135deg, rgba(212,175,55,0.1) 0%, rgba(0,0,0,0.3) 100%);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .about-image::before {
+            content: 'THE REALONES';
+            position: absolute;
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            opacity: 0.1;
+            letter-spacing: 10px;
+            color: var(--gold);
+        }
+
+        .about-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            margin-bottom: 2rem;
+            color: var(--gold);
+            line-height: 1.2;
+        }
+
+        .about-content p {
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
+            color: rgba(255,255,255,0.85);
+            font-size: 1.05rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .feature-list li {
+            padding: 0.8rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: var(--gold-light);
+            font-size: 1.05rem;
+        }
+
+        .feature-list li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+
+        /* Delivery Info - Cards */
+        .delivery-info {
+            background: linear-gradient(135deg, rgba(212,175,55,0.05) 0%, var(--black) 100%);
+            padding: 6rem 2rem;
+            text-align: center;
+            margin: 0;
+            max-width: 100%;
+        }
+
+        .delivery-grid {
+            max-width: 1200px;
+            margin: 4rem auto 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .delivery-card {
+            background: var(--glass-bg);
+            padding: 2.5rem;
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            transition: all 0.4s;
+            backdrop-filter: blur(10px);
+        }
+
+        .delivery-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.1);
+        }
+
+        .delivery-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--gold);
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .delivery-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .delivery-card p {
+            color: rgba(255,255,255,0.7);
+            line-height: 1.7;
+        }
+
+        /* Footer - Elegant Dark */
+        footer {
+            background: var(--black);
+            color: white;
+            padding: 5rem 2rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            text-align: left;
+            margin-bottom: 4rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+        }
+
+        .footer-section p, .footer-section a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            line-height: 1.9;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--gold);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            border: 1px solid var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            border-radius: 50%;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .social-links a:hover {
+            background: var(--gold);
+            color: var(--black);
+            transform: translateY(-3px);
+        }
+
+        .payment-methods {
+            margin-top: 1.5rem;
+            padding: 0.8rem 1.2rem;
+            background: rgba(212, 175, 55, 0.1);
+            display: inline-block;
+            border-radius: 8px;
+            font-weight: 700;
+            color: var(--gold);
+            border: 1px solid var(--glass-border);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--glass-border);
+            padding-top: 2rem;
+            color: rgba(255,255,255,0.4);
+            font-size: 0.9rem;
+        }
+
+        /* Loading Screen */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--black);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-ring {
+            width: 80px;
+            height: 80px;
+            border: 3px solid transparent;
+            border-top-color: var(--gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            position: relative;
+        }
+
+        .loader-ring::before,
+        .loader-ring::after {
+            content: '';
+            position: absolute;
+            border: 3px solid transparent;
+            border-radius: 50%;
+        }
+
+        .loader-ring::before {
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border-top-color: rgba(212,175,55,0.5);
+            animation: spin 2s linear infinite reverse;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Scanline Effect - Subtle Tech */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 0, 0, 0.03) 3px,
+                rgba(0, 0, 0, 0.03) 4px
+            );
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.4;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .bento-item.featured { grid-column: span 6; }
+            .bento-item.large { grid-column: span 6; }
+            .bento-item.medium, .bento-item.small { grid-column: span 6; }
+            
+            .about-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .about-image { height: 400px; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .bento-item.featured,
+            .bento-item.large,
+            .bento-item.medium,
+            .bento-item.small {
+                grid-column: span 1;
+            }
+            
+            .cart-container {
+                width: 100%;
+                right: -100%;
+            }
+            
+            .hero-title { font-size: 2.5rem; }
+            
+            .section-title { font-size: 2rem; }
+            
+            .about-content h2 { font-size: 2rem; }
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn { display: block; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-ring"></div>
+    </div>
+
+    <!-- Scanlines Overlay -->
+    <div class="scanlines"></div>
+
+    <!-- Animated Background -->
+    <div class="cyber-grid"></div>
+    <div class="particles" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo" data-text="THE REALONES">THE REALONES</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#collection">Collection</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="cart-icon" onclick="toggleCart()">
+            🛒
+            <span class="cart-count" id="cartCount">0</span>
+        </div>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-subtitle">Est. 2024 • Kenya Coast</div>
+            <h1 class="kinetic-title" id="kineticTitle">THE REALONES<br>STORE</h1>
+            <p class="hero-description">
+                Where luxury meets innovation. Curated fashion for the modern woman who demands excellence. 
+                Premium dresses, exclusive sets, and statement pieces delivered from Mombasa to Nairobi and beyond.
+            </p>
+            <a href="#collection" class="cta-button">Explore Collection</a>
+        </div>
+    </section>
+
+    <!-- Products Section with Bento Grid -->
+    <section class="products-section" id="collection">
+        <div class="section-header">
+            <div class="section-tag">Curated Excellence</div>
+            <h2 class="section-title">The Collection</h2>
+            <div class="section-line"></div>
+        </div>
+        
+        <div class="bento-grid" id="productGrid">
+            <!-- Products will be dynamically inserted here -->
+        </div>
+    </section>
+
+    <!-- Product Modal -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">×</button>
+            <div class="product-viewer-3d">
+                <img src="" alt="Product" class="product-3d-image" id="modalProductImage" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22><rect width=%22300%22 height=%22300%22 fill=%22%231a1a1a%22/><text x=%2250%%22 y=%2250%%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23d4af37%22 font-family=%22serif%22 font-size=%2220%22>THE REALONES</text></svg>'">
+            </div>
+            <div class="modal-product-details">
+                <h2 id="modalProductName"></h2>
+                <p class="modal-product-price" id="modalProductPrice"></p>
+                <p class="modal-product-desc" id="modalProductDesc"></p>
+                <button class="checkout-btn-modal" onclick="addToCartFromModal()">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-container" id="cartContainer">
+        <div class="cart-header">
+            <h3 class="cart-title">Your Cart</h3>
+            <button class="close-cart" onclick="toggleCart()">×</button>
+        </div>
+        <div id="cartItems">
+            <p style="text-align: center; color: rgba(255,255,255,0.5); margin-top: 3rem; font-style: italic;">Your cart is empty</p>
+        </div>
+        <div class="cart-total-section">
+            <div class="total-amount" id="cartTotal">KES 0</div>
+            <button class="checkout-btn" id="checkoutBtn" onclick="checkout()">Checkout via WhatsApp</button>
+        </div>
+    </div>
+
+    <!-- Cart Toggle Button -->
+    <button class="cart-toggle" onclick="toggleCart()">
+        🛒
+        <span class="cart-count" id="cartToggleCount" style="position: absolute; top: -5px; right: -5px; background: var(--gold); color: var(--black); width: 25px; height: 25px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 0.8rem; font-weight: 700;">0</span>
+    </button>
+
+    <!-- AI Assistant -->
+    <div class="ai-assistant" onclick="toggleAI()">🤖</div>
+    <div class="ai-chat" id="aiChat">
+        <h4>AI Shopping Assistant</h4>
+        <p>Hello! I'm your luxury shopping companion. I can help you find products, check availability, and optimize your cart. What are you looking for today?</p>
+    </div>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-container">
+            <div class="about-image">
+                <div style="text-align: center; color: var(--gold);">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">✦</div>
+                    <div style="font-family: 'Playfair Display', serif; font-size: 2rem;">THE REALONES</div>
+                </div>
+            </div>
+            <div class="about-content">
+                <h2>Crafted for the Kenyan Woman</h2>
+                <p>
+                    THE REALONES STORE represents the pinnacle of coastal fashion. Born in Mombasa and designed for 
+                    the discerning woman across Kenya, we bring you exclusive pieces that blend international luxury 
+                    with local elegance.
+                </p>
+                <p>
+                    Every piece in our collection is selected to ensure you stand out—whether you're attending a 
+                    boardroom meeting in Nairobi, a beach wedding in Diani, or a gala in Kisumu.
+                </p>
+                <ul class="feature-list">
+                    <li>Authentic designer pieces & quality guaranteed</li>
+                    <li>Same-day delivery available in Mombasa & Nairobi</li>
+                    <li>Secure M-Pesa payments accepted</li>
+                    <li>Personal styling consultations available</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Delivery Info -->
+    <section class="delivery-info" id="contact">
+        <div class="section-header">
+            <div class="section-tag">Service Excellence</div>
+            <h2 class="section-title">Shopping Made Simple</h2>
+            <div class="section-line"></div>
+        </div>
+        
+        <div class="delivery-grid">
+            <div class="delivery-card">
+                <div class="delivery-icon">🚚</div>
+                <h3>Nationwide Delivery</h3>
+                <p>Fast delivery to Nairobi, Mombasa, Kisumu, Nakuru, and all major towns across Kenya</p>
+            </div>
+            <div class="delivery-card">
+                <div class="delivery-icon">📱</div>
+                <h3>M-Pesa Accepted</h3>
+                <p>Secure mobile payments. Pay via M-Pesa Paybill or Till Number instantly</p>
+            </div>
+            <div class="delivery-card">
+                <div class="delivery-icon">✨</div>
+                <h3>Premium Quality</h3>
+                <p>Every item hand-selected. Quality guaranteed or your money back</p>
+            </div>
+            <div class="delivery-card">
+                <div class="delivery-icon">💬</div>
+                <h3>WhatsApp Support</h3>
+                <p>Direct support for sizing, styling advice, and order tracking</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>THE REALONES STORE</h3>
+                <p>Premium women's fashion boutique based in Mombasa, serving all of Kenya with luxury clothing and accessories.</p>
+                <div class="social-links">
+                    <a href="#">IG</a>
+                    <a href="#">FB</a>
+                    <a href="#">WA</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: info@therealonestore.co.ke</p>
+                <p>Phone: +254111636725</p>
+                <p>Location: Mombasa, Kenya</p>
+                <p>WhatsApp: +254111636725</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="#">Size Guide</a></p>
+                <p><a href="#">Delivery Policy</a></p>
+                <p><a href="#">Return Policy</a></p>
+                <p><a href="#">Terms & Conditions</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Payment</h3>
+                <p>We accept secure payments via:</p>
+                <div class="payment-methods">M-Pesa</div>
+                <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--gold);">
+                    Till Number: 123456<br>
+                    Business Name: REALONES
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 THE REALONES STORE. All rights reserved. | Designed with luxury & innovation in mind.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Product Data - Images in same directory (not images/ folder)
+        const products = [
+            { id: 1, name: "Designer Cargo Set - Dior Tee", category: "Streetwear", price: 4500, image: "1.jpg", badge: "Bestseller", desc: "Premium streetwear set featuring authentic Dior tee paired with tactical cargo pants. Perfect for urban fashion statements." },
+            { id: 2, name: "Elegant Off-Shoulder Two-Piece", category: "Formal Sets", price: 3800, image: "2.jpg", badge: "New", desc: "Sophisticated off-shoulder top with matching skirt. Ideal for cocktail parties and evening events." },
+            { id: 3, name: "Abstract Print Lounge Set", category: "Loungewear", price: 3200, image: "3.jpg", badge: "", desc: "Comfortable yet stylish lounge set with contemporary abstract prints for the modern home." },
+            { id: 4, name: "Premium Bodycon Collection", category: "Dresses", price: 2800, image: "4.jpg", badge: "Hot", desc: "Figure-hugging bodycon dress that accentuates your curves with premium stretch fabric." },
+            { id: 5, name: "Embroidered Maxi Dress", category: "Evening Wear", price: 5500, image: "5.jpg", badge: "Luxury", desc: "Hand-embroidered maxi dress with intricate details. A showstopper for any formal occasion." },
+            { id: 6, name: "Floral Milkmaid Dress", category: "Casual", price: 2500, image: "6.jpg", badge: "", desc: "Romantic milkmaid-style dress with delicate floral patterns. Perfect for brunches and daytime events." },
+            { id: 7, name: "Monochrome Abstract Gown", category: "Evening", price: 6000, image: "7.jpg", badge: "Exclusive", desc: "Stunning monochrome gown featuring artistic abstract design. Limited edition piece." },
+            { id: 8, name: "Street Style Bucket Hat Set", category: "Streetwear", price: 4200, image: "8.jpg", badge: "", desc: "Complete street style set including designer bucket hat, coordinated top and bottoms." },
+            { id: 9, name: "Tie-Dye Coord Set Collection", category: "Trending", price: 3500, image: "9.jpg", badge: "Trending", desc: "Vibrant tie-dye coordinated set in premium cotton blend. Currently trending across Kenya." },
+            { id: 10, name: "Athleisure Stussy Set", category: "Activewear", price: 4800, image: "10.jpg", badge: "", desc: "High-end athleisure set featuring Stussy branding. Gym-to-street versatility." },
+            { id: 11, name: "Velvet Leopard Gown", category: "Luxury", price: 7500, image: "11.jpg", badge: "Premium", desc: "Opulent velvet gown with subtle leopard print. For those who dare to stand out." },
+            { id: 12, name: "Executive Power Suit", category: "Business", price: 6800, image: "12.jpg", badge: "Professional", desc: "Sharp executive suit tailored for the modern businesswoman. Command the boardroom." },
+            { id: 13, name: "Green Print Summer Dress", category: "Casual", price: 2900, image: "13.jpg", badge: "", desc: "Breezy summer dress with tropical green prints. Perfect for coastal getaways." },
+            { id: 14, name: "Alo Yoga Active Set", category: "Fitness", price: 4200, image: "14.jpg", badge: "", desc: "Premium yoga and fitness set by Alo. High-performance fabric with luxury feel." },
+            { id: 15, name: "Graphic Tee Cargo Combo", category: "Streetwear", price: 3800, image: "15.jpg", badge: "", desc: "Edgy graphic tee paired with utility cargo pants. Urban fashion at its finest." },
+            { id: 16, name: "Satin Evening Collection", category: "Formal", price: 5800, image: "16.jpg", badge: "Elegant", desc: "Luxurious satin evening wear that drapes beautifully. Timeless elegance." },
+            { id: 17, name: "Traditional Print Maxi", category: "Cultural", price: 4500, image: "17.jpg", badge: "", desc: "Maxi dress featuring traditional African prints with modern silhouette." },
+            { id: 18, name: "Artistic Brushstroke Set", category: "Casual", price: 3400, image: "18.jpg", badge: "", desc: "Wearable art featuring bold brushstroke patterns. Unique and eye-catching." },
+            { id: 19, name: "Neon Pink Street Set", category: "Urban", price: 3200, image: "19.jpg", badge: "", desc: "Bold neon pink set for the fashion-forward. Make a statement wherever you go." },
+            { id: 20, name: "Corporate Sheath Dress", category: "Office", price: 3600, image: "20.jpg", badge: "", desc: "Classic sheath dress for professional settings. Polished and sophisticated." }
+        ];
+
+        let cart = [];
+        let currentModalProduct = null;
+        const WHATSAPP_NUMBER = '254111636725';
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            renderProducts();
+            setupKineticTypography();
+
+            // Hide loader
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 1500);
+        });
+
+        // Create Floating Particles
+        function createParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 25; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (15 + Math.random() * 15) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        // Kinetic Typography Setup
+        function setupKineticTypography() {
+            const title = document.getElementById('kineticTitle');
+            const text = title.innerHTML;
+            title.innerHTML = '';
+
+            // Split by line break first
+            const lines = text.split('<br>');
+            lines.forEach((line, lineIndex) => {
+                const lineDiv = document.createElement('div');
+                line.split('').forEach((char, index) => {
+                    const span = document.createElement('span');
+                    span.className = 'char';
+                    span.innerHTML = char === ' ' ? '&nbsp;' : char;
+                    span.style.setProperty('--char-index', lineIndex * 20 + index);
+                    lineDiv.appendChild(span);
+                });
+                title.appendChild(lineDiv);
+                if (lineIndex < lines.length - 1) {
+                    title.appendChild(document.createElement('br'));
+                }
+            });
+        }
+
+        // Render Bento Grid Products
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = '';
+
+            products.forEach(product => {
+                const item = document.createElement('div');
+                // Determine size class based on id for variety
+                let sizeClass = 'medium';
+                if (product.id === 1 || product.id === 5) sizeClass = 'featured';
+                else if (product.id === 2 || product.id === 7 || product.id === 11) sizeClass = 'large';
+                else if (product.id > 15) sizeClass = 'small';
+                
+                item.className = `bento-item ${sizeClass}`;
+                item.innerHTML = `
+                    <div class="product-image-container">
+                        ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
+                        <img src="${product.image}" alt="${product.name}" class="product-image" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22><rect width=%22400%22 height=%22400%22 fill=%22%231a1a1a%22/><text x=%2250%%22 y=%2250%%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23d4af37%22 font-family=%22serif%22 font-size=%2224%22>${product.id}</text></svg>'">
+                    </div>
+                    <div class="product-info">
+                        <div>
+                            <div class="product-category">${product.category}</div>
+                            <h3 class="product-name">${product.name}</h3>
+                            <div class="product-price">KES ${product.price.toLocaleString()}</div>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="showProductModal(${product.id})">View Details</button>
+                    </div>
+                `;
+                grid.appendChild(item);
+            });
+        }
+
+        // Show Product Modal
+        function showProductModal(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            currentModalProduct = product;
+
+            document.getElementById('modalProductImage').src = product.image;
+            document.getElementById('modalProductName').textContent = product.name;
+            document.getElementById('modalProductPrice').textContent = `KES ${product.price.toLocaleString()}`;
+            document.getElementById('modalProductDesc').textContent = product.desc || 'Premium quality fashion piece from THE REALONES collection.';
+
+            document.getElementById('productModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('productModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+            currentModalProduct = null;
+        }
+
+        function addToCartFromModal() {
+            if (currentModalProduct) {
+                addToCart(currentModalProduct);
+                closeModal();
+                toggleCart();
+            }
+        }
+
+        // Cart Functions
+        function addToCart(product) {
+            const existingItem = cart.find(item => item.id === product.id);
+
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+
+            updateCart();
+            animateCartButton();
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCart();
+        }
+
+        function updateQuantity(productId, change) {
+            const item = cart.find(item => item.id === productId);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeFromCart(productId);
+                } else {
+                    updateCart();
+                }
+            }
+        }
+
+        function updateCart() {
+            const cartItems = document.getElementById('cartItems');
+            const cartCount = document.getElementById('cartCount');
+            const cartToggleCount = document.getElementById('cartToggleCount');
+            const cartTotal = document.getElementById('cartTotal');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+
+            let total = 0;
+            let count = 0;
+
+            cart.forEach(item => {
+                total += item.price * item.quantity;
+                count += item.quantity;
+            });
+
+            cartCount.textContent = count;
+            cartToggleCount.textContent = count;
+            cartTotal.textContent = `KES ${total.toLocaleString()}`;
+            checkoutBtn.disabled = cart.length === 0;
+
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.5); margin-top: 3rem; font-style: italic;">Your cart is empty</p>';
+            } else {
+                cartItems.innerHTML = cart.map(item => `
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${item.name}" class="cart-item-image" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2270%22 height=%2270%22><rect width=%2270%22 height=%2270%22 fill=%22%231a1a1a%22/><text x=%2250%%22 y=%2250%%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23d4af37%22 font-size=%2220%22>${item.id}</text></svg>'">
+                        <div class="cart-item-details">
+                            <div class="cart-item-name">${item.name}</div>
+                            <div class="cart-item-price">KES ${item.price.toLocaleString()}</div>
+                            <div class="quantity-control">
+                                <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
+                                <span>${item.quantity}</span>
+                                <button class="qty-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+                            </div>
+                        </div>
+                        <button class="remove-item" onclick="removeFromCart(${item.id})">🗑</button>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function animateCartButton() {
+            const btn = document.querySelector('.cart-toggle');
+            btn.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                btn.style.transform = 'scale(1)';
+            }, 200);
+        }
+
+        function toggleCart() {
+            document.getElementById('cartContainer').classList.toggle('open');
+        }
+
+        function toggleAI() {
+            document.getElementById('aiChat').classList.toggle('active');
+        }
+
+        function toggleMobileMenu() {
+            // Simple mobile menu toggle
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            navLinks.style.position = 'absolute';
+            navLinks.style.top = '70px';
+            navLinks.style.left = '0';
+            navLinks.style.right = '0';
+            navLinks.style.background = 'rgba(10,10,10,0.95)';
+            navLinks.style.flexDirection = 'column';
+            navLinks.style.padding = '2rem';
+            navLinks.style.backdropFilter = 'blur(20px)';
+        }
+
+        // Checkout Function
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty! Add some luxury pieces first.');
+                return;
+            }
+
+            let message = '👑 THE REALONES STORE - Order Request 👑%0A%0A';
+            message += '━━━━━━━━━━━━━━━━━━━━━%0A%0A';
+            message += '🛍️ My Selection:%0A%0A';
+
+            let total = 0;
+
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                message += `• ${item.name}%0A`;
+                message += `  Quantity: ${item.quantity}%0A`;
+                message += `  Price: KES ${item.price.toLocaleString()} each%0A`;
+                message += `  Subtotal: KES ${itemTotal.toLocaleString()}%0A%0A`;
+            });
+
+            message += '━━━━━━━━━━━━━━━━━━━━━%0A%0A';
+            message += `💰 TOTAL: KES ${total.toLocaleString()}%0A%0A`;
+            message += '📍 Delivery Location: [Please fill in]%0A';
+            message += '💳 Payment: M-Pesa%0A%0A';
+            message += 'Please confirm availability and provide payment details.';
+
+            const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+
+            // Visual feedback
+            const btn = document.getElementById('checkoutBtn');
+            const originalText = btn.textContent;
+            btn.textContent = 'Connecting...';
+            btn.style.background = 'linear-gradient(135deg, #d4af37 0%, #f4e4ba 100%)';
+            btn.style.color = '#0a0a0a';
+
+            setTimeout(() => {
+                window.open(whatsappURL, '_blank');
+                btn.textContent = originalText;
+                btn.style.background = 'transparent';
+                btn.style.color = '#d4af37';
+            }, 1000);
+        }
+
+        // Close modal on outside click
+        document.getElementById('productModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) {
+                closeModal();
+            }
+        });
+
+        // Close cart when clicking outside
+        document.addEventListener('click', (e) => {
+            const cartContainer = document.getElementById('cartContainer');
+            const cartToggle = document.querySelector('.cart-toggle');
+            const cartIcon = document.querySelector('.cart-icon');
+            
+            if (cartContainer.classList.contains('open') && 
+                !cartContainer.contains(e.target) && 
+                !cartToggle.contains(e.target) &&
+                !cartIcon.contains(e.target)) {
+                cartContainer.classList.remove('open');
+            }
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(10, 10, 10, 0.98)';
+                nav.style.boxShadow = '0 5px 30px rgba(0,0,0,0.5)';
+            } else {
+                nav.style.background = 'rgba(10, 10, 10, 0.9)';
+                nav.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
         @keyframes float {
             0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
             10% { opacity: 0.6; }
