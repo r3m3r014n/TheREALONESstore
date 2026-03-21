@@ -1,0 +1,118 @@
+/* Custom animations and effects that extend Tailwind */
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotateY(0deg); }
+    50% { transform: translateY(-20px) rotateY(5deg); }
+}
+
+@keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); box-shadow: 0 0 10px #d4af37; }
+}
+
+/* Animation classes */
+.animate-shimmer {
+    animation: shimmer 3s infinite;
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+.animate-fade-in-up {
+    animation: fade-in-up 1s ease forwards;
+}
+
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+/* Custom border width */
+.border-3 {
+    border-width: 3px;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #d4af37;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #f4e4ba;
+}
+
+/* Product card hover effects */
+.product-card {
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+}
+
+/* Glassmorphism utilities */
+.glass {
+    background: rgba(26, 26, 26, 0.85);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+/* Transition utilities */
+.duration-400 {
+    transition-duration: 400ms;
+}
+
+/* Hide scrollbar for cart but keep functionality */
+#cartContainer::-webkit-scrollbar {
+    width: 4px;
+}
+
+/* Mobile menu animation */
+#mobileMenu {
+    transition: all 0.3s ease;
+}
+
+/* Loader ring animation */
+.loader-ring::before,
+.loader-ring::after {
+    content: '';
+    position: absolute;
+    border: 3px solid transparent;
+    border-radius: 50%;
+}
+
+.loader-ring::before {
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    border-top-color: rgba(212, 175, 55, 0.5);
+    animation: spin 2s linear infinite reverse;
+}
