@@ -31,6 +31,19 @@ const WHATSAPP_NUMBER = '254111636725';
 document.addEventListener('DOMContentLoaded', () => {
     updateCart();
     initNavbar();
+    
+    // Initialize shop page if product grid exists
+    const productGrid = document.getElementById('productGrid');
+    if (productGrid && typeof renderAllProducts === 'function') {
+        renderAllProducts();
+    }
+    
+    // Initialize featured products on homepage
+    const featuredGrid = document.getElementById('featuredGrid');
+    if (featuredGrid) {
+        const featured = products.slice(0, 4);
+        featuredGrid.innerHTML = featured.map(product => createProductCard(product)).join('');
+    }
 });
 
 // Create Product Card HTML
@@ -39,7 +52,7 @@ function createProductCard(product) {
         <div class="product-card bg-charcoal/80 backdrop-blur-sm border border-gold/30 rounded-2xl overflow-hidden cursor-pointer group" onclick="openModal(${product.id})">
             <div class="relative h-72 overflow-hidden bg-gradient-to-br from-gold/10 to-dark">
                 ${product.badge ? `<div class="absolute top-3 left-3 bg-gold text-dark px-3 py-1 text-xs font-bold uppercase tracking-wider rounded shadow-lg z-10">${product.badge}</div>` : ''}
-                <img src="${product.image}" alt="${product.name}" loading="lazy" class="w-full h-full object-cover transition-all duration-500 group-hover:scale-110" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22><rect width=%22400%22 height=%22400%22 fill=%22%231a1a1a%22/><text x=%2250%%22 y=%2250%%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23d4af37%22 font-family=%22serif%22 font-size=%2224%22>${product.id}</text></svg>'">
+                <img src="${product.image}" alt="${product.name}" loading="lazy" class="w-full h-full object-cover transition-all duration-500 group-hover:scale-110" onerror="this.onerror=null; this.src='https://via.placeholder.com/400x400/1a1a1a/d4af37?text=${product.id}';">
                 <div class="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>
             <div class="p-5">
@@ -57,25 +70,216 @@ function openModal(id) {
     if (!currentProduct) return;
     
     const modal = document.getElementById('productModal');
-    document.getElementById('modalImg').src = currentProduct.image;
-    document.getElementById('modalName').textContent = currentProduct.name;
-    document.getElementById('modalPrice').textContent = `KES ${currentProduct.price.toLocaleString()}`;
-    document.getElementById('modalDesc').textContent = currentProduct.desc;
+    if (!modal) return;
     
-    const badge = document.getElementById('modalBadge');
-    if (currentProduct.badge) {
-        badge.textContent = currentProduct.badge;
-        badge.classList.remove('hidden');
-    } else {
-        badge.classList.add('hidden');
+    const modalImg = document.getElementById('modalImg');
+    const modalName = document.getElementById('modalName');
+    const modalPrice = document.getElementById('modalPrice');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalBadge = document.getElementById('modalBadge');
+    const modalCategory = document.getElementById('modalCategory');
+    
+    if (modalImg) {
+        modalImg.src = currentProduct.image;
+        modalImg.onerror = function() {
+            this.onerror = null;
+            this.src = `https://via.placeholder.com/400x400/1a1a1a/d4af37?text=${currentProduct.id}`;
+        };
+    }
+    if (modalName) modalName.textContent = currentProduct.name;
+    if (modalPrice) modalPrice.textContent = `KES ${currentProduct.price.toLocaleString()}`;
+    if (modalDesc) modalDesc.textContent = currentProduct.desc;
+    
+    if (modalBadge) {
+        if (currentProduct.badge) {
+            modalBadge.textContent = currentProduct.badge;
+            modalBadge.classList.remove('hidden');
+        } else {
+            modalBadge.classList.add('hidden');
+        }
     }
     
-    const category = document.getElementById('modalCategory');
-    if (category) category.textContent = currentProduct.category;
+    if (modalCategory) modalCategory.textContent = currentProduct.category;
     
     modal.classList.remove('hidden');
     modal.classList.add('flex');
     document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+    const modal = document.getElementById('productModal');
+    if (!modal) return;
+    
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    document.body.style.overflow = 'auto';
+    currentProduct = null;
+}
+
+function addFromModal() {
+    if (currentProduct) {
+        addToCart(currentProduct);
+        closeModal();
+        toggleCart();
+    }
+}
+
+// Cart Functions
+function addToCart(product) {
+    const existing = cart.find(item => item.id === product.id);
+    if (existing) {
+        existing.quantity++;
+    } else {
+        cart.push({ ...product, quantity: 1 });
+    }
+    saveCart();
+    updateCart();
+    animateCartButton();
+}
+
+function removeFromCart(id) {
+    cart = cart.filter(item => item.id !== id);
+    saveCart();
+    updateCart();
+}
+
+function updateQuantity(id, change) {
+    const item = cart.find(item => item.id === id);
+    if (item) {
+        item.quantity += change;
+        if (item.quantity <= 0) {
+            removeFromCart(id);
+        } else {
+            saveCart();
+            updateCart();
+        }
+    }
+}
+
+function saveCart() {
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+function updateCart() {
+    const cartItems = document.getElementById('cartItems');
+    const cartCount = document.getElementById('cartCount');
+    const cartTotal = document.getElementById('cartTotal');
+    const checkoutBtn = document.getElementById('checkoutBtn');
+    
+    if (!cartItems) return;
+    
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+    
+    if (cartCount) cartCount.textContent = count;
+    if (cartTotal) cartTotal.textContent = `KES ${total.toLocaleString()}`;
+    if (checkoutBtn) checkoutBtn.disabled = cart.length === 0;
+    
+    if (cart.length === 0) {
+        cartItems.innerHTML = '<p class="text-white/50 text-center italic mt-8">Your cart is empty</p>';
+    } else {
+        cartItems.innerHTML = cart.map(item => `
+            <div class="flex gap-4 items-center bg-dark/50 border border-gold/20 p-4 rounded-xl hover:border-gold/50 transition-colors">
+                <img src="${item.image}" alt="" class="w-16 h-16 object-cover rounded-lg border border-gold/50" loading="lazy" onerror="this.onerror=null; this.src='https://via.placeholder.com/64x64/1a1a1a/d4af37?text=${item.id}';">
+                <div class="flex-1 min-w-0">
+                    <h4 class="font-playfair text-white text-sm truncate">${item.name}</h4>
+                    <p class="text-gold font-bold text-sm">KES ${item.price.toLocaleString()}</p>
+                    <div class="flex items-center gap-3 mt-2">
+                        <button onclick="updateQuantity(${item.id}, -1)" class="w-7 h-7 border border-gold text-gold rounded hover:bg-gold hover:text-dark transition-all text-sm font-bold">-</button>
+                        <span class="text-white font-semibold w-4 text-center">${item.quantity}</span>
+                        <button onclick="updateQuantity(${item.id}, 1)" class="w-7 h-7 border border-gold text-gold rounded hover:bg-gold hover:text-dark transition-all text-sm font-bold">+</button>
+                    </div>
+                </div>
+                <button onclick="removeFromCart(${item.id})" class="text-red-500 hover:text-red-400 hover:scale-110 transition-all text-xl">🗑</button>
+            </div>
+        `).join('');
+    }
+}
+
+function animateCartButton() {
+    const btn = document.querySelector('nav button[onclick="toggleCart()"]');
+    if (btn) {
+        btn.style.transform = 'scale(1.2)';
+        setTimeout(() => btn.style.transform = 'scale(1)', 200);
+    }
+}
+
+function toggleCart() {
+    const sidebar = document.getElementById('cartSidebar');
+    if (sidebar) sidebar.classList.toggle('translate-x-full');
+}
+
+function toggleMobileMenu() {
+    const menu = document.getElementById('mobileMenu');
+    if (menu) menu.classList.toggle('hidden');
+}
+
+function checkout() {
+    if (cart.length === 0) return;
+    
+    let message = `👑 THE REALONES STORE - Order Request 👑%0A%0A`;
+    let total = 0;
+    
+    cart.forEach(item => {
+        const subtotal = item.price * item.quantity;
+        total += subtotal;
+        message += `• ${item.name}%0A  Qty: ${item.quantity} × KES ${item.price.toLocaleString()} = KES ${subtotal.toLocaleString()}%0A%0A`;
+    });
+    
+    message += `━━━━━━━━━━━━━━━━━━━━━%0A`;
+    message += `💰 TOTAL: KES ${total.toLocaleString()}%0A%0A`;
+    message += `📍 Delivery Location: [Please fill in]%0A`;
+    message += `💳 Payment: M-Pesa%0A%0A`;
+    message += `Please confirm availability and provide payment details.`;
+    
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
+}
+
+// Navbar Scroll Effect
+function initNavbar() {
+    const nav = document.getElementById('navbar');
+    if (!nav) return;
+    
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.scrollY;
+        if (currentScroll > 50) {
+            nav.classList.add('shadow-lg');
+        } else {
+            nav.classList.remove('shadow-lg');
+        }
+    }, { passive: true });
+}
+
+// Close modal on outside click
+document.addEventListener('click', (e) => {
+    const modal = document.getElementById('productModal');
+    if (modal && e.target === modal) closeModal();
+});
+
+// Shop page functions
+function renderAllProducts() {
+    const grid = document.getElementById('productGrid');
+    if (!grid) return;
+    
+    const filtered = currentFilter === 'all' 
+        ? products 
+        : products.filter(p => p.category === currentFilter || p.category.includes(currentFilter));
+    
+    grid.innerHTML = filtered.map(product => createProductCard(product)).join('');
+}
+
+let currentFilter = 'all';
+
+function filterProducts(category) {
+    currentFilter = category;
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active', 'bg-gold', 'text-dark');
+        if (btn.dataset.filter === category) {
+            btn.classList.add('active', 'bg-gold', 'text-dark');
+        }
+    });
+    renderAllProducts();
+}
 }
 
 function closeModal() {
