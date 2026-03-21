@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="THE REALONES STORE - Premium women's fashion boutique in Kenya. Luxury dresses, designer sets, and exclusive coastal styles. Delivery Nairobi, Mombasa, Kisumu.">
+    <meta name="keywords" content="luxury fashion Kenya, designer dresses Nairobi, women boutique Mombasa, premium clothing Kenya, real ones store">
+    <title>THE REALONES STORE | Luxury Fashion Kenya</title>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --gold: #D4AF37;
+            --gold-light: #F4E8C1;
+            --black: #0a0a0a;
+            --charcoal: #1a1a1a;
+            --cream: #FAF7F2;
+            --white: #ffffff;
+            --accent: #C9A961;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--cream);
+            color: var(--charcoal);
+            overflow-x: hidden;
+        }
+        
+        /* Luxury Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--cream);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 4px;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--black);
+            text-decoration: none;
+            position: relative;
+        }
+        
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--charcoal);
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            position: relative;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--gold);
+            color: white;
+            font-size: 0.7rem;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+        
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            height: 90vh;
+            background: linear-gradient(135deg, var(--charcoal) 0%, var(--black) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50%" x="50%" dominant-baseline="middle" text-anchor="middle" font-family="serif" font-size="20" fill="rgba(212,175,55,0.03)">THE REALONES</text></svg>');
+            background-size: 300px;
+            opacity: 0.5;
+        }
+        
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            color: var(--white);
+            padding: 0 2rem;
+        }
+        
+        .hero-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+        
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: 5px;
+            line-height: 1.1;
+        }
+        
+        .hero-description {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.8);
+            font-weight: 300;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gold);
+            transition: left 0.3s;
+            z-index: -1;
+        }
+        
+        .cta-button:hover {
+            color: var(--black);
+        }
+        
+        .cta-button:hover::before {
+            left: 0;
+        }
+        
+        /* Section Styling */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-tag {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--gold);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 1rem;
+        }
+        
+        .section-line {
+            width: 60px;
+            height: 2px;
+            background: var(--gold);
+            margin: 0 auto;
+        }
+        
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .product-card {
+            background: var(--white);
+            border-radius: 0;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: all 0.4s ease;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 0.9rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: var(--gold);
+            color: white;
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            z-index: 2;
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .product-category {
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .product-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--charcoal);
+        }
+        
+        .product-price {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 1rem;
+        }
+        
+        .add-to-cart {
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--black);
+            color: white;
+            border: none;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .add-to-cart:hover {
+            background: var(--gold);
+        }
+        
+        /* About Section */
+        .about {
+            background: var(--charcoal);
+            color: var(--white);
+            padding: 6rem 2rem;
+            margin: 0;
+            max-width: 100%;
+        }
+        
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .about-image {
+            height: 600px;
+            background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--gold);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .about-image::before {
+            content: 'THE REALONES';
+            position: absolute;
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            opacity: 0.1;
+            letter-spacing: 10px;
+        }
+        
+        .about-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--gold);
+        }
+        
+        .about-content p {
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: rgba(255,255,255,0.8);
+            font-weight: 300;
+        }
+        
+        .feature-list {
+            list-style: none;
+            margin-top: 2rem;
+        }
+        
+        .feature-list li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--gold-light);
+        }
+        
+        .feature-list li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+        }
+        
+        /* Contact/Delivery Section */
+        .delivery-info {
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--cream) 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+            margin: 0;
+            max-width: 100%;
+        }
+        
+        .delivery-grid {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .delivery-card {
+            background: white;
+            padding: 2rem;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        .delivery-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--gold);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--black);
+            color: white;
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            text-align: left;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-section h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+        
+        .footer-section p, .footer-section a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            line-height: 1.8;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: var(--gold);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+        
+        .payment-methods {
+            margin-top: 1rem;
+            padding: 0.5rem;
+            background: rgba(255,255,255,0.1);
+            display: inline-block;
+            border-radius: 5px;
+            font-weight: 600;
+            color: var(--gold);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+        }
+        
+        /* Shopping Cart Sidebar */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 30px rgba(0,0,0,0.2);
+            z-index: 2000;
+            transition: right 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .cart-sidebar.active {
+            right: 0;
+        }
+        
+        .cart-header {
+            background: var(--charcoal);
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .cart-header h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+        }
+        
+        .close-cart {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+        
+        .cart-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            align-items: center;
+        }
+        
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            background: #f5f5f5;
+            object-fit: cover;
+        }
+        
+        .cart-item-details h4 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 0.3rem;
+        }
+        
+        .cart-item-price {
+            color: var(--gold);
+            font-weight: 600;
+        }
+        
+        .remove-item {
+            background: none;
+            border: none;
+            color: #999;
+            cursor: pointer;
+            margin-left: auto;
+            font-size: 1.2rem;
+        }
+        
+        .cart-footer {
+            padding: 1.5rem;
+            border-top: 2px solid var(--gold);
+            background: var(--cream);
+        }
+        
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .checkout-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--gold);
+            color: white;
+            border: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .checkout-btn:hover {
+            background: var(--charcoal);
+        }
+        
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1999;
+            display: none;
+        }
+        
+        .cart-overlay.active {
+            display: block;
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .about-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 1.5rem;
+            }
+            
+            .cart-sidebar {
+                width: 100%;
+                right: -100%;
+            }
+            
+            section {
+                padding: 4rem 1rem;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .product-card {
+            animation: fadeIn 0.6s ease forwards;
+        }
+        
+        .product-card:nth-child(1) { animation-delay: 0.1s; }
+        .product-card:nth-child(2) { animation-delay: 0.2s; }
+        .product-card:nth-child(3) { animation-delay: 0.3s; }
+        .product-card:nth-child(4) { animation-delay: 0.4s; }
+        .product-card:nth-child(5) { animation-delay: 0.5s; }
+        .product-card:nth-child(6) { animation-delay: 0.6s; }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">THE REALONES STORE</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#collection">Collection</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="cart-icon" onclick="toggleCart()">
+                🛒
+                <span class="cart-count" id="cartCount">0</span>
+            </div>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-subtitle">Est. 2024 • Kenya Coast</div>
+            <h1 class="hero-title">THE REALONES<br>STORE</h1>
+            <p class="hero-description">
+                Where luxury meets the Kenyan coast. Curated fashion for the modern woman who demands excellence. 
+                Premium dresses, exclusive sets, and statement pieces delivered from Mombasa to Nairobi and beyond.
+            </p>
+            <a href="#collection" class="cta-button">Explore Collection</a>
+        </div>
+    </section>
+
+    <!-- Featured Collection -->
+    <section id="collection">
+        <div class="section-header">
+            <div class="section-tag">Curated Excellence</div>
+            <h2 class="section-title">The Collection</h2>
+            <div class="section-line"></div>
+        </div>
+        
+        <div class="product-grid" id="productGrid">
+            <!-- Products will be generated by JavaScript -->
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-container">
+            <div class="about-image">
+                [Insert Brand Image Here]<br>
+                <small>Upload image as images/21.jpg (optional)</small>
+            </div>
+            <div class="about-content">
+                <h2>Crafted for the Kenyan Woman</h2>
+                <p>
+                    THE REALONES STORE represents the pinnacle of coastal fashion. Born in Mombasa and designed for 
+                    the discerning woman across Kenya, we bring you exclusive pieces that blend international luxury 
+                    with local elegance.
+                </p>
+                <p>
+                    Every piece in our collection is selected to ensure you stand out—whether you're attending a 
+                    boardroom meeting in Nairobi, a beach wedding in Diani, or a gala in Kisumu.
+                </p>
+                <ul class="feature-list">
+                    <li>Authentic designer pieces & quality guaranteed</li>
+                    <li>Same-day delivery available in Mombasa & Nairobi</li>
+                    <li>Secure M-Pesa payments accepted</li>
+                    <li>Personal styling consultations available</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Delivery Info -->
+    <section class="delivery-info" id="contact">
+        <div class="section-header">
+            <div class="section-tag">Service Excellence</div>
+            <h2 class="section-title" style="color: var(--charcoal);">Shopping Made Simple</h2>
+            <div class="section-line"></div>
+        </div>
+        
+        <div class="delivery-grid">
+            <div class="delivery-card">
+                <div class="delivery-icon">🚚</div>
+                <h3>Nationwide Delivery</h3>
+                <p>Fast delivery to Nairobi, Mombasa, Kisumu, Nakuru, and all major towns across Kenya</p>
+            </div>
+            <div class="delivery-card">
+                <div class="delivery-icon">📱</div>
+                <h3>M-Pesa Accepted</h3>
+                <p>Secure mobile payments. Pay via M-Pesa Paybill or Till Number instantly</p>
+            </div>
+            <div class="delivery-card">
+                <div class="delivery-icon">✨</div>
+                <h3>Premium Quality</h3>
+                <p>Every item hand-selected. Quality guaranteed or your money back</p>
+            </div>
+            <div class="delivery-card">
+                <div class="delivery-icon">💬</div>
+                <h3>WhatsApp Support</h3>
+                <p>Direct support for sizing, styling advice, and order tracking</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>THE REALONES STORE</h3>
+                <p>Premium women's fashion boutique based in Mombasa, serving all of Kenya with luxury clothing and accessories.</p>
+                <div class="social-links">
+                    <a href="#">IG</a>
+                    <a href="#">FB</a>
+                    <a href="#">WA</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: info@therealonestore.co.ke</p>
+                <p>Phone: +254 7XX XXX XXX</p>
+                <p>Location: Mombasa, Kenya</p>
+                <p>WhatsApp: +254 7XX XXX XXX</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="#">Size Guide</a></p>
+                <p><a href="#">Delivery Policy</a></p>
+                <p><a href="#">Return Policy</a></p>
+                <p><a href="#">Terms & Conditions</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Payment</h3>
+                <p>We accept secure payments via:</p>
+                <div class="payment-methods">M-Pesa</div>
+                <p style="margin-top: 1rem; font-size: 0.8rem; color: var(--gold);">
+                    Business Number: 123456<br>
+                    Account: REALONES
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 THE REALONES STORE. All rights reserved. | Designed with luxury in mind.</p>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="close-cart" onclick="toggleCart()">✕</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p style="text-align: center; color: #999; margin-top: 2rem;">Your cart is empty</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total (KES):</span>
+                <span id="cartTotal">0</span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">Checkout via WhatsApp</button>
+        </div>
+    </div>
+
+    <script>
+        // Product Data - Referencing your 20 images
+        const products = [
+            { id: 1, name: "Designer Cargo Set - Dior Tee", category: "Streetwear", price: 4500, image: "images/1.jpg", badge: "Bestseller" },
+            { id: 2, name: "Elegant Off-Shoulder Two-Piece", category: "Formal Sets", price: 3800, image: "images/2.jpg", badge: "New" },
+            { id: 3, name: "Abstract Print Lounge Set", category: "Loungewear", price: 3200, image: "images/3.jpg", badge: "" },
+            { id: 4, name: "Premium Bodycon Collection", category: "Dresses", price: 2800, image: "images/4.jpg", badge: "Hot" },
+            { id: 5, name: "Embroidered Maxi Dress", category: "Evening Wear", price: 5500, image: "images/5.jpg", badge: "Luxury" },
+            { id: 6, name: "Floral Milkmaid Dress", category: "Casual", price: 2500, image: "images/6.jpg", badge: "" },
+            { id: 7, name: "Monochrome Abstract Gown", category: "Evening", price: 6000, image: "images/7.jpg", badge: "Exclusive" },
+            { id: 8, name: "Street Style Bucket Hat Set", category: "Streetwear", price: 4200, image: "images/8.jpg", badge: "" },
+            { id: 9, name: "Tie-Dye Coord Set Collection", category: "Trending", price: 3500, image: "images/9.jpg", badge: "Trending" },
+            { id: 10, name: "Athleisure Stussy Set", category: "Activewear", price: 4800, image: "images/10.jpg", badge: "" },
+            { id: 11, name: "Velvet Leopard Gown", category: "Luxury", price: 7500, image: "images/11.jpg", badge: "Premium" },
+            { id: 12, name: "Executive Power Suit", category: "Business", price: 6800, image: "images/12.jpg", badge: "Professional" },
+            { id: 13, name: "Green Print Summer Dress", category: "Casual", price: 2900, image: "images/13.jpg", badge: "" },
+            { id: 14, name: "Alo Yoga Active Set", category: "Fitness", price: 4200, image: "images/14.jpg", badge: "" },
+            { id: 15, name: "Graphic Tee Cargo Combo", category: "Streetwear", price: 3800, image: "images/15.jpg", badge: "" },
+            { id: 16, name: "Satin Evening Collection", category: "Formal", price: 5800, image: "images/16.jpg", badge: "Elegant" },
+            { id: 17, name: "Traditional Print Maxi", category: "Cultural", price: 4500, image: "images/17.jpg", badge: "" },
+            { id: 18, name: "Artistic Brushstroke Set", category: "Casual", price: 3400, image: "images/18.jpg", badge: "" },
+            { id: 19, name: "Neon Pink Street Set", category: "Urban", price: 3200, image: "images/19.jpg", badge: "" },
+            { id: 20, name: "Corporate Sheath Dress", category: "Office", price: 3600, image: "images/20.jpg", badge: "" }
+        ];
+
+        let cart = [];
+
+        // Initialize Products
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = products.map(product => `
+                <div class="product-card" onclick="addToCart(${product.id})">
+                    ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}" onerror="this.style.display='none'; this.parentElement.innerHTML='[Upload ${product.id}.jpg]'">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">${product.category}</div>
+                        <h3 class="product-name">${product.name}</h3>
+                        <div class="product-price">KES ${product.price.toLocaleString()}</div>
+                        <button class="add-to-cart" onclick="event.stopPropagation(); addToCart(${product.id})">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Cart Functions
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+            
+            updateCart();
+            toggleCart();
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartCount = document.getElementById('cartCount');
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+            
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            cartCount.textContent = totalItems;
+            cartTotal.textContent = totalPrice.toLocaleString();
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p style="text-align: center; color: #999; margin-top: 2rem;">Your cart is empty</p>';
+            } else {
+                cartItems.innerHTML = cart.map(item => `
+                    <div class="cart-item">
+                        <img src="${item.image}" class="cart-item-image" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2280%22 height=%2280%22><rect width=%2280%22 height=%2280%22 fill=%22%23f0f0f0%22/><text x=%2250%%22 y=%2250%%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22>IMG</text></svg>'">
+                        <div class="cart-item-details">
+                            <h4>${item.name}</h4>
+                            <p class="cart-item-price">KES ${item.price.toLocaleString()} x ${item.quantity}</p>
+                        </div>
+                        <button class="remove-item" onclick="removeFromCart(${item.id})">✕</button>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function toggleCart() {
+            document.getElementById('cartSidebar').classList.toggle('active');
+            document.getElementById('cartOverlay').classList.toggle('active');
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            
+            let message = 'Hello THE REALONES STORE,%0A%0AI would like to order:%0A%0A';
+            let total = 0;
+            
+            cart.forEach(item => {
+                message += `${item.name} (Qty: ${item.quantity}) - KES ${(item.price * item.quantity).toLocaleString()}%0A`;
+                total += item.price * item.quantity;
+            });
+            
+            message += `%0ATotal: KES ${total.toLocaleString()}%0A%0APlease confirm availability and payment details.`;
+            
+            window.open(`https://wa.me/2547XXXXXXXX?text=${message}`, '_blank');
+        }
+
+        function toggleMobileMenu() {
+            // Simple alert for mobile menu - can be expanded
+            document.querySelector('.nav-links').classList.toggle('mobile-active');
+        }
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            } else {
+                nav.style.boxShadow = 'none';
+            }
+        });
+
+        // Initialize
+        renderProducts();
+    </script>
+</body>
+</html>
