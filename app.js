@@ -11,7 +11,7 @@ const products = [
     { id: 9, name: "Tie-Dye Coord Set Collection", category: "Neatfit Collection", price: 3500, image: "9.jpg", badge: "Trending", desc: "Vibrant tie-dye coordinated set in premium cotton blend. Currently trending across Kenya." },
     { id: 10, name: "Athleisure Stussy Set", category: "Neatfit Collection", price: 4800, image: "10.jpg", badge: "", desc: "High-end athleisure set featuring Stussy branding. Gym-to-street versatility." },
     { id: 11, name: "Velvet Leopard Gown", category: "Neatfit Collection", price: 7500, image: "11.jpg", badge: "Premium", desc: "Opulent velvet gown with subtle leopard print. For those who dare to stand out." },
-    { id: 12, name: "Executive Power Suit", category: "Neatfit Collection", price: 6800, image: "12.jpg", badge: "Professional", desc: "Sharp executive suit tailored for the modern businesswoman. Command the boardroom." },
+    { id: 12, name: "Executive Power Suit", category: "Neatfit Collection", price: 6800, image: "12.jpg", badge: "Professional", desc: "Sharp executive suit tailored for the modern professional. Command the boardroom." },
     { id: 13, name: "Green Print Summer Dress", category: "Neatfit Collection", price: 2900, image: "13.jpg", badge: "", desc: "Breezy summer dress with tropical green prints. Perfect for coastal getaways." },
     { id: 14, name: "Alo Yoga Active Set", category: "Neatfit Collection", price: 4200, image: "14.jpg", badge: "", desc: "Premium yoga and fitness set by Alo. High-performance fabric with luxury feel." },
     { id: 15, name: "Graphic Tee Cargo Combo", category: "Casual Streetwear", price: 3800, image: "15.jpg", badge: "", desc: "Edgy graphic tee paired with utility cargo pants. Urban fashion at its finest." },
