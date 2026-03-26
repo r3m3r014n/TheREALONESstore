@@ -835,8 +835,17 @@ function initializeOptimizedLinks() {
             event.preventDefault();
             const optimized = openOptimizedSocialLink(href);
             const popup = window.open(optimized, '_blank', 'noopener,noreferrer');
-            if (popup) popup.opener = null;
-            else window.location.href = optimized;
+            if (popup) {
+                popup.opener = null;
+                return;
+            }
+            const secondary = window.open(optimized, '_blank');
+            if (secondary) {
+                secondary.opener = null;
+                return;
+            }
+            const proceed = window.confirm('Pop-up blocked. Open the social link in this tab?');
+            if (proceed) window.location.assign(optimized);
         });
     });
 }
