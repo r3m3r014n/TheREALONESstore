@@ -20,7 +20,7 @@ const CONSENT_KEY = 'smattire_cookie_choice';
 const LANG_KEY = 'smattire_lang';
 const RECENTLY_VIEWED_KEY = 'smattire_recently_viewed';
 const SITE_TUTORIAL_KEY = 'smattire_site_tutorial_seen';
-const FAST_LINK_OPTIN_KEY = 'smattire_fast_link_optin';
+const EXTERNAL_LINK_CONSENT_KEY = 'smattire_external_link_consent';
 const STICKY_BAR_DELAY_MS = 3500;
 let cart = JSON.parse(localStorage.getItem('cart') || '[]');
 let currentProduct = null;
@@ -681,34 +681,26 @@ function setLanguage(lang) {
 
 function openOptimizedSocialLink(url) {
     try {
-        const savedChoice = localStorage.getItem(FAST_LINK_OPTIN_KEY);
-        if (savedChoice !== 'yes') {
-            if (savedChoice === null) {
-                const allowMirrorRouting = window.confirm('Enable trusted fast-link routing for TikTok/Instagram mirror compatibility? You can keep using original links if you choose Cancel.');
-                localStorage.setItem(FAST_LINK_OPTIN_KEY, allowMirrorRouting ? 'yes' : 'no');
-                if (!allowMirrorRouting) return url;
-            } else {
-                return url;
-            }
-        }
         const parsed = new URL(url);
+        if (!['https:', 'http:'].includes(parsed.protocol)) return url;
         const host = parsed.hostname.toLowerCase();
         const hostParts = host.split('.').filter(Boolean);
         const isTikTokHost = (host === 'tiktok.com' || host === 'www.tiktok.com' || host.endsWith('.tiktok.com')) && hostParts.slice(-2).join('.') === 'tiktok.com';
         const isInstagramHost = (host === 'instagram.com' || host === 'www.instagram.com' || host.endsWith('.instagram.com')) && hostParts.slice(-2).join('.') === 'instagram.com';
+        const isExternal = parsed.origin !== window.location.origin;
 
-        if (isTikTokHost) {
-            const proceed = window.confirm('You are leaving TikTok for the trusted SM ATTIRE mirror site tiktokez.com to improve compatibility. Continue?');
+        if (isExternal && (isTikTokHost || isInstagramHost)) {
+            const savedChoice = localStorage.getItem(EXTERNAL_LINK_CONSENT_KEY);
+            if (savedChoice !== 'yes') {
+                const proceed = window.confirm(`You are opening an official external ${isTikTokHost ? 'TikTok' : 'Instagram'} link. Continue?`);
+                if (!proceed) return url;
+                localStorage.setItem(EXTERNAL_LINK_CONSENT_KEY, 'yes');
+            }
+        } else if (isExternal) {
+            const proceed = window.confirm(`You are opening an external link to ${host}. Continue?`);
             if (!proceed) return url;
-            const path = `${parsed.pathname}${parsed.search || ''}`;
-            return `https://tiktokez.com${path}`;
         }
-        if (isInstagramHost) {
-            const proceed = window.confirm('You are leaving Instagram for the trusted SM ATTIRE mirror site xeezz.com to improve compatibility. Continue?');
-            if (!proceed) return url;
-            const path = `${parsed.pathname}${parsed.search || ''}`;
-            return `https://xeezz.com${path}`;
-        }
+        return parsed.href;
     } catch (error) {
         return url;
     }
