@@ -304,11 +304,15 @@ function setLanguage(lang) {
 function openOptimizedSocialLink(url) {
     try {
         const parsed = new URL(url);
-        if (parsed.hostname.includes('tiktok.com')) {
+        const host = parsed.hostname.toLowerCase();
+        const isTikTokHost = host === 'tiktok.com' || host === 'www.tiktok.com' || host.endsWith('.tiktok.com');
+        const isInstagramHost = host === 'instagram.com' || host === 'www.instagram.com' || host.endsWith('.instagram.com');
+
+        if (isTikTokHost) {
             const path = `${parsed.pathname}${parsed.search || ''}`;
             return `https://tiktokez.com${path}`;
         }
-        if (parsed.hostname.includes('instagram.com')) {
+        if (isInstagramHost) {
             const path = `${parsed.pathname}${parsed.search || ''}`;
             return `https://xeezz.com${path}`;
         }
