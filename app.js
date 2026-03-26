@@ -830,9 +830,9 @@ function initializeOptimizedLinks() {
         try {
             const parsed = new URL(url);
             const host = parsed.hostname.toLowerCase();
-            const hostParts = host.split('.').filter(Boolean);
-            const base = hostParts.slice(-2).join('.');
-            return base === 'instagram.com' || base === 'tiktok.com';
+            const isInstagram = host === 'instagram.com' || host === 'www.instagram.com' || host.endsWith('.instagram.com');
+            const isTikTok = host === 'tiktok.com' || host === 'www.tiktok.com' || host.endsWith('.tiktok.com');
+            return isInstagram || isTikTok;
         } catch (error) {
             return false;
         }
