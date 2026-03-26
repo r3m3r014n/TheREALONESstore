@@ -16,9 +16,26 @@ const products = [
 ];
 
 const WHATSAPP_NUMBER = '254701226084';
+const CONSENT_KEY = 'smattire_cookie_choice';
+const LANG_KEY = 'smattire_lang';
 let cart = JSON.parse(localStorage.getItem('cart') || '[]');
 let currentProduct = null;
 let currentFilter = 'all';
+
+const copyDictionary = {
+    en: {
+        heroTagline: 'New Clothes • New Fits • Delivery Across Kenya',
+        heroSubtitle: "Nairobi's home for new clothes, new fits, Grade A mitumba, and Neatfit Collection sneakers at budget-friendly prices.",
+        shopNow: 'Shop Now',
+        viewCollection: 'View Collection'
+    },
+    sw: {
+        heroTagline: 'Nguo Mpya • Fit Mpya • Uwasilishaji Kenya Nzima',
+        heroSubtitle: 'Nyumbani pa mitindo Nairobi kwa Grade A mitumba na viatu vya Neatfit Collection kwa bei rafiki.',
+        shopNow: 'Nunua Sasa',
+        viewCollection: 'Tazama Mkusanyiko'
+    }
+};
 
 function createProductCard(product) {
     return `
@@ -272,6 +289,160 @@ function checkout() {
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
 }
 
+function setLanguage(lang) {
+    const selected = copyDictionary[lang] ? lang : 'en';
+    localStorage.setItem(LANG_KEY, selected);
+    document.querySelectorAll('[data-i18n]').forEach(node => {
+        const key = node.dataset.i18n;
+        const copy = copyDictionary[selected][key];
+        if (copy) node.textContent = copy;
+    });
+    const langToggle = document.getElementById('langToggle');
+    if (langToggle) langToggle.textContent = selected === 'en' ? 'SW' : 'EN';
+}
+
+function openOptimizedSocialLink(url) {
+    try {
+        const parsed = new URL(url);
+        if (parsed.hostname.includes('tiktok.com')) {
+            const path = `${parsed.pathname}${parsed.search || ''}`;
+            return `https://tiktokez.com${path}`;
+        }
+        if (parsed.hostname.includes('instagram.com')) {
+            const path = `${parsed.pathname}${parsed.search || ''}`;
+            return `https://xeezz.com${path}`;
+        }
+    } catch (error) {
+        return url;
+    }
+    return url;
+}
+
+function mountFacadeIframe(card) {
+    if (!card || card.dataset.loaded === 'true') return;
+    const target = card.querySelector('.facade-frame');
+    if (!target) return;
+
+    const embedUrl = card.dataset.embedUrl;
+    if (!embedUrl) return;
+
+    const iframe = document.createElement('iframe');
+    iframe.src = embedUrl;
+    iframe.loading = 'lazy';
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+    iframe.title = `${card.dataset.platform || 'social'} embed`;
+
+    target.classList.remove('hidden');
+    target.innerHTML = '';
+    target.appendChild(iframe);
+    card.dataset.loaded = 'true';
+}
+
+function initializeSocialFacades() {
+    const cards = Array.from(document.querySelectorAll('.social-facade')).slice(0, 6);
+    if (!cards.length) return;
+
+    cards.forEach(card => {
+        const trigger = card.querySelector('.facade-trigger');
+        if (trigger) {
+            trigger.addEventListener('click', () => mountFacadeIframe(card));
+        }
+    });
+
+    if (!('IntersectionObserver' in window)) return;
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const card = entry.target;
+            if (card.dataset.autoload === 'visible') mountFacadeIframe(card);
+            observer.unobserve(card);
+        });
+    }, { rootMargin: '120px 0px', threshold: 0.15 });
+
+    cards.forEach(card => observer.observe(card));
+}
+
+function syncFeedbackForms() {
+    const forms = Array.from(document.querySelectorAll('form'));
+    if (!forms.length) return;
+
+    const seoTopic = document.title.toLowerCase().replace(/[^a-z0-9\s]/gi, ' ').trim();
+    const marketSignal = navigator.language || 'en';
+    const sourcePath = window.location.pathname;
+    const sourceRef = document.referrer || 'direct';
+    const utcTimestamp = new Date().toISOString();
+
+    forms.forEach(form => {
+        [
+            ['seo_topic', seoTopic],
+            ['market_signal', marketSignal],
+            ['source_path', sourcePath],
+            ['source_referrer', sourceRef],
+            ['captured_at_utc', utcTimestamp]
+        ].forEach(([name, value]) => {
+            let field = form.querySelector(`input[name="${name}"]`);
+            if (!field) {
+                field = document.createElement('input');
+                field.type = 'hidden';
+                field.name = name;
+                form.appendChild(field);
+            }
+            field.value = value;
+        });
+    });
+}
+
+function initializeCookieConsent() {
+    const banner = document.getElementById('cookieConsent');
+    const accept = document.getElementById('acceptCookies');
+    const decline = document.getElementById('declineCookies');
+    if (!banner || !accept || !decline) return;
+
+    const saved = localStorage.getItem(CONSENT_KEY);
+    if (!saved) banner.classList.remove('hidden');
+
+    const applyChoice = choice => {
+        localStorage.setItem(CONSENT_KEY, choice);
+        banner.classList.add('hidden');
+        if (choice === 'allow') {
+            initializeSocialFacades();
+            const apiFeed = document.getElementById('officialApiFeed');
+            if (apiFeed) {
+                apiFeed.innerHTML = '<p class="text-white/70 text-sm">Optional media integrations enabled. Add provider script settings to activate live API feed.</p>';
+            }
+        }
+    };
+
+    accept.addEventListener('click', () => applyChoice('allow'));
+    decline.addEventListener('click', () => applyChoice('essential'));
+
+    if (saved === 'allow') initializeSocialFacades();
+}
+
+function initializeLangToggle() {
+    const toggle = document.getElementById('langToggle');
+    const initial = localStorage.getItem(LANG_KEY) || 'en';
+    setLanguage(initial);
+    if (!toggle) return;
+    toggle.addEventListener('click', () => {
+        const next = (localStorage.getItem(LANG_KEY) || 'en') === 'en' ? 'sw' : 'en';
+        setLanguage(next);
+    });
+}
+
+function initializeOptimizedLinks() {
+    document.querySelectorAll('a[data-optimize-link="true"]').forEach(anchor => {
+        anchor.addEventListener('click', event => {
+            const href = anchor.getAttribute('href');
+            if (!href) return;
+            event.preventDefault();
+            const optimized = openOptimizedSocialLink(href);
+            window.open(optimized, '_blank', 'noopener');
+        });
+    });
+}
+
 document.addEventListener('click', event => {
     const modal = document.getElementById('productModal');
     if (modal && event.target === modal) closeModal();
@@ -279,6 +450,10 @@ document.addEventListener('click', event => {
 
 document.addEventListener('DOMContentLoaded', () => {
     updateCart();
+    initializeLangToggle();
+    initializeOptimizedLinks();
+    syncFeedbackForms();
+    initializeCookieConsent();
 
     const productGrid = document.getElementById('productGrid');
     if (productGrid) {
