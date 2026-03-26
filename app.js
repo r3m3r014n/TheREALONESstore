@@ -138,7 +138,11 @@ function selectSeraVoice() {
     if (!voices.length) return;
 
     const englishVoices = voices.filter(voice => /en[-_]/i.test(voice.lang) || /^en$/i.test(voice.lang));
-    const africanEnglish = englishVoices.find(voice => /(za|ng|ke|gh|tz|ug)/i.test(voice.lang) || /(africa|nigeria|kenya|ghana|south africa)/i.test(voice.name));
+    const africanEnglishLocales = new Set(['en-za', 'en-ng', 'en-ke', 'en-gh', 'en-tz', 'en-ug']);
+    const africanEnglish = englishVoices.find(voice => {
+        const locale = (voice.lang || '').toLowerCase().replace('_', '-');
+        return africanEnglishLocales.has(locale) || /(africa|nigeria|kenya|ghana|south africa)/i.test(voice.name);
+    });
     const femaleHint = englishVoices.find(voice => /(female|woman|zira|susan|aria|samantha|karen|lucy|serena)/i.test(voice.name));
     const preferred = africanEnglish || femaleHint || englishVoices[0] || voices[0];
     seraVoiceName = preferred ? preferred.name : null;
