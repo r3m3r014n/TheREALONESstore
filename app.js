@@ -828,6 +828,18 @@ function initializeLangToggle() {
 }
 
 function initializeOptimizedLinks() {
+    const isAllowedSocialUrl = url => {
+        try {
+            const parsed = new URL(url);
+            const host = parsed.hostname.toLowerCase();
+            const hostParts = host.split('.').filter(Boolean);
+            const base = hostParts.slice(-2).join('.');
+            return base === 'instagram.com' || base === 'tiktok.com';
+        } catch (error) {
+            return false;
+        }
+    };
+
     document.querySelectorAll('a[data-optimize-link="true"]').forEach(anchor => {
         anchor.addEventListener('click', event => {
             const href = anchor.getAttribute('href');
@@ -844,8 +856,9 @@ function initializeOptimizedLinks() {
                 secondary.opener = null;
                 return;
             }
-            const proceed = window.confirm('Pop-up blocked. Open the social link in this tab?');
-            if (proceed) window.location.assign(optimized);
+            if (!isAllowedSocialUrl(optimized)) return;
+            localStorage.setItem(EXTERNAL_LINK_CONSENT_KEY, 'yes');
+            window.location.assign(optimized);
         });
     });
 }
