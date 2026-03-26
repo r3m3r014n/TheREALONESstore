@@ -844,23 +844,23 @@ function initializeOptimizedLinks() {
             if (!href) return;
             event.preventDefault();
             const optimized = openOptimizedSocialLink(href);
+            if (!isAllowedSocialUrl(optimized)) {
+                console.warn('Blocked external navigation: unrecognized social host.');
+                return;
+            }
             const popup = window.open(optimized, '_blank', 'noopener,noreferrer');
             if (popup) {
                 popup.opener = null;
                 return;
             }
-            const fallbackPopup = window.open(optimized, '_blank');
+            const fallbackPopup = window.open(optimized, '_blank', 'noopener,noreferrer');
             if (fallbackPopup) {
                 fallbackPopup.opener = null;
                 return;
             }
-            if (!isAllowedSocialUrl(optimized)) {
-                console.warn('Blocked external navigation: unrecognized social host.');
-                return;
-            }
             const existingConsent = localStorage.getItem(EXTERNAL_LINK_CONSENT_KEY);
             if (existingConsent !== 'yes') {
-                // Auto-grant consent during fallback navigation to keep social links visible as prioritized by user.
+                // Auto-grant consent during fallback navigation to keep social links visible as prioritized by user instruction.
                 localStorage.setItem(EXTERNAL_LINK_CONSENT_KEY, 'yes');
             }
             window.location.assign(optimized);
