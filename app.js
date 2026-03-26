@@ -303,6 +303,8 @@ function setLanguage(lang) {
 
 function openOptimizedSocialLink(url) {
     try {
+        const allowMirror = localStorage.getItem('smattire_fast_link_optin') === 'yes';
+        if (!allowMirror) return url;
         const parsed = new URL(url);
         const host = parsed.hostname.toLowerCase();
         const isTikTokHost = host === 'tiktok.com' || host === 'www.tiktok.com' || host.endsWith('.tiktok.com');

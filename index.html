@@ -265,6 +265,69 @@
         </div>
     </section>
 
+    <section class="max-w-7xl mx-auto px-5 md:px-8 pb-16">
+        <h2 class="font-playfair text-3xl md:text-4xl mb-6">AI + AR Revenue Engine</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <article class="glass-panel border border-gold/20 rounded-2xl p-5">
+                <h3 class="font-playfair text-2xl mb-2 text-gold">AI Personalization</h3>
+                <p class="text-white/75">Hyper-personalized product recommendations, style cues, and intent-led merchandising based on buyer behavior signals.</p>
+            </article>
+            <article class="glass-panel border border-gold/20 rounded-2xl p-5">
+                <h3 class="font-playfair text-2xl mb-2 text-gold">Size Prediction</h3>
+                <p class="text-white/75">Fit-guided advice using lightweight preference capture and 3D body-scan-ready pathways to reduce return risk.</p>
+            </article>
+            <article class="glass-panel border border-gold/20 rounded-2xl p-5">
+                <h3 class="font-playfair text-2xl mb-2 text-gold">Smart Forecasting</h3>
+                <p class="text-white/75">Demand signals from forms and social touchpoints help prioritize restocks and reduce dead inventory.</p>
+            </article>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-6 mt-6">
+            <article class="glass-panel border border-gold/20 rounded-2xl p-6">
+                <h3 class="font-playfair text-2xl text-gold mb-2">AR Virtual Try-On + 3D View</h3>
+                <p class="text-white/75 mb-4">Virtual fitting journeys and 3D previews improve confidence and support lower return rates.</p>
+                <div class="flex flex-wrap gap-3">
+                    <a href="https://arvr.google.com/scene-viewer/1.0?file=https://modelviewer.dev/shared-assets/models/Astronaut.glb&mode=ar_preferred" target="_blank" rel="noopener" class="px-5 py-3 bg-gold text-dark rounded-full text-xs uppercase tracking-[0.14em] font-bold">Open AR Try-On Demo</a>
+                    <a href="vr.html" class="px-5 py-3 border border-gold/70 text-gold rounded-full text-xs uppercase tracking-[0.14em] font-bold hover:bg-gold hover:text-dark transition-colors">Open VR Branch</a>
+                </div>
+            </article>
+            <article class="glass-panel border border-gold/20 rounded-2xl p-6">
+                <h3 class="font-playfair text-2xl text-gold mb-2">Social Commerce + Direct Buy</h3>
+                <p class="text-white/75 mb-4">Instagram and TikTok discovery loops feed direct in-app shopping intent, then convert with WhatsApp concierge and M-Pesa.</p>
+                <div class="flex flex-wrap gap-3">
+                    <a href="https://instagram.com/sm_attire_" target="_blank" rel="noopener" class="px-5 py-3 border border-gold/60 text-gold rounded-full text-xs uppercase tracking-[0.14em] font-bold">Instagram Shop Journey</a>
+                    <a href="https://tiktok.com/@sera_muthoni_" target="_blank" rel="noopener" class="px-5 py-3 border border-gold/60 text-gold rounded-full text-xs uppercase tracking-[0.14em] font-bold">TikTok Shop Journey</a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-5 md:px-8 pb-16">
+        <div class="grid lg:grid-cols-3 gap-5">
+            <article class="glass-panel border border-gold/20 rounded-2xl p-5">
+                <h3 class="font-playfair text-2xl mb-2 text-gold">Blockchain Authenticity</h3>
+                <p class="text-white/75">Digital passport-ready product records for provenance, anti-counterfeit checks, and transparent sourcing narratives.</p>
+            </article>
+            <article class="glass-panel border border-gold/20 rounded-2xl p-5">
+                <h3 class="font-playfair text-2xl mb-2 text-gold">Omnichannel + IMS</h3>
+                <p class="text-white/75">Mobile, web, social, and showroom data streams can sync inventory and pricing signals for efficient operations.</p>
+            </article>
+            <article class="glass-panel border border-gold/20 rounded-2xl p-5">
+                <h3 class="font-playfair text-2xl mb-2 text-gold">BNPL + Secure Payments</h3>
+                <p class="text-white/75">BNPL intent capture, EFT-ready strategy, and EDI-style partner data exchange for scalable financial workflows.</p>
+            </article>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-5 mt-5">
+            <article class="glass-panel border border-gold/20 rounded-2xl p-5">
+                <h3 class="font-playfair text-2xl mb-2 text-gold">Circular Fashion + Resale</h3>
+                <p class="text-white/75">Second-life marketplace pathways extend product lifecycle and attract eco-conscious buyers.</p>
+            </article>
+            <article class="glass-panel border border-gold/20 rounded-2xl p-5">
+                <h3 class="font-playfair text-2xl mb-2 text-gold">Metaverse + Digital Fashion</h3>
+                <p class="text-white/75">Virtual storefront campaigns and collectible digital drops create new experiential revenue channels.</p>
+            </article>
+        </div>
+    </section>
+
     <section class="max-w-7xl mx-auto px-5 md:px-8 pb-20">
         <div class="glass-panel border border-gold/20 rounded-2xl p-6 md:p-8">
             <h2 class="font-playfair text-3xl md:text-4xl mb-3">Join the Drop List</h2>
@@ -287,7 +350,28 @@
                     <option value="sw">Kiswahili</option>
                     <option value="both">English + Kiswahili</option>
                 </select>
+                <select name="fit_experience" class="w-full px-4 py-3 rounded-lg bg-dark/70 border border-gold/30 focus:border-gold focus:outline-none">
+                    <option value="ar_try_on">AR Virtual Try-On</option>
+                    <option value="vr_showroom">VR Showroom Branch</option>
+                    <option value="body_scan">3D Body Scan Interest</option>
+                </select>
+                <select name="financing_preference" class="w-full px-4 py-3 rounded-lg bg-dark/70 border border-gold/30 focus:border-gold focus:outline-none">
+                    <option value="mpesa">M-Pesa Instant Pay</option>
+                    <option value="bnpl_interest">BNPL Interest</option>
+                    <option value="mixed">Mixed Payment Options</option>
+                </select>
+                <select name="authenticity_preference" class="w-full px-4 py-3 rounded-lg bg-dark/70 border border-gold/30 focus:border-gold focus:outline-none">
+                    <option value="standard">Standard Product Verification</option>
+                    <option value="digital_passport">Blockchain Digital Passport</option>
+                </select>
+                <select name="circular_interest" class="w-full px-4 py-3 rounded-lg bg-dark/70 border border-gold/30 focus:border-gold focus:outline-none">
+                    <option value="new_only">New/Primary Stock</option>
+                    <option value="resale">Resale / Circular Fashion</option>
+                    <option value="both">Both New + Resale</option>
+                </select>
                 <textarea name="notes" rows="3" placeholder="Tell us what drops you want next." class="md:col-span-2 w-full px-4 py-3 rounded-lg bg-dark/70 border border-gold/30 focus:border-gold focus:outline-none resize-none"></textarea>
+                <input type="hidden" name="primary_intent" value="ai-ar-commerce-growth">
+                <input type="hidden" name="omnichannel_capture" value="web_social_vr">
                 <button type="submit" class="md:col-span-2 bg-gold text-dark py-3 rounded-full font-bold uppercase tracking-[0.14em] hover:bg-gold-light transition-colors">Submit Insights</button>
             </form>
         </div>
