@@ -24,8 +24,8 @@ let currentProduct = null;
 let currentFilter = 'all';
 let conversionPromptShown = false;
 
-const navigationPsychologyDB = {
-    discover: "r3m3r014n Avatar Engine: Discover high-intent products first to reduce decision fatigue.",
+const navigationPsychologyMessages = {
+    discover: 'Discover high-intent products first to reduce decision fatigue.',
     validate: 'Use social proof and recently viewed items to reinforce choices before checkout.',
     commit: 'Commit mode active: reduce checkout friction with clear next-best-action prompts.'
 };
@@ -124,7 +124,7 @@ function trackProductInteraction(eventName, data = {}) {
         page_path: window.location.pathname,
         page_title: document.title,
         cart_count: String(cart.reduce((sum, item) => sum + item.quantity, 0)),
-        avatar_mode: 'r3m3r014n_core',
+        avatar_mode: 'ai_shopping_assistant',
         ts_utc: new Date().toISOString(),
         ...data
     };
@@ -160,11 +160,11 @@ function updateJourneyAssistant() {
     if (!node) return;
     const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
     if (cartCount === 0) {
-        node.textContent = navigationPsychologyDB.discover;
+        node.textContent = navigationPsychologyMessages.discover;
     } else if (cartCount < 3) {
-        node.textContent = navigationPsychologyDB.validate;
+        node.textContent = navigationPsychologyMessages.validate;
     } else {
-        node.textContent = navigationPsychologyDB.commit;
+        node.textContent = navigationPsychologyMessages.commit;
     }
 }
 
