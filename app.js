@@ -712,6 +712,31 @@ function mountFacadeIframe(card) {
 
 let socialFacadesInitialized = false;
 
+function initializeSeraAssistant() {
+    const toggleBtn = document.getElementById('seraToggleBtn');
+    const panel = document.getElementById('seraPanel');
+    const closeBtn = document.getElementById('seraPanelClose');
+    if (!toggleBtn || !panel) return;
+
+    toggleBtn.addEventListener('click', () => {
+        const isOpen = !panel.hidden;
+        panel.hidden = isOpen;
+        toggleBtn.setAttribute('aria-expanded', String(!isOpen));
+        if (!isOpen) {
+            seraAssistantActivated = true;
+            updateJourneyAssistant();
+        }
+    });
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            panel.hidden = true;
+            toggleBtn.setAttribute('aria-expanded', 'false');
+            toggleBtn.focus();
+        });
+    }
+}
+
 function initializeSocialFacades() {
     if (socialFacadesInitialized) return;
     socialFacadesInitialized = true;
@@ -881,6 +906,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeCookieConsent();
     initializeConversionPrompts();
     initializeSiteTutorial();
+    initializeSeraAssistant();
     renderRecentlyViewed();
     updateJourneyAssistant();
 
