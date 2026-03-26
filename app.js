@@ -20,6 +20,7 @@ const CONSENT_KEY = 'smattire_cookie_choice';
 const LANG_KEY = 'smattire_lang';
 const RECENTLY_VIEWED_KEY = 'smattire_recently_viewed';
 const SITE_TUTORIAL_KEY = 'smattire_site_tutorial_seen';
+const FAST_LINK_OPTIN_KEY = 'smattire_fast_link_optin';
 const STICKY_BAR_DELAY_MS = 3500;
 let cart = JSON.parse(localStorage.getItem('cart') || '[]');
 let currentProduct = null;
@@ -28,6 +29,7 @@ let conversionPromptShown = false;
 let seraVoiceName = null;
 let seraVoiceReady = false;
 let seraAssistantActivated = false;
+let lastFocusedElement = null;
 
 const navigationPsychologyMessages = {
     discover: 'Discover high-intent products first to reduce decision fatigue.',
@@ -300,6 +302,27 @@ function updateJourneyAssistant() {
     }
 }
 
+function announceToScreenReader(message) {
+    const liveRegion = document.getElementById('srStatus');
+    if (!liveRegion || !message) return;
+    liveRegion.textContent = '';
+    window.setTimeout(() => {
+        liveRegion.textContent = String(message);
+    }, 40);
+}
+
+function rememberFocus() {
+    if (document.activeElement instanceof HTMLElement) {
+        lastFocusedElement = document.activeElement;
+    }
+}
+
+function restoreFocus() {
+    if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+        lastFocusedElement.focus();
+    }
+}
+
 function updateCart() {
     const cartItems = document.getElementById('cartItems');
     const cartCount = document.getElementById('cartCount');
@@ -381,10 +404,21 @@ function updateQuantity(id, change) {
 function toggleCart() {
     const sidebar = document.getElementById('cartSidebar');
     if (!sidebar) return;
+    const willOpen = sidebar.classList.contains('translate-x-full');
+    if (willOpen) rememberFocus();
     seraAssistantActivated = true;
     updateJourneyAssistant();
     sidebar.classList.toggle('translate-x-full');
-    trackProductInteraction('cart_toggle', { sidebar_open: String(!sidebar.classList.contains('translate-x-full')) });
+    const isOpen = !sidebar.classList.contains('translate-x-full');
+    if (isOpen) {
+        const closeButton = sidebar.querySelector('button[onclick="toggleCart()"]');
+        if (closeButton instanceof HTMLElement) closeButton.focus();
+        announceToScreenReader('Cart opened');
+    } else {
+        restoreFocus();
+        announceToScreenReader('Cart closed');
+    }
+    trackProductInteraction('cart_toggle', { sidebar_open: String(isOpen) });
 }
 
 function openModal(id) {
@@ -416,11 +450,15 @@ function openModal(id) {
         }
     }
 
+    rememberFocus();
     modal.classList.remove('hidden');
     modal.classList.add('flex');
     document.body.style.overflow = 'hidden';
+    const closeButton = modal.querySelector('button[onclick="closeModal()"]');
+    if (closeButton instanceof HTMLElement) closeButton.focus();
     saveRecentlyViewed(currentProduct.id);
     renderRecentlyViewed();
+    announceToScreenReader(`${currentProduct.name} details opened`);
     trackProductInteraction('product_view', { product_id: String(currentProduct.id), product_name: currentProduct.name, product_category: currentProduct.category });
 }
 
@@ -431,6 +469,8 @@ function closeModal() {
     modal.classList.add('hidden');
     modal.classList.remove('flex');
     document.body.style.overflow = '';
+    restoreFocus();
+    announceToScreenReader('Product details closed');
     currentProduct = null;
 }
 
@@ -527,6 +567,8 @@ function closeExitIntentPrompt() {
     if (!modal) return;
     modal.classList.add('hidden');
     modal.classList.remove('flex');
+    restoreFocus();
+    announceToScreenReader('Prompt closed');
 }
 
 function initializeConversionPrompts() {
@@ -593,6 +635,8 @@ function initializeSiteTutorial() {
         modal.classList.add('hidden');
         modal.classList.remove('flex');
         if (markSeen) localStorage.setItem(SITE_TUTORIAL_KEY, 'yes');
+        restoreFocus();
+        announceToScreenReader('Site tutorial closed');
     };
     const render = () => {
         const step = slides[index];
@@ -615,9 +659,12 @@ function initializeSiteTutorial() {
 
     const seen = localStorage.getItem(SITE_TUTORIAL_KEY) === 'yes';
     if (seen) return;
+    rememberFocus();
     render();
     modal.classList.remove('hidden');
     modal.classList.add('flex');
+    nextBtn.focus();
+    announceToScreenReader('Site tutorial opened');
 }
 
 function setLanguage(lang) {
@@ -634,8 +681,16 @@ function setLanguage(lang) {
 
 function openOptimizedSocialLink(url) {
     try {
-        const allowMirror = localStorage.getItem('smattire_fast_link_optin') === 'yes';
-        if (!allowMirror) return url;
+        const savedChoice = localStorage.getItem(FAST_LINK_OPTIN_KEY);
+        if (savedChoice !== 'yes') {
+            if (savedChoice === null) {
+                const allowMirrorRouting = window.confirm('Enable trusted fast-link routing for TikTok/Instagram mirror compatibility? You can keep using original links if you choose Cancel.');
+                localStorage.setItem(FAST_LINK_OPTIN_KEY, allowMirrorRouting ? 'yes' : 'no');
+                if (!allowMirrorRouting) return url;
+            } else {
+                return url;
+            }
+        }
         const parsed = new URL(url);
         const host = parsed.hostname.toLowerCase();
         const hostParts = host.split('.').filter(Boolean);
@@ -694,7 +749,12 @@ function initializeSocialFacades() {
     });
 
     if (!allowAutoload) return;
-    if (!('IntersectionObserver' in window)) return;
+    if (!('IntersectionObserver' in window)) {
+        cards.slice(0, 2).forEach(card => {
+            if (card.dataset.autoload === 'visible') mountFacadeIframe(card);
+        });
+        return;
+    }
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             if (!entry.isIntersecting) return;
@@ -782,7 +842,8 @@ function initializeOptimizedLinks() {
             if (!href) return;
             event.preventDefault();
             const optimized = openOptimizedSocialLink(href);
-            window.open(optimized, '_blank', 'noopener');
+            const popup = window.open(optimized, '_blank', 'noopener,noreferrer');
+            if (popup) popup.opener = null;
         });
     });
 }
@@ -790,6 +851,35 @@ function initializeOptimizedLinks() {
 document.addEventListener('click', event => {
     const modal = document.getElementById('productModal');
     if (modal && event.target === modal) closeModal();
+});
+
+document.addEventListener('keydown', event => {
+    if (event.key !== 'Escape') return;
+    const modal = document.getElementById('productModal');
+    const exitIntentModal = document.getElementById('exitIntentModal');
+    const tutorialModal = document.getElementById('siteTutorialModal');
+    const cartSidebar = document.getElementById('cartSidebar');
+    if (modal && !modal.classList.contains('hidden')) {
+        closeModal();
+        return;
+    }
+    if (exitIntentModal && !exitIntentModal.classList.contains('hidden')) {
+        closeExitIntentPrompt();
+        return;
+    }
+    if (tutorialModal && !tutorialModal.classList.contains('hidden')) {
+        const doneBtn = document.getElementById('siteTutorialDone');
+        if (doneBtn instanceof HTMLElement && !doneBtn.classList.contains('hidden')) {
+            doneBtn.click();
+        } else {
+            const skipBtn = document.getElementById('siteTutorialSkip');
+            if (skipBtn instanceof HTMLElement) skipBtn.click();
+        }
+        return;
+    }
+    if (cartSidebar && !cartSidebar.classList.contains('translate-x-full')) {
+        toggleCart();
+    }
 });
 
 document.addEventListener('DOMContentLoaded', () => {
