@@ -85,6 +85,8 @@
     </script>
 </head>
 <body class="safe-area text-white font-rajdhani antialiased">
+    <div class="immersive-orb immersive-orb-1" aria-hidden="true"></div>
+    <div class="immersive-orb immersive-orb-2" aria-hidden="true"></div>
     <nav id="navbar" class="sticky top-0 z-50 glass-panel border-b border-gold/20">
         <div class="max-w-7xl mx-auto px-5 md:px-8 py-4 flex items-center justify-between gap-4">
             <a href="index.html" class="font-playfair text-2xl tracking-[0.14em] text-gold hover:text-gold-light transition-colors">SM ATTIRE</a>
@@ -92,8 +94,10 @@
                 <a href="shop.html#casual-streetwear" class="hover:text-gold transition-colors">Casual Streetwear</a>
                 <a href="shop.html#neatfit-collection" class="hover:text-gold transition-colors">Neatfit Collection</a>
                 <a href="shop.html" class="hover:text-gold transition-colors">All Products</a>
+                <a href="vr.html" class="hover:text-gold transition-colors">VR Showroom</a>
             </div>
             <a href="seo.html" class="hidden md:inline text-xs uppercase tracking-[0.16em] text-white/70 hover:text-gold">SEO</a>
+            <button id="langToggle" type="button" class="hidden sm:inline border border-gold/40 rounded-full px-3 py-2 text-[11px] tracking-[0.14em] text-gold hover:bg-gold hover:text-dark transition-colors">SW</button>
             <button onclick="toggleCart()" aria-label="Open Cart" class="relative border border-gold/60 text-gold rounded-full px-4 py-2 hover:bg-gold hover:text-dark transition-all">
                 🛒
                 <span id="cartCount" class="absolute -top-2 -right-2 min-w-[22px] h-[22px] px-1 rounded-full bg-gold text-dark text-xs font-bold flex items-center justify-center">0</span>
@@ -102,12 +106,13 @@
     </nav>
 
     <header class="max-w-7xl mx-auto px-5 md:px-8 pt-24 pb-16 text-center">
-        <p class="text-gold uppercase tracking-[0.35em] text-xs mb-5">New Clothes • New Fits • Delivery Across Kenya</p>
+        <p data-i18n="heroTagline" class="text-gold uppercase tracking-[0.35em] text-xs mb-5">New Clothes • New Fits • Delivery Across Kenya</p>
         <h1 class="font-playfair text-5xl md:text-7xl leading-none mb-5">SM ATTIRE</h1>
-        <p class="max-w-2xl mx-auto text-white/75 text-lg md:text-xl mb-10">Nairobi's home for new clothes, new fits, Grade A mitumba, and Neatfit Collection sneakers at budget-friendly prices.</p>
+        <p data-i18n="heroSubtitle" class="max-w-2xl mx-auto text-white/75 text-lg md:text-xl mb-10">Nairobi's home for new clothes, new fits, Grade A mitumba, and Neatfit Collection sneakers at budget-friendly prices.</p>
         <div class="flex flex-wrap justify-center gap-4">
-            <a href="shop.html" class="px-7 py-3 bg-gold text-dark font-bold uppercase tracking-[0.14em] rounded-full hover:bg-gold-light transition-colors">Shop Now</a>
-            <a href="#featured" class="px-7 py-3 border border-gold/70 text-gold font-bold uppercase tracking-[0.14em] rounded-full hover:bg-gold hover:text-dark transition-all">View Collection</a>
+            <a href="shop.html" data-i18n="shopNow" class="px-7 py-3 bg-gold text-dark font-bold uppercase tracking-[0.14em] rounded-full hover:bg-gold-light transition-colors">Shop Now</a>
+            <a href="#featured" data-i18n="viewCollection" class="px-7 py-3 border border-gold/70 text-gold font-bold uppercase tracking-[0.14em] rounded-full hover:bg-gold hover:text-dark transition-all">View Collection</a>
+            <a href="#immersive-social" class="px-7 py-3 border border-gold/40 text-white/90 font-bold uppercase tracking-[0.14em] rounded-full hover:border-gold hover:text-gold transition-all">Immersive Social Feed</a>
         </div>
     </header>
 
@@ -149,6 +154,139 @@
                 <h3 class="font-playfair text-2xl mb-2">WhatsApp Support</h3>
                 <p class="text-white/70">Quick replies for sizes, availability, and order updates.</p>
             </div>
+        </div>
+    </section>
+
+    <section id="immersive-social" class="max-w-7xl mx-auto px-5 md:px-8 pb-16">
+        <div class="flex items-center justify-between mb-6 gap-3 flex-wrap">
+            <h2 class="font-playfair text-3xl md:text-4xl">Immersive Social Drops</h2>
+            <p class="text-white/65 text-sm">Facade-first loading • initial feed capped to 6</p>
+        </div>
+        <div id="socialFacadeGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <article class="social-facade glass-panel border border-gold/20 rounded-2xl overflow-hidden" data-platform="tiktok" data-embed-url="https://www.tiktok.com/embed/v2/7340980419493299462" data-autoload="visible">
+                <button type="button" class="facade-trigger w-full text-left" aria-label="Load TikTok video">
+                    <img src="1.jpg" alt="TikTok style preview" loading="lazy" class="w-full h-64 object-cover">
+                    <span class="facade-badge">TikTok • Tap to play</span>
+                </button>
+                <div class="p-4 flex items-center justify-between gap-3">
+                    <p class="text-white/75 text-sm">@sera_muthoni_</p>
+                    <a href="https://tiktok.com/@sera_muthoni_" data-optimize-link="true" target="_blank" rel="noopener" class="text-gold text-xs uppercase tracking-[0.14em] hover:text-gold-light">Open Fast Link</a>
+                </div>
+                <div class="facade-frame hidden"></div>
+            </article>
+            <article class="social-facade glass-panel border border-gold/20 rounded-2xl overflow-hidden" data-platform="instagram" data-embed-url="https://www.instagram.com/p/CrA4S5wM0C1/embed" data-autoload="visible">
+                <button type="button" class="facade-trigger w-full text-left" aria-label="Load Instagram post">
+                    <img src="2.jpg" alt="Instagram style preview" loading="lazy" class="w-full h-64 object-cover">
+                    <span class="facade-badge">Instagram • Tap to play</span>
+                </button>
+                <div class="p-4 flex items-center justify-between gap-3">
+                    <p class="text-white/75 text-sm">@sm_attire_</p>
+                    <a href="https://instagram.com/sm_attire_" data-optimize-link="true" target="_blank" rel="noopener" class="text-gold text-xs uppercase tracking-[0.14em] hover:text-gold-light">Open Fast Link</a>
+                </div>
+                <div class="facade-frame hidden"></div>
+            </article>
+            <article class="social-facade glass-panel border border-gold/20 rounded-2xl overflow-hidden" data-platform="tiktok" data-embed-url="https://www.tiktok.com/embed/v2/7335968210312391979" data-autoload="visible">
+                <button type="button" class="facade-trigger w-full text-left" aria-label="Load TikTok video">
+                    <img src="3.jpg" alt="TikTok style preview" loading="lazy" class="w-full h-64 object-cover">
+                    <span class="facade-badge">TikTok • Tap to play</span>
+                </button>
+                <div class="p-4 flex items-center justify-between gap-3">
+                    <p class="text-white/75 text-sm">Streetwear highlights</p>
+                    <a href="https://tiktok.com/@sera_muthoni_" data-optimize-link="true" target="_blank" rel="noopener" class="text-gold text-xs uppercase tracking-[0.14em] hover:text-gold-light">Open Fast Link</a>
+                </div>
+                <div class="facade-frame hidden"></div>
+            </article>
+            <article class="social-facade glass-panel border border-gold/20 rounded-2xl overflow-hidden" data-platform="instagram" data-embed-url="https://www.instagram.com/p/CvYdCA6qAqG/embed" data-autoload="visible">
+                <button type="button" class="facade-trigger w-full text-left" aria-label="Load Instagram post">
+                    <img src="4.jpg" alt="Instagram style preview" loading="lazy" class="w-full h-64 object-cover">
+                    <span class="facade-badge">Instagram • Tap to play</span>
+                </button>
+                <div class="p-4 flex items-center justify-between gap-3">
+                    <p class="text-white/75 text-sm">Neatfit spotlight</p>
+                    <a href="https://instagram.com/sm_attire_" data-optimize-link="true" target="_blank" rel="noopener" class="text-gold text-xs uppercase tracking-[0.14em] hover:text-gold-light">Open Fast Link</a>
+                </div>
+                <div class="facade-frame hidden"></div>
+            </article>
+            <article class="social-facade glass-panel border border-gold/20 rounded-2xl overflow-hidden" data-platform="tiktok" data-embed-url="https://www.tiktok.com/embed/v2/7321496425504101637" data-autoload="visible">
+                <button type="button" class="facade-trigger w-full text-left" aria-label="Load TikTok video">
+                    <img src="5.jpg" alt="TikTok style preview" loading="lazy" class="w-full h-64 object-cover">
+                    <span class="facade-badge">TikTok • Tap to play</span>
+                </button>
+                <div class="p-4 flex items-center justify-between gap-3">
+                    <p class="text-white/75 text-sm">Fit inspiration</p>
+                    <a href="https://tiktok.com/@sera_muthoni_" data-optimize-link="true" target="_blank" rel="noopener" class="text-gold text-xs uppercase tracking-[0.14em] hover:text-gold-light">Open Fast Link</a>
+                </div>
+                <div class="facade-frame hidden"></div>
+            </article>
+            <article class="social-facade glass-panel border border-gold/20 rounded-2xl overflow-hidden" data-platform="instagram" data-embed-url="https://www.instagram.com/p/C3c2d8-Nq1g/embed" data-autoload="visible">
+                <button type="button" class="facade-trigger w-full text-left" aria-label="Load Instagram post">
+                    <img src="6.jpg" alt="Instagram style preview" loading="lazy" class="w-full h-64 object-cover">
+                    <span class="facade-badge">Instagram • Tap to play</span>
+                </button>
+                <div class="p-4 flex items-center justify-between gap-3">
+                    <p class="text-white/75 text-sm">Weekly restock</p>
+                    <a href="https://instagram.com/sm_attire_" data-optimize-link="true" target="_blank" rel="noopener" class="text-gold text-xs uppercase tracking-[0.14em] hover:text-gold-light">Open Fast Link</a>
+                </div>
+                <div class="facade-frame hidden"></div>
+            </article>
+        </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-5 md:px-8 pb-20">
+        <div class="grid lg:grid-cols-2 gap-6">
+            <article class="glass-panel border border-gold/20 rounded-2xl p-6">
+                <h2 class="font-playfair text-3xl text-gold mb-3">Official API Feed Bridge</h2>
+                <p class="text-white/75 mb-4">Clipara / EmbedSocial hooks are wired for real-time social ingestion and deferred load after cookie consent.</p>
+                <div id="officialApiFeed" class="bg-dark/60 border border-gold/20 rounded-xl p-4" data-provider="clipara" data-script-src="" data-widget-id="">
+                    <p class="text-white/65 text-sm">Add your provider script URL + widget ID to activate official API feed rendering.</p>
+                </div>
+            </article>
+            <article class="glass-panel border border-gold/20 rounded-2xl p-6">
+                <h2 class="font-playfair text-3xl text-gold mb-3">AR + VR Commerce</h2>
+                <p class="text-white/75 mb-4">Launch immersive selling channels with AR Quick View and a dedicated VR showroom experience.</p>
+                <div class="flex flex-wrap gap-3">
+                    <a href="https://arvr.google.com/scene-viewer/1.0?file=https://modelviewer.dev/shared-assets/models/Astronaut.glb&mode=ar_preferred" target="_blank" rel="noopener" class="px-5 py-3 bg-gold text-dark rounded-full text-xs uppercase tracking-[0.14em] font-bold">View in AR</a>
+                    <a href="vr.html" class="px-5 py-3 border border-gold/70 text-gold rounded-full text-xs uppercase tracking-[0.14em] font-bold hover:bg-gold hover:text-dark transition-colors">Open VR Showroom</a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-5 md:px-8 pb-16">
+        <h2 class="font-playfair text-3xl md:text-4xl mb-6">High-Impact Growth Niches</h2>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <article class="glass-panel border border-gold/20 rounded-2xl p-5"><h3 class="font-playfair text-xl mb-2">Sneaker Collectors</h3><p class="text-white/70 text-sm">Limited Neatfit drops with early access list capture.</p></article>
+            <article class="glass-panel border border-gold/20 rounded-2xl p-5"><h3 class="font-playfair text-xl mb-2">Campus Streetwear</h3><p class="text-white/70 text-sm">Affordable rotating fits optimized for students.</p></article>
+            <article class="glass-panel border border-gold/20 rounded-2xl p-5"><h3 class="font-playfair text-xl mb-2">Diaspora Gifts</h3><p class="text-white/70 text-sm">Buy from abroad, deliver to Kenya via WhatsApp concierge.</p></article>
+            <article class="glass-panel border border-gold/20 rounded-2xl p-5"><h3 class="font-playfair text-xl mb-2">Creator Collaborations</h3><p class="text-white/70 text-sm">Co-branded fits and social commerce campaigns.</p></article>
+        </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-5 md:px-8 pb-20">
+        <div class="glass-panel border border-gold/20 rounded-2xl p-6 md:p-8">
+            <h2 class="font-playfair text-3xl md:text-4xl mb-3">Join the Drop List</h2>
+            <p class="text-white/75 mb-6">Lightweight Netlify form for market intelligence, translation demand, and VIP restock alerts.</p>
+            <form name="drop-insights" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="grid md:grid-cols-2 gap-4">
+                <input type="hidden" name="form-name" value="drop-insights">
+                <p class="hidden">
+                    <label>Don’t fill this out: <input name="bot-field"></label>
+                </p>
+                <input required name="name" type="text" placeholder="Your Name" class="w-full px-4 py-3 rounded-lg bg-dark/70 border border-gold/30 focus:border-gold focus:outline-none">
+                <input required name="email" type="email" placeholder="Email Address" class="w-full px-4 py-3 rounded-lg bg-dark/70 border border-gold/30 focus:border-gold focus:outline-none">
+                <select name="market" class="w-full px-4 py-3 rounded-lg bg-dark/70 border border-gold/30 focus:border-gold focus:outline-none">
+                    <option value="nairobi">Nairobi Shopper</option>
+                    <option value="diaspora">Diaspora Buyer</option>
+                    <option value="campus">Campus Streetwear</option>
+                    <option value="collector">Sneaker Collector</option>
+                </select>
+                <select name="language" class="w-full px-4 py-3 rounded-lg bg-dark/70 border border-gold/30 focus:border-gold focus:outline-none">
+                    <option value="en">English</option>
+                    <option value="sw">Kiswahili</option>
+                    <option value="both">English + Kiswahili</option>
+                </select>
+                <textarea name="notes" rows="3" placeholder="Tell us what drops you want next." class="md:col-span-2 w-full px-4 py-3 rounded-lg bg-dark/70 border border-gold/30 focus:border-gold focus:outline-none resize-none"></textarea>
+                <button type="submit" class="md:col-span-2 bg-gold text-dark py-3 rounded-full font-bold uppercase tracking-[0.14em] hover:bg-gold-light transition-colors">Submit Insights</button>
+            </form>
         </div>
     </section>
 
@@ -240,6 +378,13 @@
 
     <script id="productListSchema" type="application/ld+json"></script>
     <script src="app.js"></script>
+    <div id="cookieConsent" class="cookie-consent hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-[90] w-[95%] max-w-3xl bg-charcoal border border-gold/30 rounded-2xl p-4 md:p-5">
+        <p class="text-white/80 text-sm">We use essential cookies for cart and optional cookies for analytics + social feed enhancements. Allow optional cookies?</p>
+        <div class="mt-3 flex flex-wrap gap-3">
+            <button id="acceptCookies" class="px-4 py-2 rounded-full bg-gold text-dark text-xs font-bold uppercase tracking-[0.14em]">Allow Optional</button>
+            <button id="declineCookies" class="px-4 py-2 rounded-full border border-gold/50 text-gold text-xs font-bold uppercase tracking-[0.14em]">Essential Only</button>
+        </div>
+    </div>
 
     <script type="application/ld+json">
     {
