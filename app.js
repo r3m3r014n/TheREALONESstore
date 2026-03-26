@@ -23,6 +23,8 @@ let cart = JSON.parse(localStorage.getItem('cart') || '[]');
 let currentProduct = null;
 let currentFilter = 'all';
 let conversionPromptShown = false;
+let seraVoiceName = null;
+let seraVoiceReady = false;
 
 const navigationPsychologyMessages = {
     discover: 'Discover high-intent products first to reduce decision fatigue.',
@@ -124,11 +126,59 @@ function trackProductInteraction(eventName, data = {}) {
         page_path: window.location.pathname,
         page_title: document.title,
         cart_count: String(cart.reduce((sum, item) => sum + item.quantity, 0)),
-        avatar_mode: 'ai_shopping_assistant',
+        avatar_mode: 'sera_ai_shopping_assistant',
         ts_utc: new Date().toISOString(),
         ...data
     };
     postNetlifyForm('product-interactions', payload);
+}
+
+function selectSeraVoice() {
+    const voices = window.speechSynthesis ? window.speechSynthesis.getVoices() : [];
+    if (!voices.length) return;
+
+    const englishVoices = voices.filter(voice => /en[-_]/i.test(voice.lang) || /^en$/i.test(voice.lang));
+    const africanEnglish = englishVoices.find(voice => /(za|ng|ke|gh|tz|ug)/i.test(voice.lang) || /(africa|nigeria|kenya|ghana|south africa)/i.test(voice.name));
+    const femaleHint = englishVoices.find(voice => /(female|woman|zira|susan|aria|samantha|karen|lucy|serena)/i.test(voice.name));
+    const preferred = africanEnglish || femaleHint || englishVoices[0] || voices[0];
+    seraVoiceName = preferred ? preferred.name : null;
+    seraVoiceReady = true;
+}
+
+function getSeraMessage() {
+    const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+    if (cartCount === 0) {
+        return 'Hello, I am Sera. Welcome to SM ATTIRE. Start with top sellers and discover your best fit quickly.';
+    }
+    if (cartCount < 3) {
+        return 'Hi, this is Sera. Great choice so far. Review recently viewed options, then continue to checkout.';
+    }
+    return 'Sera here. Your cart is ready. Open cart now and complete WhatsApp checkout in under a minute.';
+}
+
+function stopSeraVoice() {
+    if (!window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
+}
+
+function speakSeraAssistant() {
+    if (!('speechSynthesis' in window) || typeof window.SpeechSynthesisUtterance === 'undefined') return;
+    if (!seraVoiceReady) selectSeraVoice();
+
+    stopSeraVoice();
+    const utterance = new SpeechSynthesisUtterance(getSeraMessage());
+    utterance.lang = 'en';
+    utterance.rate = 0.95;
+    utterance.pitch = 1.05;
+    utterance.volume = 1;
+
+    if (seraVoiceName) {
+        const voice = window.speechSynthesis.getVoices().find(item => item.name === seraVoiceName);
+        if (voice) utterance.voice = voice;
+    }
+
+    window.speechSynthesis.speak(utterance);
+    trackProductInteraction('sera_voice_play', { cta_text: 'Play Voice' });
 }
 
 function saveRecentlyViewed(productId) {
@@ -635,4 +685,9 @@ document.addEventListener('DOMContentLoaded', () => {
             trackProductInteraction(anchor.dataset.track || 'cta_click', { cta_text: anchor.textContent.trim() });
         });
     });
+
+    if ('speechSynthesis' in window) {
+        selectSeraVoice();
+        window.speechSynthesis.onvoiceschanged = selectSeraVoice;
+    }
 });
