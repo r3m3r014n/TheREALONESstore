@@ -19,12 +19,14 @@ const WHATSAPP_NUMBER = '254701226084';
 const CONSENT_KEY = 'smattire_cookie_choice';
 const LANG_KEY = 'smattire_lang';
 const RECENTLY_VIEWED_KEY = 'smattire_recently_viewed';
+const SITE_TUTORIAL_KEY = 'smattire_site_tutorial_seen';
 let cart = JSON.parse(localStorage.getItem('cart') || '[]');
 let currentProduct = null;
 let currentFilter = 'all';
 let conversionPromptShown = false;
 let seraVoiceName = null;
 let seraVoiceReady = false;
+let seraAssistantActivated = false;
 
 const navigationPsychologyMessages = {
     discover: 'Discover high-intent products first to reduce decision fatigue.',
@@ -227,6 +229,8 @@ function stopSeraVoice() {
 
 function speakSeraAssistant() {
     if (!('speechSynthesis' in window) || typeof window.SpeechSynthesisUtterance === 'undefined') return;
+    seraAssistantActivated = true;
+    updateJourneyAssistant();
 
     stopSeraVoice();
     const utterance = new SpeechSynthesisUtterance(getSeraMessage());
@@ -280,6 +284,10 @@ function renderRecentlyViewed() {
 function updateJourneyAssistant() {
     const node = document.getElementById('journeyAssistantText');
     if (!node) return;
+    if (!seraAssistantActivated) {
+        node.textContent = 'Sera is on standby. Tap Discover, Cart, or Play Voice when you need help.';
+        return;
+    }
     const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
     if (cartCount === 0) {
         node.textContent = navigationPsychologyMessages.discover;
@@ -371,6 +379,8 @@ function updateQuantity(id, change) {
 function toggleCart() {
     const sidebar = document.getElementById('cartSidebar');
     if (!sidebar) return;
+    seraAssistantActivated = true;
+    updateJourneyAssistant();
     sidebar.classList.toggle('translate-x-full');
     trackProductInteraction('cart_toggle', { sidebar_open: String(!sidebar.classList.contains('translate-x-full')) });
 }
@@ -551,6 +561,63 @@ function initializeConversionPrompts() {
     });
 }
 
+function initializeSiteTutorial() {
+    const modal = document.getElementById('siteTutorialModal');
+    const titleNode = document.getElementById('siteTutorialTitle');
+    const bodyNode = document.getElementById('siteTutorialBody');
+    const progressNode = document.getElementById('siteTutorialProgress');
+    const nextBtn = document.getElementById('siteTutorialNext');
+    const skipBtn = document.getElementById('siteTutorialSkip');
+    const doneBtn = document.getElementById('siteTutorialDone');
+    if (!modal || !titleNode || !bodyNode || !progressNode || !nextBtn || !skipBtn || !doneBtn) return;
+
+    const slides = [
+        {
+            title: 'Welcome to SM ATTIRE',
+            body: 'Browse Featured Drops, shop by category, and use quick cart actions for faster checkout.'
+        },
+        {
+            title: 'Smart Shopping Features',
+            body: 'Use social feed highlights, recently viewed products, and top sellers to compare quickly.'
+        },
+        {
+            title: 'Sera Assistant + Fast Checkout',
+            body: 'Sera stays on standby until you tap Discover, Cart, or Play Voice. Checkout completes via WhatsApp + M-Pesa.'
+        }
+    ];
+
+    let index = 0;
+    const closeTutorial = (markSeen = true) => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        if (markSeen) localStorage.setItem(SITE_TUTORIAL_KEY, 'yes');
+    };
+    const render = () => {
+        const step = slides[index];
+        titleNode.textContent = step.title;
+        bodyNode.textContent = step.body;
+        progressNode.textContent = `${index + 1}/${slides.length}`;
+        nextBtn.classList.toggle('hidden', index >= slides.length - 1);
+        doneBtn.classList.toggle('hidden', index < slides.length - 1);
+    };
+
+    nextBtn.addEventListener('click', () => {
+        index = Math.min(index + 1, slides.length - 1);
+        render();
+    });
+    doneBtn.addEventListener('click', () => closeTutorial(true));
+    skipBtn.addEventListener('click', () => closeTutorial(true));
+    modal.addEventListener('click', event => {
+        if (event.target === modal) closeTutorial(true);
+    });
+
+    const seen = localStorage.getItem(SITE_TUTORIAL_KEY) === 'yes';
+    if (seen) return;
+    render();
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+}
+
 function setLanguage(lang) {
     const selected = copyDictionary[lang] ? lang : 'en';
     localStorage.setItem(LANG_KEY, selected);
@@ -726,6 +793,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeSocialFacades();
     initializeCookieConsent();
     initializeConversionPrompts();
+    initializeSiteTutorial();
     renderRecentlyViewed();
     updateJourneyAssistant();
 
@@ -754,6 +822,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelectorAll('a[data-track]').forEach(anchor => {
         anchor.addEventListener('click', () => {
+            if (anchor.dataset.track === 'assistant_discover') {
+                seraAssistantActivated = true;
+                updateJourneyAssistant();
+            }
             trackProductInteraction(anchor.dataset.track || 'cta_click', { cta_text: anchor.textContent.trim() });
         });
     });
