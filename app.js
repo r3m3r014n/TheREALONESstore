@@ -853,7 +853,8 @@ function initializeOptimizedLinks() {
                 popup.opener = null;
                 return;
             }
-            const fallbackPopup = window.open(optimized, '_blank', 'noopener,noreferrer');
+            // Second attempt with minimal features to improve chances when stricter popup settings block the first attempt.
+            const fallbackPopup = window.open(optimized, '_blank');
             if (fallbackPopup) {
                 fallbackPopup.opener = null;
                 return;
