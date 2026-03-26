@@ -170,12 +170,44 @@
         </div>
     </section>
 
+    <section class="max-w-7xl mx-auto px-5 md:px-8 pb-12">
+        <div class="glass-panel border border-gold/20 rounded-2xl p-6">
+            <h2 class="font-playfair text-3xl md:text-4xl text-gold mb-2">Guided Shopping Journey</h2>
+            <p class="text-white/70 mb-5">Designed with navigation psychology: clear path, low friction, and momentum toward checkout.</p>
+            <div class="grid md:grid-cols-3 gap-4">
+                <a href="#featured" data-track="journey_step_discover" class="block border border-gold/30 rounded-xl p-4 hover:border-gold transition-colors">
+                    <p class="text-gold text-xs uppercase tracking-[0.14em] mb-1">Step 1</p>
+                    <h3 class="font-playfair text-xl mb-1">Discover Products</h3>
+                    <p class="text-white/70 text-sm">Start with featured and top-seller items.</p>
+                </a>
+                <a href="shop.html" data-track="journey_step_compare" class="block border border-gold/30 rounded-xl p-4 hover:border-gold transition-colors">
+                    <p class="text-gold text-xs uppercase tracking-[0.14em] mb-1">Step 2</p>
+                    <h3 class="font-playfair text-xl mb-1">Compare & Pick</h3>
+                    <p class="text-white/70 text-sm">Open full catalog and lock in your best fit.</p>
+                </a>
+                <button type="button" onclick="toggleCart()" class="text-left border border-gold/30 rounded-xl p-4 hover:border-gold transition-colors">
+                    <p class="text-gold text-xs uppercase tracking-[0.14em] mb-1">Step 3</p>
+                    <h3 class="font-playfair text-xl mb-1">Checkout Fast</h3>
+                    <p class="text-white/70 text-sm">Review cart and order instantly via WhatsApp.</p>
+                </button>
+            </div>
+        </div>
+    </section>
+
     <section class="max-w-7xl mx-auto px-5 md:px-8 pb-16">
         <div class="flex items-center justify-between mb-6 gap-3 flex-wrap">
             <h2 class="font-playfair text-3xl md:text-4xl">Top Sellers Right Now</h2>
             <a href="shop.html" class="text-gold text-sm uppercase tracking-[0.16em] font-semibold hover:text-gold-light transition-colors">Open Full Shop</a>
         </div>
         <div id="bestsellerGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-5 md:px-8 pb-16">
+        <div class="flex items-center justify-between mb-6 gap-3 flex-wrap">
+            <h2 class="font-playfair text-3xl md:text-4xl">Recently Viewed</h2>
+            <button type="button" onclick="clearRecentlyViewed()" class="text-gold text-xs uppercase tracking-[0.14em] hover:text-gold-light">Clear</button>
+        </div>
+        <div id="recentlyViewedGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
     </section>
 
     <section class="max-w-7xl mx-auto px-5 md:px-8 pb-20">
@@ -593,6 +625,15 @@
                 </div>
             </div>
             <button id="closeStickyBuyBar" class="text-white/70 hover:text-gold text-lg leading-none">&times;</button>
+        </div>
+    </div>
+
+    <div id="journeyAssistant" class="fixed bottom-4 left-4 z-[84] hidden md:block max-w-[320px] glass-panel border border-gold/30 rounded-2xl p-4">
+        <p class="text-gold text-[11px] uppercase tracking-[0.14em] mb-2">Journey Assistant</p>
+        <p id="journeyAssistantText" class="text-white/80 text-sm">Start with top sellers, then add to cart to unlock faster checkout.</p>
+        <div class="mt-3 flex gap-2">
+            <a href="#featured" data-track="assistant_discover" class="px-3 py-2 bg-gold text-dark rounded-full text-[10px] uppercase tracking-[0.12em] font-bold">Discover</a>
+            <button type="button" onclick="toggleCart()" class="px-3 py-2 border border-gold/60 text-gold rounded-full text-[10px] uppercase tracking-[0.12em] font-bold">Cart</button>
         </div>
     </div>
 

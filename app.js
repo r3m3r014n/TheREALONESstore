@@ -18,10 +18,17 @@ const products = [
 const WHATSAPP_NUMBER = '254701226084';
 const CONSENT_KEY = 'smattire_cookie_choice';
 const LANG_KEY = 'smattire_lang';
+const RECENTLY_VIEWED_KEY = 'smattire_recently_viewed';
 let cart = JSON.parse(localStorage.getItem('cart') || '[]');
 let currentProduct = null;
 let currentFilter = 'all';
 let conversionPromptShown = false;
+
+const navigationPsychologyDB = {
+    discover: 'Discover high-intent products first to reduce decision fatigue.',
+    validate: 'Use social proof and recently viewed items to reinforce choices.',
+    commit: 'Reduce checkout friction with clear next-best-action prompts.'
+};
 
 const copyDictionary = {
     en: {
@@ -123,6 +130,43 @@ function trackProductInteraction(eventName, data = {}) {
     postNetlifyForm('product-interactions', payload);
 }
 
+function saveRecentlyViewed(productId) {
+    const current = JSON.parse(localStorage.getItem(RECENTLY_VIEWED_KEY) || '[]');
+    const next = [productId, ...current.filter(id => id !== productId)].slice(0, 8);
+    localStorage.setItem(RECENTLY_VIEWED_KEY, JSON.stringify(next));
+}
+
+function clearRecentlyViewed() {
+    localStorage.removeItem(RECENTLY_VIEWED_KEY);
+    renderRecentlyViewed();
+    trackProductInteraction('recently_viewed_cleared');
+}
+
+function renderRecentlyViewed() {
+    const container = document.getElementById('recentlyViewedGrid');
+    if (!container) return;
+    const ids = JSON.parse(localStorage.getItem(RECENTLY_VIEWED_KEY) || '[]');
+    if (!ids.length) {
+        container.innerHTML = '<p class="col-span-full text-white/60">No viewed products yet. Tap any product to start your journey.</p>';
+        return;
+    }
+    const list = ids.map(id => products.find(item => item.id === id)).filter(Boolean);
+    container.innerHTML = list.map(createProductCard).join('');
+}
+
+function updateJourneyAssistant() {
+    const node = document.getElementById('journeyAssistantText');
+    if (!node) return;
+    const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+    if (cartCount === 0) {
+        node.textContent = navigationPsychologyDB.discover;
+    } else if (cartCount < 3) {
+        node.textContent = navigationPsychologyDB.validate;
+    } else {
+        node.textContent = navigationPsychologyDB.commit;
+    }
+}
+
 function updateCart() {
     const cartItems = document.getElementById('cartItems');
     const cartCount = document.getElementById('cartCount');
@@ -135,6 +179,7 @@ function updateCart() {
     if (cartCount) cartCount.textContent = String(count);
     if (cartTotal) cartTotal.textContent = `KES ${total.toLocaleString()}`;
     if (checkoutBtn) checkoutBtn.disabled = cart.length === 0;
+    updateJourneyAssistant();
 
     if (!cartItems) return;
 
@@ -239,6 +284,8 @@ function openModal(id) {
     modal.classList.remove('hidden');
     modal.classList.add('flex');
     document.body.style.overflow = 'hidden';
+    saveRecentlyViewed(currentProduct.id);
+    renderRecentlyViewed();
     trackProductInteraction('product_view', { product_id: String(currentProduct.id), product_name: currentProduct.name, product_category: currentProduct.category });
 }
 
@@ -553,6 +600,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeSocialFacades();
     initializeCookieConsent();
     initializeConversionPrompts();
+    renderRecentlyViewed();
+    updateJourneyAssistant();
 
     const productGrid = document.getElementById('productGrid');
     if (productGrid) {
