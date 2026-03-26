@@ -88,6 +88,7 @@
     </script>
 </head>
 <body class="safe-area text-white font-rajdhani antialiased">
+    <a href="#featured" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[120] focus:bg-gold focus:text-dark focus:px-4 focus:py-2 focus:rounded-full focus:font-bold">Skip to products</a>
     <div class="immersive-orb immersive-orb-1" aria-hidden="true"></div>
     <div class="immersive-orb immersive-orb-2" aria-hidden="true"></div>
     <nav id="navbar" class="sticky top-0 z-50 glass-panel border-b border-gold/20">
@@ -112,6 +113,7 @@
         <p data-i18n="heroTagline" class="text-gold uppercase tracking-[0.35em] text-xs mb-5">Classy, Elegant, Style</p>
         <h1 class="font-playfair text-5xl md:text-7xl leading-none mb-5">SM ATTIRE</h1>
         <p data-i18n="heroSubtitle" class="max-w-2xl mx-auto text-white/75 text-lg md:text-xl mb-10">Your Ultimate Fashion Guide for elegant looks, smart pricing, and premium thrift confidence.</p>
+        <p class="max-w-3xl mx-auto text-white/70 text-sm md:text-base mb-8">Technology computing mode active: <span class="text-gold font-semibold">r3m3r014n&apos;s Avatar Engine</span> guides discovery, compares top fits, and accelerates conversion paths.</p>
         <div class="flex flex-wrap justify-center gap-4">
             <a href="shop.html" data-track="hero_shop_now" data-i18n="shopNow" class="px-7 py-3 bg-gold text-dark font-bold uppercase tracking-[0.14em] rounded-full hover:bg-gold-light transition-colors">Shop Now</a>
             <a href="#featured" data-track="hero_view_collection" data-i18n="viewCollection" class="px-7 py-3 border border-gold/70 text-gold font-bold uppercase tracking-[0.14em] rounded-full hover:bg-gold hover:text-dark transition-all">View Collection</a>
@@ -133,6 +135,7 @@
         <input type="text" name="items_count">
         <input type="text" name="page_path">
         <input type="text" name="page_title">
+        <input type="text" name="avatar_mode">
         <input type="text" name="cta_text">
         <input type="text" name="sidebar_open">
         <input type="text" name="ts_utc">
@@ -561,12 +564,13 @@
     </section>
 
     <section class="max-w-7xl mx-auto px-5 md:px-8 pb-16">
-        <h2 class="font-playfair text-3xl md:text-4xl mb-6">AI Style Assist Avatars</h2>
+        <h2 class="font-playfair text-3xl md:text-4xl mb-3">AI Style Assist Avatars</h2>
+        <p class="text-white/75 mb-6">Competing with modern web apps: personalized assistant roles are powered by r3m3r014n&apos;s avatar computing profile and optimized for quick buying decisions.</p>
         <div class="avatar-cloud">
             <article class="avatar-card">
                 <div class="avatar-icon" aria-hidden="true">✨</div>
-                <h3 class="font-playfair text-xl mt-3">Trend Scout</h3>
-                <p class="text-white/70 text-sm mt-1">Suggests classy combinations for casual and neatfit drops.</p>
+                <h3 class="font-playfair text-xl mt-3">r3m3r014n Avatar Core</h3>
+                <p class="text-white/70 text-sm mt-1">Primary technology computing assistant for product intent routing, conversion prompts, and smart catalog guidance.</p>
             </article>
             <article class="avatar-card">
                 <div class="avatar-icon" aria-hidden="true">👟</div>
@@ -630,7 +634,7 @@
 
     <div id="journeyAssistant" class="fixed bottom-4 left-4 z-[84] hidden md:block max-w-[320px] glass-panel border border-gold/30 rounded-2xl p-4">
         <p class="text-gold text-[11px] uppercase tracking-[0.14em] mb-2">Journey Assistant</p>
-        <p id="journeyAssistantText" class="text-white/80 text-sm">Start with top sellers, then add to cart to unlock faster checkout.</p>
+        <p id="journeyAssistantText" aria-live="polite" class="text-white/80 text-sm">Start with top sellers, then add to cart to unlock faster checkout.</p>
         <div class="mt-3 flex gap-2">
             <a href="#featured" data-track="assistant_discover" class="px-3 py-2 bg-gold text-dark rounded-full text-[10px] uppercase tracking-[0.12em] font-bold">Discover</a>
             <button type="button" onclick="toggleCart()" class="px-3 py-2 border border-gold/60 text-gold rounded-full text-[10px] uppercase tracking-[0.12em] font-bold">Cart</button>

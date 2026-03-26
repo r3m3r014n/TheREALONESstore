@@ -25,9 +25,9 @@ let currentFilter = 'all';
 let conversionPromptShown = false;
 
 const navigationPsychologyDB = {
-    discover: 'Discover high-intent products first to reduce decision fatigue.',
-    validate: 'Use social proof and recently viewed items to reinforce choices.',
-    commit: 'Reduce checkout friction with clear next-best-action prompts.'
+    discover: "r3m3r014n Avatar Engine: Discover high-intent products first to reduce decision fatigue.",
+    validate: 'Use social proof and recently viewed items to reinforce choices before checkout.',
+    commit: 'Commit mode active: reduce checkout friction with clear next-best-action prompts.'
 };
 
 const copyDictionary = {
@@ -124,6 +124,7 @@ function trackProductInteraction(eventName, data = {}) {
         page_path: window.location.pathname,
         page_title: document.title,
         cart_count: String(cart.reduce((sum, item) => sum + item.quantity, 0)),
+        avatar_mode: 'r3m3r014n_core',
         ts_utc: new Date().toISOString(),
         ...data
     };
@@ -422,6 +423,9 @@ function initializeConversionPrompts() {
         if (document.visibilityState === 'hidden') {
             trackProductInteraction('tab_hidden');
         }
+    });
+    window.addEventListener('pagehide', () => {
+        trackProductInteraction('pagehide');
     });
 }
 
