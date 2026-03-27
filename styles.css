@@ -15,7 +15,7 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-    background: #0a0a0a;
+    background: #0e0d0b;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -85,7 +85,7 @@ html {
 /* Hover Effects */
 .product-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(212, 175, 55, 0.1);
+    box-shadow: 0 12px 40px rgba(196, 162, 106, 0.08);
 }
 
 .product-card img {
@@ -215,7 +215,7 @@ select {
 .immersive-orb-1 {
     width: 260px;
     height: 260px;
-    background: radial-gradient(circle, rgba(212, 175, 55, 0.55), rgba(212, 175, 55, 0));
+    background: radial-gradient(circle, rgba(232, 213, 176, 0.18), rgba(232, 213, 176, 0));
     top: 8vh;
     left: -40px;
 }
@@ -223,7 +223,7 @@ select {
 .immersive-orb-2 {
     width: 300px;
     height: 300px;
-    background: radial-gradient(circle, rgba(86, 154, 255, 0.35), rgba(86, 154, 255, 0));
+    background: radial-gradient(circle, rgba(196, 162, 106, 0.1), rgba(196, 162, 106, 0));
     right: -80px;
     top: 38vh;
     animation-delay: 1.3s;
@@ -395,4 +395,28 @@ select {
 .dev-sig-link:hover {
     animation: devShimmer 1.2s linear infinite, devGlowPulse 1.4s ease-in-out infinite;
     -webkit-text-fill-color: transparent;
+}
+
+/* Editorial Ticker */
+@keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+.editorial-ticker {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.editorial-ticker-inner {
+    display: inline-flex;
+    animation: marquee 30s linear infinite;
+}
+
+/* Editorial Utilities */
+.editorial-divider {
+    width: 40px;
+    height: 1px;
+    background: currentColor;
+    display: inline-block;
 }
