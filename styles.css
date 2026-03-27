@@ -442,8 +442,8 @@ body {
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    object-fit: cover;
-    /* Crop the square logo mark to circular — works for logo-sm.jpg (1004×1000) */
+    object-fit: contain;
+    background: #fff;
     object-position: center center;
     border: 1.5px solid rgba(184, 149, 63, 0.55);
     flex-shrink: 0;
