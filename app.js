@@ -280,17 +280,31 @@ const copyDictionary = {
     }
 };
 
+function productAltText(product) {
+    return `${product.name} — ${product.category}, KES ${product.price.toLocaleString()} | Grade A Mitumba, SM ATTIRE Nairobi`;
+}
+
 function createProductCard(product) {
     return `
-        <article class="bg-charcoal/80 border border-gold/30 rounded-2xl overflow-hidden backdrop-blur-sm hover:border-gold hover:-translate-y-1 transition-all duration-300 cursor-pointer content-visibility-auto" onclick="openModal(${product.id})">
+        <article class="bg-charcoal/80 border border-gold/30 rounded-2xl overflow-hidden backdrop-blur-sm hover:border-gold hover:-translate-y-1 transition-all duration-300 cursor-pointer content-visibility-auto" onclick="openModal(${product.id})" itemscope itemtype="https://schema.org/Product">
+            <meta itemprop="name" content="${product.name}">
+            <meta itemprop="description" content="${product.desc}">
+            <meta itemprop="sku" content="SM-${String(product.id).padStart(3, '0')}">
             <div class="relative h-72 overflow-hidden bg-dark">
                 ${product.badge ? `<span class="absolute top-3 left-3 z-10 bg-gold text-dark text-xs font-bold uppercase px-3 py-1 rounded-full">${product.badge}</span>` : ''}
-                <img src="${product.image}" alt="${product.name}" loading="lazy" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" onerror="this.onerror=null;this.src='https://via.placeholder.com/400x500/1a1a1a/d4af37?text=SM+ATTIRE';">
+                <img src="${product.image}" alt="${productAltText(product)}" loading="lazy" itemprop="image" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" onerror="this.onerror=null;this.src='https://via.placeholder.com/400x500/1a1a1a/d4af37?text=SM+ATTIRE';">
             </div>
             <div class="p-5">
-                <p class="text-gold text-xs uppercase tracking-[0.18em] mb-2">${product.category}</p>
-                <h3 class="font-playfair text-xl mb-3 leading-tight">${product.name}</h3>
-                <p class="text-gold font-bold text-2xl">KES ${product.price.toLocaleString()}</p>
+                <p class="text-gold text-xs uppercase tracking-[0.18em] mb-2" itemprop="category">${product.category}</p>
+                <h3 class="font-playfair text-xl mb-3 leading-tight" itemprop="name">${product.name}</h3>
+                <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <meta itemprop="priceCurrency" content="KES">
+                    <meta itemprop="price" content="${product.price}">
+                    <meta itemprop="availability" content="https://schema.org/InStock">
+                    <meta itemprop="itemCondition" content="https://schema.org/UsedCondition">
+                    <meta itemprop="url" content="https://smattirestore.com/shop.html">
+                    <p class="text-gold font-bold text-2xl">KES ${product.price.toLocaleString()}</p>
+                </div>
                 <button onclick="quickAddToCartById(${product.id}, event)" class="mt-4 w-full bg-gold text-dark py-2.5 rounded-full text-xs uppercase tracking-[0.12em] font-bold hover:bg-gold-light transition-colors">Quick Add to Cart</button>
             </div>
         </article>
@@ -300,7 +314,118 @@ function createProductCard(product) {
 
 
 /**
+ * Builds a complete Product JSON-LD object for a single product.
+ * Includes all Google Shopping-required fields: itemCondition, brand, sku,
+ * seller, ImageObject, and potentialAction BuyAction.
+ * @param {{id:number,name:string,image:string,category:string,desc:string,price:number,badge:string}} product
+ * @returns {Object}
+ */
+function buildProductSchema(product) {
+    const productUrl = `https://smattirestore.com/shop.html#product-${product.id}`;
+    const imageUrl = `https://smattirestore.com/${product.image}`;
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'Product',
+        '@id': productUrl,
+        name: product.name,
+        description: `${product.desc} Available at SM ATTIRE — Grade A Mitumba store in Nairobi, Kenya. M-Pesa checkout via WhatsApp.`,
+        sku: `SM-${String(product.id).padStart(3, '0')}`,
+        productID: `SM-${String(product.id).padStart(3, '0')}`,
+        category: product.category,
+        brand: {
+            '@type': 'Brand',
+            name: 'SM ATTIRE'
+        },
+        image: {
+            '@type': 'ImageObject',
+            '@id': imageUrl,
+            contentUrl: imageUrl,
+            url: imageUrl,
+            name: productAltText(product),
+            description: `${product.name} — ${product.category} available at SM ATTIRE Nairobi. KES ${product.price.toLocaleString()}.`,
+            width: { '@type': 'QuantitativeValue', value: 800, unitCode: 'E37' },
+            height: { '@type': 'QuantitativeValue', value: 1000, unitCode: 'E37' }
+        },
+        offers: {
+            '@type': 'Offer',
+            '@id': `${productUrl}#offer`,
+            url: 'https://smattirestore.com/shop.html',
+            priceCurrency: 'KES',
+            price: product.price,
+            priceValidUntil: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+            availability: 'https://schema.org/InStock',
+            itemCondition: 'https://schema.org/UsedCondition',
+            seller: {
+                '@type': 'Organization',
+                name: 'SM ATTIRE',
+                url: 'https://smattirestore.com',
+                telephone: '+254701226084',
+                areaServed: 'Nairobi, Kenya'
+            },
+            shippingDetails: {
+                '@type': 'OfferShippingDetails',
+                shippingRate: {
+                    '@type': 'MonetaryAmount',
+                    value: 0,
+                    currency: 'KES'
+                },
+                deliveryTime: {
+                    '@type': 'ShippingDeliveryTime',
+                    handlingTime: {
+                        '@type': 'QuantitativeValue',
+                        minValue: 0,
+                        maxValue: 1,
+                        unitCode: 'DAY'
+                    },
+                    transitTime: {
+                        '@type': 'QuantitativeValue',
+                        minValue: 0,
+                        maxValue: 2,
+                        unitCode: 'DAY'
+                    }
+                },
+                shippingDestination: {
+                    '@type': 'DefinedRegion',
+                    addressCountry: 'KE',
+                    addressRegion: 'Nairobi'
+                }
+            },
+            hasMerchantReturnPolicy: {
+                '@type': 'MerchantReturnPolicy',
+                applicableCountry: 'KE',
+                returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+                merchantReturnDays: 3,
+                returnMethod: 'https://schema.org/ReturnByMail',
+                returnFees: 'https://schema.org/FreeReturn'
+            }
+        },
+        potentialAction: {
+            '@type': 'BuyAction',
+            target: {
+                '@type': 'EntryPoint',
+                urlTemplate: `https://wa.me/254701226084?text=${encodeURIComponent(`Hi, I want to order: ${product.name} (KES ${product.price.toLocaleString()})`)}`
+            }
+        }
+    };
+}
+
+/**
+ * Injects individual Product JSON-LD scripts for all products into the page.
+ * Called once on DOMContentLoaded so Googlebot can index every product.
+ */
+function injectAllProductSchemas() {
+    const container = document.getElementById('allProductsSchema');
+    if (!container) return;
+    const schemas = products.map(buildProductSchema);
+    container.textContent = JSON.stringify(schemas.length === 1 ? schemas[0] : {
+        '@context': 'https://schema.org',
+        '@graph': schemas
+    });
+}
+
+/**
  * Updates ItemList JSON-LD for currently rendered products to improve indexing of dynamic grids.
+ * Also refreshes individual Product schemas for the visible subset.
  * @param {Array<{name:string,image:string,category:string,desc:string,price:number}>} list
  * @param {string} pageName
  */
@@ -311,26 +436,16 @@ function updateProductListSchema(list, pageName = 'Product Listing') {
     const itemListElement = list.map((product, index) => ({
         '@type': 'ListItem',
         position: index + 1,
-        item: {
-            '@type': 'Product',
-            name: product.name,
-            image: `https://smattirestore.com/${product.image}`,
-            category: product.category,
-            description: product.desc,
-            offers: {
-                '@type': 'Offer',
-                priceCurrency: 'KES',
-                price: product.price,
-                availability: 'https://schema.org/InStock',
-                url: 'https://smattirestore.com/shop.html'
-            }
-        }
+        url: `https://smattirestore.com/shop.html#product-${product.id}`,
+        item: buildProductSchema(product)
     }));
 
     const schema = {
         '@context': 'https://schema.org',
         '@type': 'ItemList',
         name: pageName,
+        description: `${pageName} — Grade A mitumba and thrift clothing from SM ATTIRE Nairobi`,
+        numberOfItems: list.length,
         itemListElement
     };
 
@@ -663,7 +778,10 @@ function openModal(id) {
     const modalBadge = document.getElementById('modalBadge');
     const modalCategory = document.getElementById('modalCategory');
 
-    if (modalImg) modalImg.src = currentProduct.image;
+    if (modalImg) {
+        modalImg.src = currentProduct.image;
+        modalImg.alt = productAltText(currentProduct);
+    }
     if (modalName) modalName.textContent = currentProduct.name;
     if (modalPrice) modalPrice.textContent = `KES ${currentProduct.price.toLocaleString()}`;
     if (modalDesc) modalDesc.textContent = currentProduct.desc;
@@ -1158,6 +1276,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeLangToggle();
     initializeOptimizedLinks();
     syncFeedbackForms();
+    injectAllProductSchemas();
     initializeSocialFacades();
     initializeCookieConsent();
     initializeConversionPrompts();
