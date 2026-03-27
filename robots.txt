@@ -20,6 +20,11 @@ Allow: /*.png
 Allow: /*.webp
 Allow: /*.avif
 
+User-agent: Googlebot-Video
+Allow: /
+Allow: /*.mp4
+Allow: /*.webm
+
 # Block known aggressive scrapers that contribute to scam-flagging signals
 User-agent: AhrefsBot
 Disallow: /

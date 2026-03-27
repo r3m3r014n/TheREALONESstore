@@ -1104,6 +1104,38 @@ function initializeSocialFacades() {
 }
 
 /**
+ * Progressive enhancement: replace static product-photo thumbnails on TikTok
+ * facade cards with real thumbnails fetched via the /api/oembed proxy.
+ * Falls back silently to the existing image if the fetch fails or the user
+ * is offline — the card remains fully usable either way.
+ *
+ * Instagram requires an authenticated access token for oEmbed, so those
+ * cards keep their static thumbnails.
+ */
+function initOembedCards() {
+    const cards = Array.from(document.querySelectorAll('.social-facade'));
+    cards.forEach(card => {
+        const link = card.querySelector('a.facade-trigger');
+        if (!link) return;
+        const postUrl = link.href;
+        // Only TikTok video posts are supported by the proxy
+        if (!postUrl.includes('tiktok.com') || !postUrl.includes('/video/')) return;
+        const img = card.querySelector('img.facade-thumb');
+        if (!img) return;
+
+        fetch(`/api/oembed?url=${encodeURIComponent(postUrl)}`)
+            .then(r => (r.ok ? r.json() : null))
+            .then(data => {
+                if (data && data.thumbnail_url) {
+                    img.src = data.thumbnail_url;
+                    if (data.title) img.alt = data.title;
+                }
+            })
+            .catch(() => { /* keep existing static thumbnail */ });
+    });
+}
+
+/**
  * Lazy-load <video data-src> and <iframe data-src> elements via IntersectionObserver.
  * Videos use WebM-first / MP4-fallback <source data-src> children.
  * All lazy targets are observed with a 200 px root-margin so assets start
@@ -1304,6 +1336,7 @@ document.addEventListener('DOMContentLoaded', () => {
     syncFeedbackForms();
     injectAllProductSchemas();
     initializeSocialFacades();
+    initOembedCards();
     initializeCookieConsent();
     initializeConversionPrompts();
     initializeSiteTutorial();
