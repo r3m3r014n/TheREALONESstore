@@ -286,7 +286,7 @@ function productAltText(product) {
 
 function createProductCard(product) {
     return `
-        <article class="bg-white border border-charcoal/10 rounded-2xl overflow-hidden hover:border-gold hover:-translate-y-1 transition-all duration-300 cursor-pointer content-visibility-auto product-card" onclick="openModal(${product.id})" itemscope itemtype="https://schema.org/Product">
+        <article class="bg-white border border-charcoal/10 rounded-2xl overflow-hidden shadow-sm hover:shadow-md hover:border-gold hover:-translate-y-1 transition-all duration-300 cursor-pointer content-visibility-auto" onclick="openModal(${product.id})" itemscope itemtype="https://schema.org/Product">
             <meta itemprop="name" content="${product.name}">
             <meta itemprop="description" content="${product.desc}">
             <meta itemprop="sku" content="SM-${String(product.id).padStart(3, '0')}">
