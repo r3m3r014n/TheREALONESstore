@@ -5,14 +5,14 @@ const products = [
     { id: 4, name: "T-Shirts", category: "Casual Streetwear", price: 1000, image: "/t-shirts.jpg", badge: "", desc: "Classic tees at a friendly price. Everyday essentials for easy styling." },
     { id: 5, name: "White Striped Shirts", category: "Casual Streetwear", price: 1000, image: "/white-striped-shirts.jpg", badge: "Trending", desc: "White striped shirts with a clean, minimalist vibe. Perfect for smart-casual fits." },
     { id: 6, name: "Cap & Chanel Bag", category: "Casual Streetwear", price: 5800, image: "/cap-and-chanel-bag.jpg", badge: "", desc: "Cap plus Chanel-inspired bag bundle. Statement accessories for an elevated finish.", keywords: "Nairobi Thrift, Streetwear Kenya, Chanel bag bundle, statement accessories" },
-    { id: 7, name: "Pink 'Alo' Graphic Tee with Matching Cap", category: "Casual Streetwear", price: 1500, image: "/pink-alo-tee-cap.jpg", badge: "Deal", desc: "Grade A Pink 'Alo' graphic tee paired with a matching cap for a clean coordinated aesthetic. A Quality Vintage streetwear set with fast delivery in Nairobi.", keywords: "Nairobi Thrift, Streetwear Kenya, Quality Vintage, pink alo graphic tee, matching cap set" },
+    { id: 7, name: "Pink 'Alo' Graphic Tee with Matching Cap", category: "Casual Streetwear", price: 1500, image: "/pink-alo-tee-cap.jpg", badge: "Deal", desc: "Brand-new Pink 'Alo' graphic tee paired with a matching cap for a clean coordinated aesthetic. Fresh streetwear set with fast delivery in Nairobi.", keywords: "Nairobi fashion, Streetwear Kenya, pink alo graphic tee, matching cap set" },
     { id: 8, name: "Shoes", category: "Casual Streetwear", price: 3500, image: "/shoes.jpg", badge: "", desc: "Versatile shoes prepped and ready to wear. Clean, dependable, and easy to style.", keywords: "Nairobi Thrift, Streetwear Kenya, everyday shoes" },
-    { id: 9, name: "Pink New Balance", category: "Neatfit Collection", price: 3500, image: "/pink-new-balance.jpg", badge: "Exclusive", desc: "Pink New Balance sneakers with a sleek retro-runner aesthetic. Quality Vintage sneaker heat with fast delivery in Nairobi.", keywords: "Nairobi Thrift, Streetwear Kenya, Quality Vintage, pink new balance sneakers, retro runner style" },
-    { id: 10, name: "White New Balance", category: "Neatfit Collection", price: 3500, image: "/white-new-balance.jpg", badge: "Trending", desc: "White New Balance sneakers for a clean, versatile look. Fresh thrift find for any fit.", keywords: "Nairobi Thrift, Streetwear Kenya, white new balance sneakers" },
+    { id: 9, name: "Pink New Balance", category: "Neatfit Collection", price: 3500, image: "/pink-new-balance.jpg", badge: "Exclusive", desc: "Pink New Balance sneakers with a sleek retro-runner aesthetic. Brand-new pair with fast delivery in Nairobi.", keywords: "Nairobi fashion, Streetwear Kenya, pink new balance sneakers, retro runner style" },
+    { id: 10, name: "White New Balance", category: "Neatfit Collection", price: 3500, image: "/white-new-balance.jpg", badge: "Trending", desc: "White New Balance sneakers for a clean, versatile look. Brand-new pick for any fit.", keywords: "Nairobi fashion, Streetwear Kenya, white new balance sneakers" },
     { id: 11, name: "Bag, Cap & Shoes", category: "Casual Streetwear", price: 9300, image: "/bag-cap-shoes.jpg", badge: "", desc: "Premium bundle-only price for a curated bag, cap, and shoes set — a full head-to-toe upgrade." },
     { id: 12, name: "New Balance 9060", category: "Neatfit Collection", price: 3500, image: "/new-balance-9060.jpg", badge: "Quality", desc: "New Balance 9060 sneakers with a chunky futuristic aesthetic. A Quality Vintage sneaker pick with fast delivery in Nairobi.", keywords: "Nairobi Thrift, Streetwear Kenya, Quality Vintage, new balance 9060, chunky sneaker" },
     { id: 13, name: "Nike Air & Cap", category: "Casual Streetwear", price: 4300, image: "/nike-air-and-cap.jpg", badge: "", desc: "Bundle: Nike Air sneakers paired with a cap for an instant streetwear finish.", keywords: "Nairobi Thrift, Streetwear Kenya, Nike Air bundle, cap" },
-    { id: 14, name: "Nike", category: "Neatfit Collection", price: 3500, image: "/nike.jpg", badge: "", desc: "Nike sneakers in Grade A condition. Cleaned, prepped, and ready to wear." }
+    { id: 14, name: "Nike", category: "Neatfit Collection", price: 3500, image: "/nike.jpg", badge: "", desc: "Nike sneakers brand new, prepped, and ready to wear." }
 ];
 
 const WHATSAPP_NUMBER = '254701226084';
@@ -282,20 +282,20 @@ function initDarkMode() {
 const copyDictionary = {
     en: {
         heroTagline: 'Classy, Elegant, Style',
-        heroSubtitle: 'Your Ultimate Fashion Guide for elegant looks, smart pricing, and premium thrift confidence.',
+        heroSubtitle: 'Your Ultimate Fashion Guide for elegant looks, smart pricing, and premium new-arrival confidence.',
         shopNow: 'Shop Now',
         viewCollection: 'View Collection'
     },
     sw: {
         heroTagline: 'Mtindo wa Kifahari, Elegance, Style',
-        heroSubtitle: 'Mwongozo wako kamili wa mitindo ya kifahari kwa bei rafiki na confidence ya thrift premium.',
+        heroSubtitle: 'Mwongozo wako kamili wa mitindo ya kifahari kwa bei rafiki na confidence ya bidhaa mpya premium.',
         shopNow: 'Nunua Sasa',
         viewCollection: 'Tazama Mkusanyiko'
     }
 };
 
 function productAltText(product) {
-    return `${product.name} — ${product.category}, KES ${product.price.toLocaleString()} | Grade A, SM ATTIRE Nairobi`;
+    return `${product.name} — ${product.category}, KES ${product.price.toLocaleString()} | Brand New, SM ATTIRE Nairobi`;
 }
 
 function createProductCard(product) {
@@ -349,7 +349,7 @@ function buildProductSchema(product) {
         '@id': productUrl,
         name: product.name,
         keywords: product.keywords || undefined,
-        description: `${product.desc} Available at SM ATTIRE — Grade A store in Nairobi, Kenya. M-Pesa checkout via WhatsApp.`,
+        description: `${product.desc} Available at SM ATTIRE — brand-new stock in Nairobi, Kenya. M-Pesa checkout via WhatsApp.`,
         sku: `SM-${String(product.id).padStart(3, '0')}`,
         productID: `SM-${String(product.id).padStart(3, '0')}`,
         category: product.category,
@@ -465,7 +465,7 @@ function updateProductListSchema(list, pageName = 'Product Listing') {
         '@context': 'https://schema.org',
         '@type': 'ItemList',
         name: pageName,
-        description: `${pageName} — Grade A thrift clothing from SM ATTIRE Nairobi`,
+        description: `${pageName} — Brand-new clothing from SM ATTIRE Nairobi`,
         numberOfItems: list.length,
         itemListElement
     };

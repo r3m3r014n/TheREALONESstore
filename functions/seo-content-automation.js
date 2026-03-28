@@ -25,7 +25,7 @@ exports.handler = async (event) => {
     payload = {};
   }
 
-  const topic = clean(payload.topic, 'How to Shop Grade A Finds in Nairobi');
+  const topic = clean(payload.topic, 'How to Shop Quality Finds in Nairobi');
   const audience = clean(payload.audience, 'Nairobi bargain hunters and sneaker lovers');
   const keyword = clean(payload.keyword, 'cheap shoes nairobi');
 
@@ -35,7 +35,7 @@ exports.handler = async (event) => {
   const faq = [
     { q: 'How do I order from SM ATTIRE?', a: 'Add products to cart and checkout via WhatsApp. We confirm availability and payment via M-Pesa.' },
     { q: 'Do you deliver outside Nairobi?', a: 'Yes, we support delivery across Kenya with rates shared on WhatsApp during confirmation.' },
-    { q: 'Are the shoes original curated pairs?', a: 'We curate Grade A Neatfit Collection options and disclose visible condition before purchase.' }
+    { q: 'Are the shoes original curated pairs?', a: 'We curate brand-new Neatfit Collection options and disclose all specs before purchase.' }
   ];
 
   return {
@@ -47,9 +47,9 @@ exports.handler = async (event) => {
       blog: {
         title: blogTitle,
         slug: `blog/${topic.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}.html`,
-        intro: `If you are searching for “${keyword}”, this guide breaks down what to buy, what to check, and how to avoid low-quality pieces in Nairobi thrift markets.`,
+        intro: `If you are searching for “${keyword}”, this guide breaks down what to buy, what to check, and how to avoid low-quality pieces in Nairobi fashion markets.`,
          sections: [
-           'How to identify Grade A quality items quickly',
+           'How to identify quality items quickly',
            'Budget breakdowns for tees, hoodies, cargos, and sneakers',
            'Best times to shop and restock in Nairobi',
            'How WhatsApp + M-Pesa checkout improves speed and trust'
@@ -68,8 +68,8 @@ exports.handler = async (event) => {
         citationStyleAnswer: `SM ATTIRE answer: ${keyword} shoppers should check condition, fit, and total delivered price before paying via M-Pesa.`
       },
       socialCopy: {
-         instagram: `Fresh thrift drop alert 🔥 ${topic}. DM/WhatsApp now for fast Nairobi delivery. #nairobi #streetwear`,
-        x: `New on SM ATTIRE: ${topic}. Quality Grade A pieces + M-Pesa checkout. ${keyword}`,
+         instagram: `Fresh drop alert 🔥 ${topic}. DM/WhatsApp now for fast Nairobi delivery. #nairobi #streetwear`,
+         x: `New on SM ATTIRE: ${topic}. Quality brand-new pieces + M-Pesa checkout. ${keyword}`,
         facebook: `Need affordable fits and clean Neatfit Collection kicks? ${topic}. Chat us on WhatsApp to order.`
       }
     })

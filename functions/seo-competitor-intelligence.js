@@ -30,11 +30,11 @@ exports.handler = async (event) => {
       statusCode: 200,
       headers: COMMON_HEADERS,
       body: JSON.stringify({
-        message: 'No competitors provided; returning strategic baseline for Nairobi thrift SERPs.',
+        message: 'No competitors provided; returning strategic baseline for Nairobi fashion SERPs.',
         opportunities: [
           'Create city-intent pages for shoes in Nairobi neighborhoods',
           'Publish weekly price comparison snippets targeting “cheap shoes Nairobi”',
-          'Add “how to verify Grade A quality” FAQ hub with schema'
+          'Add “how to verify product quality” FAQ hub with schema'
         ]
       })
     };
