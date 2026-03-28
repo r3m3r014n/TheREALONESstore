@@ -1012,25 +1012,60 @@ function initializeNotificationPanel() {
     const closeBtn = document.getElementById('notificationClose');
     if (!toggle || !panel || !list || !badge || !closeBtn) return;
 
+    const AUTO_CLOSE_MS = 5000;
+    let autoCloseTimer = null;
+
     const render = () => {
-        list.innerHTML = notificationFeed.map(item => {
-            const actionButton = item.cta
-                ? item.cta.href
-                    ? `<a href="${item.cta.href}" class="inline-flex items-center gap-2 text-gold font-semibold hover:text-gold-light transition-colors text-sm">${item.cta.label} →</a>`
-                    : `<button data-action="${item.cta.action}" class="inline-flex items-center gap-2 text-gold font-semibold hover:text-gold-light transition-colors text-sm">${item.cta.label} →</button>`
-                : '';
-            return `<li class="glass-panel bg-dark/40 border border-gold/20 rounded-xl p-3">
-                <p class="text-white font-semibold mb-1">${item.title}</p>
-                <p class="text-white/70 text-sm mb-2">${item.body}</p>
-                ${actionButton}
-            </li>`;
-        }).join('');
+        list.innerHTML = '';
+        notificationFeed.forEach(item => {
+            const li = document.createElement('li');
+            li.className = 'glass-panel bg-dark/40 border border-gold/20 rounded-xl p-3';
+
+            const title = document.createElement('p');
+            title.className = 'text-white font-semibold mb-1';
+            title.textContent = item.title;
+            li.appendChild(title);
+
+            const body = document.createElement('p');
+            body.className = 'text-white/70 text-sm mb-2';
+            body.textContent = item.body;
+            li.appendChild(body);
+
+            if (item.cta) {
+                if (item.cta.href) {
+                    const link = document.createElement('a');
+                    link.href = item.cta.href;
+                    link.className = 'inline-flex items-center gap-2 text-gold font-semibold hover:text-gold-light transition-colors text-sm';
+                    link.textContent = `${item.cta.label} →`;
+                    link.rel = 'noopener';
+                    li.appendChild(link);
+                } else {
+                    const button = document.createElement('button');
+                    button.dataset.action = item.cta.action;
+                    button.className = 'inline-flex items-center gap-2 text-gold font-semibold hover:text-gold-light transition-colors text-sm';
+                    button.textContent = `${item.cta.label} →`;
+                    li.appendChild(button);
+                }
+            }
+
+            list.appendChild(li);
+        });
     };
 
     const setOpen = (isOpen) => {
         panel.hidden = !isOpen;
         toggle.setAttribute('aria-expanded', String(isOpen));
-        if (isOpen) badge.classList.add('hidden');
+        if (autoCloseTimer) {
+            clearTimeout(autoCloseTimer);
+            autoCloseTimer = null;
+        }
+        if (isOpen) {
+            badge.classList.add('hidden');
+            autoCloseTimer = setTimeout(() => {
+                panel.hidden = true;
+                toggle.setAttribute('aria-expanded', 'false');
+            }, AUTO_CLOSE_MS);
+        }
     };
 
     list.addEventListener('click', (event) => {
