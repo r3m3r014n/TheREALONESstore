@@ -907,7 +907,7 @@ function checkout() {
     });
 
     const openWhatsAppFallback = () => window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
-    const phoneInput = window.prompt('Enter your M-Pesa phone number (07XXXXXXXX or 2547XXXXXXXX). Click Cancel to use WhatsApp instead.', '');
+    const phoneInput = window.prompt('Enter your M-Pesa phone (07XXXXXXXX, 01XXXXXXXX, +2547XXXXXXXX, or +2541XXXXXXXX). Click Cancel to use WhatsApp instead.', '');
     if (!phoneInput) {
         openWhatsAppFallback();
         return;
