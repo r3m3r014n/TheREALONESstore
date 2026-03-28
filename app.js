@@ -1159,7 +1159,7 @@ function initializeSeraAssistant() {
 function initializeSocialFacades() {
     if (socialFacadesInitialized) return;
     socialFacadesInitialized = true;
-    const cards = Array.from(document.querySelectorAll('.social-facade')).slice(0, 6);
+    const cards = Array.from(document.querySelectorAll('.social-facade')).slice(0, 11);
     if (!cards.length) return;
 
     cards.forEach(card => {
