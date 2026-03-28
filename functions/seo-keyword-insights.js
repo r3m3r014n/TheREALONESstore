@@ -7,30 +7,30 @@ const COMMON_HEADERS = {
 const SEASONAL_HINTS = [
   { month: 1, signal: 'Back-to-school restock demand for affordable sneakers and hoodies' },
   { month: 3, signal: 'Rain-season demand for windbreakers and boots in Nairobi' },
-  { month: 6, signal: 'Mid-year salary cycle boosts purchase intent for curated thrift drops' },
+  { month: 6, signal: 'Mid-year salary cycle boosts purchase intent for curated new arrivals' },
   { month: 11, signal: 'Holiday and travel demand spikes for casual outfits and shoes' }
 ];
 
-function buildKeywordClusters(seed = 'mitumba nairobi') {
+function buildKeywordClusters(seed = 'shoes nairobi') {
   const city = 'nairobi';
   return {
     transactional: [
       `buy ${seed}`,
-      `grade a mitumba ${city}`,
+      `premium finds ${city}`,
       `neatfit collection sneakers ${city}`,
-      `thrift clothes ${city} delivery`,
-      `cheap mitumba shoes ${city}`
+      `brand new clothes ${city} delivery`,
+      `cheap shoes ${city}`
     ],
     commercialInvestigation: [
-      `best thrift store ${city}`,
-      `mitumba vs new clothes kenya`,
-      `where to buy thrifted jordans kenya`,
+      `best fashion store ${city}`,
+      `new clothes kenya`,
+      `where to buy jordans kenya`,
       `affordable streetwear kenya`
     ],
     localIntent: [
-      `mitumba near me ${city}`,
-      `thrift shop in ${city}`,
-      `mpesa thrift store kenya`,
+      `shoes near me ${city}`,
+      `fashion shop in ${city}`,
+      `mpesa fashion store kenya`,
       `whatsapp clothing store kenya`
     ]
   };
@@ -52,7 +52,7 @@ exports.handler = async (event) => {
     payload = {};
   }
 
-  const seedKeyword = String(payload.seedKeyword || 'mitumba nairobi').trim().toLowerCase();
+  const seedKeyword = String(payload.seedKeyword || 'shoes nairobi').trim().toLowerCase();
   const clusters = buildKeywordClusters(seedKeyword);
   const month = new Date().getMonth() + 1;
 
