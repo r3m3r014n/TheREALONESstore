@@ -4,13 +4,13 @@ const products = [
     { id: 3, name: "Gently Used Air Force 1s", category: "Neatfit Collection", price: 3500, image: "/gently-used-air-force-1s.jpg", badge: "Shoe Lover", desc: "Top-tier Neatfit Collection sneakers. Carefully cleaned and restored. Delivery within Nairobi." },
     { id: 4, name: "Vintage Geometric Knit Cardigan", category: "Casual Streetwear", price: 1500, image: "/oversized-flannel-shirt.jpg", badge: "", desc: "Classic thrifted flannel shirt. Perfect for layering during cold Nairobi mornings." },
     { id: 5, name: "Retro Running Sneakers", category: "Neatfit Collection", price: 2800, image: "/retro-running-sneakers.jpg", badge: "Trending", desc: "Affordable, high-quality mitumba running shoes. Grade A condition with plenty of life left." },
-    { id: 6, name: "Premium Red Snakeskin Cropped Jacket", category: "Casual Streetwear", price: 2500, image: "/classic-denim-jacket.jpg", badge: "", desc: "Vintage mitumba denim jacket. A timeless casual staple handpicked for quality." },
-    { id: 7, name: "High-Top Canvas Shoes", category: "Neatfit Collection", price: 1800, image: "/high-top-canvas-shoes.jpg", badge: "Deal", desc: "Clean Neatfit Collection canvas shoes. A budget-friendly addition to your sneaker rotation." },
-    { id: 8, name: "Patterned Knit Cardigan (Pink)", category: "Casual Streetwear", price: 1500, image: "/thrifted-streetwear-hoodie.jpg", badge: "", desc: "Heavyweight Grade A hoodie. Stay warm and stylish without breaking the bank." },
-    { id: 9, name: "Premium Neatfit Jordans", category: "Neatfit Collection", price: 3500, image: "/premium-neatfit-jordans.jpg", badge: "Exclusive", desc: "Rare find! Highly sought-after mitumba sneakers for true Nairobi shoe lovers." },
+    { id: 6, name: "Red Snakeskin Textured Cropped Jacket", category: "Casual Streetwear", price: 2500, image: "/classic-denim-jacket.jpg", badge: "", desc: "Grade A red snakeskin textured cropped jacket with a bold, standout aesthetic. A Quality Vintage statement layer with fast delivery in Nairobi.", keywords: "Nairobi Thrift, Streetwear Kenya, Quality Vintage, red snakeskin cropped jacket, statement outerwear" },
+    { id: 7, name: "Pink 'Alo' Graphic Tee with Matching Cap", category: "Casual Streetwear", price: 1800, image: "/high-top-canvas-shoes.jpg", badge: "Deal", desc: "Grade A Pink 'Alo' graphic tee paired with a matching cap for a clean coordinated aesthetic. A Quality Vintage streetwear set with fast delivery in Nairobi.", keywords: "Nairobi Thrift, Streetwear Kenya, Quality Vintage, pink alo graphic tee, matching cap set" },
+    { id: 8, name: "Black & White Striped Tees", category: "Casual Streetwear", price: 1500, image: "/thrifted-streetwear-hoodie.jpg", badge: "", desc: "Grade A black and white striped tees with a timeless minimalist aesthetic. Quality Vintage everyday essentials delivered fast in Nairobi.", keywords: "Nairobi Thrift, Streetwear Kenya, Quality Vintage, black and white striped tees, minimalist streetwear" },
+    { id: 9, name: "Pink & White New Balance Sneakers", category: "Neatfit Collection", price: 3500, image: "/premium-neatfit-jordans.jpg", badge: "Exclusive", desc: "Grade A pink and white New Balance sneakers with a sleek retro-runner aesthetic. Quality Vintage sneaker heat with fast delivery in Nairobi.", keywords: "Nairobi Thrift, Streetwear Kenya, Quality Vintage, pink white new balance sneakers, retro runner style" },
     { id: 10, name: "Y2K Baggy Jeans", category: "Casual Streetwear", price: 1400, image: "/y2k-baggy-jeans.jpg", badge: "Trending", desc: "Authentic vintage baggy denim. The ultimate thrift find for casual streetwear fans." },
     { id: 11, name: "Vintage Windbreaker", category: "Casual Streetwear", price: 1600, image: "/vintage-windbreaker.jpg", badge: "", desc: "Lightweight retro windbreaker jacket. Grade A mitumba perfect for the rainy season." },
-    { id: 12, name: "Mitumba Chelsea Boots", category: "Neatfit Collection", price: 2500, image: "/mitumba-chelsea-boots.jpg", badge: "Quality", desc: "Gently used leather Chelsea boots. Look sharp on a budget." },
+    { id: 12, name: "Red New Balance 9060 Sneakers", category: "Neatfit Collection", price: 2500, image: "/mitumba-chelsea-boots.jpg", badge: "Quality", desc: "Grade A red New Balance 9060 sneakers with a chunky futuristic aesthetic. A Quality Vintage sneaker pick with fast delivery in Nairobi.", keywords: "Nairobi Thrift, Streetwear Kenya, Quality Vintage, red new balance 9060, chunky sneaker" },
     { id: 13, name: "NY Red Cap", category: "Casual Streetwear", price: 800, image: "/casual-summer-shorts.jpg", badge: "", desc: "Comfortable thrifted shorts for weekend wear. Affordable and high quality." },
     { id: 14, name: "Slip-On Casual Vans", category: "Neatfit Collection", price: 1900, image: "/slip-on-casual-vans.jpg", badge: "", desc: "Easy, everyday Neatfit Collection slip-on sneakers. Cleaned, prepped, and ready to wear." }
 ];
@@ -290,6 +290,7 @@ function createProductCard(product) {
         <article class="bg-charcoal/80 border border-gold/30 rounded-2xl overflow-hidden backdrop-blur-sm hover:border-gold hover:-translate-y-1 transition-all duration-300 cursor-pointer content-visibility-auto" onclick="openModal(${product.id})" itemscope itemtype="https://schema.org/Product">
             <meta itemprop="name" content="${product.name}">
             <meta itemprop="description" content="${product.desc}">
+            ${product.keywords ? `<meta itemprop="keywords" content="${product.keywords}">` : ''}
             <meta itemprop="sku" content="SM-${String(product.id).padStart(3, '0')}">
             <div class="relative h-72 overflow-hidden bg-dark">
                 ${product.badge ? `<span class="absolute top-3 left-3 z-10 bg-gold text-dark text-xs font-bold uppercase px-3 py-1 rounded-full">${product.badge}</span>` : ''}
@@ -333,6 +334,7 @@ function buildProductSchema(product) {
         '@type': 'Product',
         '@id': productUrl,
         name: product.name,
+        keywords: product.keywords || undefined,
         description: `${product.desc} Available at SM ATTIRE — Grade A Mitumba store in Nairobi, Kenya. M-Pesa checkout via WhatsApp.`,
         sku: `SM-${String(product.id).padStart(3, '0')}`,
         productID: `SM-${String(product.id).padStart(3, '0')}`,
@@ -758,6 +760,10 @@ function toggleCart() {
     updateJourneyAssistant();
     sidebar.classList.toggle('translate-x-full');
     const isOpen = !sidebar.classList.contains('translate-x-full');
+    document.querySelectorAll('.floating-whatsapp-chat').forEach(button => {
+        button.classList.toggle('hidden', isOpen);
+        button.setAttribute('aria-hidden', isOpen ? 'true' : 'false');
+    });
     if (isOpen) {
         const closeButton = sidebar.querySelector('button[onclick="toggleCart()"]');
         if (closeButton instanceof HTMLElement) closeButton.focus();
@@ -903,13 +909,7 @@ function checkout() {
     });
 
     const openWhatsAppFallback = () => window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
-    const useDaraja = window.confirm('Use M-Pesa Daraja prompt now? Tap "Cancel" to continue checkout via WhatsApp.');
-    if (!useDaraja) {
-        openWhatsAppFallback();
-        return;
-    }
-
-    const phoneInput = window.prompt('Enter your M-Pesa phone number (07XXXXXXXX or 2547XXXXXXXX):', '');
+    const phoneInput = window.prompt('Enter your M-Pesa phone (07XXXXXXXX, 01XXXXXXXX, +2547XXXXXXXX, or +2541XXXXXXXX). Click Cancel to use WhatsApp instead.', '');
     if (!phoneInput) {
         openWhatsAppFallback();
         return;

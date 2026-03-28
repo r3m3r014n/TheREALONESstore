@@ -81,8 +81,8 @@ exports.handler = async (event) => {
   if (!Number.isFinite(amount) || amount < 1) {
     return { statusCode: 400, headers: JSON_HEADERS, body: JSON.stringify({ error: 'Invalid amount' }) };
   }
-  if (!/^254\d{9}$/.test(phoneNumber)) {
-    return { statusCode: 400, headers: JSON_HEADERS, body: JSON.stringify({ error: 'Invalid phone. Use Kenyan format (07... or 254...)' }) };
+  if (!/^254[17]\d{8}$/.test(phoneNumber)) {
+    return { statusCode: 400, headers: JSON_HEADERS, body: JSON.stringify({ error: 'Invalid phone. Use Kenyan format (07..., 01..., +2547..., or +2541...)' }) };
   }
 
   const baseUrl = getDarajaBaseUrl();
