@@ -1,18 +1,18 @@
 const products = [
-    { id: 1, name: "Grade A Vintage Graphic Tee", category: "Casual Streetwear", price: 800, image: "1.jpg", badge: "Bestseller", desc: "Premium Grade A mitumba graphic t-shirt. Clean, trendy, and perfect for the Nairobi streetwear scene." },
-    { id: 2, name: "Thrifted Cargo Pants - Olive", category: "Casual Streetwear", price: 1500, image: "2.jpg", badge: "Hot", desc: "Gently used tactical cargo pants. High-quality thrift wear for a rugged, casual look." },
-    { id: 3, name: "Gently Used Air Force 1s", category: "Neatfit Collection", price: 3500, image: "3.jpg", badge: "Shoe Lover", desc: "Top-tier Neatfit Collection sneakers. Carefully cleaned and restored. Delivery within Nairobi." },
-    { id: 4, name: "Oversized Flannel Shirt", category: "Casual Streetwear", price: 900, image: "4.jpg", badge: "", desc: "Classic thrifted flannel shirt. Perfect for layering during cold Nairobi mornings." },
-    { id: 5, name: "Retro Running Sneakers", category: "Neatfit Collection", price: 2800, image: "5.jpg", badge: "Trending", desc: "Affordable, high-quality mitumba running shoes. Grade A condition with plenty of life left." },
-    { id: 6, name: "Classic Denim Jacket", category: "Casual Streetwear", price: 1800, image: "6.jpg", badge: "", desc: "Vintage mitumba denim jacket. A timeless casual staple handpicked for quality." },
-    { id: 7, name: "High-Top Canvas Shoes", category: "Neatfit Collection", price: 1800, image: "7.jpg", badge: "Deal", desc: "Clean Neatfit Collection canvas shoes. A budget-friendly addition to your sneaker rotation." },
-    { id: 8, name: "Thrifted Streetwear Hoodie", category: "Casual Streetwear", price: 1300, image: "8.jpg", badge: "", desc: "Heavyweight Grade A hoodie. Stay warm and stylish without breaking the bank." },
-    { id: 9, name: "Premium Neatfit Jordans", category: "Neatfit Collection", price: 4200, image: "9.jpg", badge: "Exclusive", desc: "Rare find! Highly sought-after mitumba sneakers for true Nairobi shoe lovers." },
-    { id: 10, name: "Y2K Baggy Jeans", category: "Casual Streetwear", price: 1400, image: "10.jpg", badge: "Trending", desc: "Authentic vintage baggy denim. The ultimate thrift find for casual streetwear fans." },
-    { id: 11, name: "Vintage Windbreaker", category: "Casual Streetwear", price: 1600, image: "11.jpg", badge: "", desc: "Lightweight retro windbreaker jacket. Grade A mitumba perfect for the rainy season." },
-    { id: 12, name: "Mitumba Chelsea Boots", category: "Neatfit Collection", price: 2500, image: "12.jpg", badge: "Quality", desc: "Gently used leather Chelsea boots. Look sharp on a budget." },
-    { id: 13, name: "Casual Summer Shorts", category: "Casual Streetwear", price: 700, image: "13.jpg", badge: "", desc: "Comfortable thrifted shorts for weekend wear. Affordable and high quality." },
-    { id: 14, name: "Slip-On Casual Vans", category: "Neatfit Collection", price: 1900, image: "14.jpg", badge: "", desc: "Easy, everyday Neatfit Collection slip-on sneakers. Cleaned, prepped, and ready to wear." }
+    { id: 1, name: "Grade A Vintage Graphic Tee", category: "Casual Streetwear", price: 800, image: "/grade-a-vintage-graphic-tee.jpg", badge: "Bestseller", desc: "Premium Grade A mitumba graphic t-shirt. Clean, trendy, and perfect for the Nairobi streetwear scene." },
+    { id: 2, name: "Thrifted Cargo Pants - Olive", category: "Casual Streetwear", price: 1500, image: "/thrifted-cargo-pants-olive.jpg", badge: "Hot", desc: "Gently used tactical cargo pants. High-quality thrift wear for a rugged, casual look." },
+    { id: 3, name: "Gently Used Air Force 1s", category: "Neatfit Collection", price: 3500, image: "/gently-used-air-force-1s.jpg", badge: "Shoe Lover", desc: "Top-tier Neatfit Collection sneakers. Carefully cleaned and restored. Delivery within Nairobi." },
+    { id: 4, name: "Oversized Flannel Shirt", category: "Casual Streetwear", price: 900, image: "/oversized-flannel-shirt.jpg", badge: "", desc: "Classic thrifted flannel shirt. Perfect for layering during cold Nairobi mornings." },
+    { id: 5, name: "Retro Running Sneakers", category: "Neatfit Collection", price: 2800, image: "/retro-running-sneakers.jpg", badge: "Trending", desc: "Affordable, high-quality mitumba running shoes. Grade A condition with plenty of life left." },
+    { id: 6, name: "Classic Denim Jacket", category: "Casual Streetwear", price: 1800, image: "/classic-denim-jacket.jpg", badge: "", desc: "Vintage mitumba denim jacket. A timeless casual staple handpicked for quality." },
+    { id: 7, name: "High-Top Canvas Shoes", category: "Neatfit Collection", price: 1800, image: "/high-top-canvas-shoes.jpg", badge: "Deal", desc: "Clean Neatfit Collection canvas shoes. A budget-friendly addition to your sneaker rotation." },
+    { id: 8, name: "Thrifted Streetwear Hoodie", category: "Casual Streetwear", price: 1300, image: "/thrifted-streetwear-hoodie.jpg", badge: "", desc: "Heavyweight Grade A hoodie. Stay warm and stylish without breaking the bank." },
+    { id: 9, name: "Premium Neatfit Jordans", category: "Neatfit Collection", price: 4200, image: "/premium-neatfit-jordans.jpg", badge: "Exclusive", desc: "Rare find! Highly sought-after mitumba sneakers for true Nairobi shoe lovers." },
+    { id: 10, name: "Y2K Baggy Jeans", category: "Casual Streetwear", price: 1400, image: "/y2k-baggy-jeans.jpg", badge: "Trending", desc: "Authentic vintage baggy denim. The ultimate thrift find for casual streetwear fans." },
+    { id: 11, name: "Vintage Windbreaker", category: "Casual Streetwear", price: 1600, image: "/vintage-windbreaker.jpg", badge: "", desc: "Lightweight retro windbreaker jacket. Grade A mitumba perfect for the rainy season." },
+    { id: 12, name: "Mitumba Chelsea Boots", category: "Neatfit Collection", price: 2500, image: "/mitumba-chelsea-boots.jpg", badge: "Quality", desc: "Gently used leather Chelsea boots. Look sharp on a budget." },
+    { id: 13, name: "Casual Summer Shorts", category: "Casual Streetwear", price: 700, image: "/casual-summer-shorts.jpg", badge: "", desc: "Comfortable thrifted shorts for weekend wear. Affordable and high quality." },
+    { id: 14, name: "Slip-On Casual Vans", category: "Neatfit Collection", price: 1900, image: "/slip-on-casual-vans.jpg", badge: "", desc: "Easy, everyday Neatfit Collection slip-on sneakers. Cleaned, prepped, and ready to wear." }
 ];
 
 const WHATSAPP_NUMBER = '254701226084';
@@ -286,26 +286,26 @@ function productAltText(product) {
 
 function createProductCard(product) {
     return `
-        <article class="bg-white border border-charcoal/10 rounded-2xl overflow-hidden shadow-sm hover:shadow-md hover:border-gold hover:-translate-y-1 transition-all duration-300 cursor-pointer content-visibility-auto" onclick="openModal(${product.id})" itemscope itemtype="https://schema.org/Product">
+        <article class="bg-charcoal/80 border border-gold/30 rounded-2xl overflow-hidden backdrop-blur-sm hover:border-gold hover:-translate-y-1 transition-all duration-300 cursor-pointer content-visibility-auto" onclick="openModal(${product.id})" itemscope itemtype="https://schema.org/Product">
             <meta itemprop="name" content="${product.name}">
             <meta itemprop="description" content="${product.desc}">
             <meta itemprop="sku" content="SM-${String(product.id).padStart(3, '0')}">
             <div class="relative h-72 overflow-hidden bg-dark">
                 ${product.badge ? `<span class="absolute top-3 left-3 z-10 bg-gold text-dark text-xs font-bold uppercase px-3 py-1 rounded-full">${product.badge}</span>` : ''}
-                <img src="${product.image}" alt="${productAltText(product)}" loading="lazy" itemprop="image" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" onerror="this.onerror=null;this.src='https://via.placeholder.com/400x500/faf9f7/111110?text=SM+ATTIRE';">
+                <img src="${product.image}" alt="${productAltText(product)}" loading="lazy" itemprop="image" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" onerror="this.onerror=null;this.src='https://via.placeholder.com/400x500/1a1a1a/d4af37?text=SM+ATTIRE';">
             </div>
             <div class="p-5">
-                <p class="text-gold text-xs uppercase tracking-[0.18em] mb-2 font-medium" itemprop="category">${product.category}</p>
-                <h3 class="font-playfair text-xl mb-3 leading-tight text-charcoal" itemprop="name">${product.name}</h3>
+                <p class="text-gold text-xs uppercase tracking-[0.18em] mb-2" itemprop="category">${product.category}</p>
+                <h3 class="font-playfair text-xl mb-3 leading-tight" itemprop="name">${product.name}</h3>
                 <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                     <meta itemprop="priceCurrency" content="KES">
                     <meta itemprop="price" content="${product.price}">
                     <meta itemprop="availability" content="https://schema.org/InStock">
                     <meta itemprop="itemCondition" content="https://schema.org/UsedCondition">
                     <meta itemprop="url" content="https://smattirestore.com/shop.html">
-                    <p class="text-charcoal font-bold text-2xl">KES ${product.price.toLocaleString()}</p>
+                    <p class="text-gold font-bold text-2xl">KES ${product.price.toLocaleString()}</p>
                 </div>
-                <button onclick="quickAddToCartById(${product.id}, event)" class="mt-4 w-full bg-dark text-white py-2.5 rounded-full text-xs uppercase tracking-[0.12em] font-bold hover:bg-charcoal/80 transition-colors">Add to Cart</button>
+                <button onclick="quickAddToCartById(${product.id}, event)" class="mt-4 w-full bg-gold text-dark py-2.5 rounded-full text-xs uppercase tracking-[0.12em] font-bold hover:bg-gold-light transition-colors">Quick Add to Cart</button>
             </div>
         </article>
     `;
@@ -1044,7 +1044,6 @@ function openOptimizedSocialLink(url) {
     }
 }
 
-let socialFacadesInitialized = false;
 
 function initializeSeraAssistant() {
     const toggleBtn = document.getElementById('seraToggleBtn');
@@ -1099,89 +1098,6 @@ function initializeSeraAssistant() {
     }
 }
 
-function initializeSocialFacades() {
-    // Facade cards now use native anchor links; no JS wiring required.
-}
-
-/**
- * Progressive enhancement: replace static product-photo thumbnails on TikTok
- * facade cards with real thumbnails fetched via the /api/oembed proxy.
- * Falls back silently to the existing image if the fetch fails or the user
- * is offline — the card remains fully usable either way.
- *
- * Instagram requires an authenticated access token for oEmbed, so those
- * cards keep their static thumbnails.
- */
-function initOembedCards() {
-    const cards = Array.from(document.querySelectorAll('.social-facade'));
-    cards.forEach(card => {
-        const link = card.querySelector('a.facade-trigger');
-        if (!link) return;
-        const postUrl = link.href;
-        // Only TikTok video posts are supported by the proxy
-        if (!postUrl.includes('tiktok.com') || !postUrl.includes('/video/')) return;
-        const img = card.querySelector('img.facade-thumb');
-        if (!img) return;
-
-        fetch(`/api/oembed?url=${encodeURIComponent(postUrl)}`)
-            .then(r => (r.ok ? r.json() : null))
-            .then(data => {
-                if (data && data.thumbnail_url) {
-                    img.src = data.thumbnail_url;
-                    if (data.title) img.alt = data.title;
-                }
-            })
-            .catch(() => { /* keep existing static thumbnail */ });
-    });
-}
-
-/**
- * Lazy-load <video data-src> and <iframe data-src> elements via IntersectionObserver.
- * Videos use WebM-first / MP4-fallback <source data-src> children.
- * All lazy targets are observed with a 200 px root-margin so assets start
- * fetching just before the user reaches them.
- */
-function initLazyVideos() {
-    const lazyEls = Array.from(document.querySelectorAll('video[data-src], iframe[data-src]'));
-    if (!lazyEls.length) return;
-
-    function activateElement(el) {
-        if (el.tagName === 'IFRAME') {
-            if (el.dataset.src) {
-                el.src = el.dataset.src;
-                delete el.dataset.src;
-            }
-        } else {
-            Array.from(el.querySelectorAll('source[data-src]')).forEach(source => {
-                source.src = source.dataset.src;
-                delete source.dataset.src;
-            });
-            if (el.dataset.src) {
-                el.src = el.dataset.src;
-                delete el.dataset.src;
-            }
-            el.load();
-            el.play().catch(() => {});
-        }
-        el.classList.remove('lazy-video');
-    }
-
-    if (!('IntersectionObserver' in window)) {
-        // Fallback for older browsers: activate all immediately.
-        lazyEls.forEach(activateElement);
-        return;
-    }
-
-    const observer = new IntersectionObserver((entries, obs) => {
-        entries.forEach(entry => {
-            if (!entry.isIntersecting) return;
-            activateElement(entry.target);
-            obs.unobserve(entry.target);
-        });
-    }, { rootMargin: '200px' });
-
-    lazyEls.forEach(el => observer.observe(el));
-}
 
 function syncFeedbackForms() {
     const forms = Array.from(document.querySelectorAll('form'));
@@ -1217,27 +1133,68 @@ function initializeCookieConsent() {
     const banner = document.getElementById('cookieConsent');
     const accept = document.getElementById('acceptCookies');
     const decline = document.getElementById('declineCookies');
+    const authModal = document.getElementById('cookieAuthModal');
+    const confirmAuth = document.getElementById('confirmCookieAuth');
+    const cancelAuth = document.getElementById('cancelCookieAuth');
+    const authEmail = document.getElementById('cookieAuthEmail');
     if (!banner || !accept || !decline) return;
 
+    const dismissBanner = () => {
+        banner.classList.add('hidden');
+        banner.setAttribute('aria-hidden', 'true');
+        banner.style.display = 'none';
+    };
+
     const saved = localStorage.getItem(CONSENT_KEY);
-    if (!saved) banner.classList.remove('hidden');
+    if (!saved) {
+        banner.classList.remove('hidden');
+        banner.style.display = '';
+        banner.removeAttribute('aria-hidden');
+    } else {
+        dismissBanner();
+    }
+
+    const hideAuthModal = () => {
+        if (!authModal) return;
+        authModal.classList.add('hidden');
+        authModal.classList.remove('flex');
+    };
 
     const applyChoice = choice => {
         localStorage.setItem(CONSENT_KEY, choice);
-        banner.classList.add('hidden');
+        dismissBanner();
+        hideAuthModal();
         if (choice === 'allow') {
-            initializeSocialFacades();
-            const apiFeed = document.getElementById('officialApiFeed');
-            if (apiFeed) {
-                apiFeed.innerHTML = '<p class="text-white/70 text-sm">Optional media integrations enabled. Add provider script settings to activate live API feed.</p>';
+            if (authEmail && authEmail.value) {
+                localStorage.setItem('smattire_cookie_auth_email', authEmail.value.trim());
             }
         }
     };
 
-    accept.addEventListener('click', () => applyChoice('allow'));
-    decline.addEventListener('click', () => applyChoice('essential'));
+    const showAuthModal = () => {
+        if (!authModal) {
+            applyChoice('allow');
+            return;
+        }
+        authModal.classList.remove('hidden');
+        authModal.classList.add('flex');
+        const emailValue = localStorage.getItem('smattire_cookie_auth_email');
+        if (authEmail && emailValue) authEmail.value = emailValue;
+    };
 
-    if (saved === 'allow') initializeSocialFacades();
+    accept.addEventListener('click', showAuthModal);
+    decline.addEventListener('click', () => applyChoice('essential'));
+    if (confirmAuth) confirmAuth.addEventListener('click', () => applyChoice('allow'));
+    if (cancelAuth) cancelAuth.addEventListener('click', hideAuthModal);
+    if (authModal) {
+        authModal.addEventListener('click', event => {
+            if (event.target === authModal) hideAuthModal();
+        });
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape') hideAuthModal();
+        });
+    }
+
 }
 
 function initializeLangToggle() {
@@ -1335,13 +1292,10 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeOptimizedLinks();
     syncFeedbackForms();
     injectAllProductSchemas();
-    initializeSocialFacades();
-    initOembedCards();
     initializeCookieConsent();
     initializeConversionPrompts();
     initializeSiteTutorial();
     initializeSeraAssistant();
-    initLazyVideos();
     renderRecentlyViewed();
     updateJourneyAssistant();
 

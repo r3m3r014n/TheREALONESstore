@@ -1,4 +1,5 @@
 [build]
+  command = "npm run build"
   publish = "."
   functions = "functions"
 
@@ -8,7 +9,13 @@
 [[plugins]]
   package = "@netlify/plugin-sitemap"
 
-# Block WordPress/CMS probe paths — return 404 immediately
+# Specific page rewrites (specific to general order)
+[[redirects]]
+  from = "/collection"
+  to = "/shop.html"
+  status = 301
+
+# Handle WordPress/CMS probe paths - return 404 responses
 [[redirects]]
   from = "/wp-admin"
   to = "/404.html"
@@ -22,15 +29,21 @@
   force = true
 
 [[redirects]]
-  from = "/wp-login.php"
+  from = "/wordpress/*"
   to = "/404.html"
   status = 404
   force = true
 
 [[redirects]]
+  from = "/wp-login.php"
+  to = "/gone.html"
+  status = 410
+  force = true
+
+[[redirects]]
   from = "/xmlrpc.php"
-  to = "/404.html"
-  status = 404
+  to = "/gone.html"
+  status = 410
   force = true
 
 [[redirects]]
@@ -50,12 +63,6 @@
   to = "/404.html"
   status = 404
   force = true
-
-# Custom 404 error page
-[[redirects]]
-  from = "/*"
-  to = "/404.html"
-  status = 404
 
 # API routing
 [[redirects]]
