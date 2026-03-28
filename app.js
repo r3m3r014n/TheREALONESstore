@@ -759,8 +759,7 @@ function toggleCart() {
     sidebar.classList.toggle('translate-x-full');
     const isOpen = !sidebar.classList.contains('translate-x-full');
     document.querySelectorAll('.floating-whatsapp-chat').forEach(button => {
-        button.classList.toggle('pointer-events-none', isOpen);
-        button.classList.toggle('opacity-0', isOpen);
+        button.classList.toggle('hidden', isOpen);
         button.setAttribute('aria-hidden', isOpen ? 'true' : 'false');
     });
     if (isOpen) {
@@ -908,7 +907,7 @@ function checkout() {
     });
 
     const openWhatsAppFallback = () => window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
-    const phoneInput = window.prompt('Enter M-Pesa phone (07XXXXXXXX or 2547XXXXXXXX), or Cancel for WhatsApp:', '');
+    const phoneInput = window.prompt('Enter your M-Pesa phone number (07XXXXXXXX or 2547XXXXXXXX). Click Cancel to use WhatsApp instead.', '');
     if (!phoneInput) {
         openWhatsAppFallback();
         return;
