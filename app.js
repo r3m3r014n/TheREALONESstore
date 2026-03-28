@@ -910,8 +910,9 @@ function checkout() {
 
     const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
     const openWhatsAppFallback = () => {
-        // Use a direct navigation to avoid popup blockers interfering with checkout
-        window.location.href = whatsappUrl;
+        // Prefer a new tab to keep the cart page open; fall back to same-tab navigation if blocked
+        const win = window.open(whatsappUrl, '_blank');
+        if (!win) window.location.href = whatsappUrl;
     };
     const phoneInput = window.prompt('Enter your M-Pesa phone (07XXXXXXXX, 01XXXXXXXX, +2547XXXXXXXX, or +2541XXXXXXXX). Click Cancel to use WhatsApp instead.', '');
     if (!phoneInput) {
@@ -935,8 +936,9 @@ function checkout() {
             const data = await response.json().catch(() => ({}));
             if (!response.ok || !data.ok) {
                 const reason = (data && (data.error || data.detail)) ? `${data.error || data.detail}` : 'Daraja request failed';
-                window.alert(`${reason}. Continuing via WhatsApp checkout.`);
-                openWhatsAppFallback();
+                window.alert(`${reason}. Continue to WhatsApp to place the order manually.`);
+                const proceed = window.confirm('Open WhatsApp chat to finish the order?');
+                if (proceed) openWhatsAppFallback();
                 return;
             }
             const customerMessage = data.customerMessage || 'Check your phone to complete M-Pesa payment.';
@@ -945,8 +947,9 @@ function checkout() {
             if (openChat) openWhatsAppFallback();
         })
         .catch(() => {
-            window.alert('Unable to reach Daraja service right now. Continuing via WhatsApp checkout.');
-            openWhatsAppFallback();
+            window.alert('Unable to reach Daraja service right now. Continue via WhatsApp checkout.');
+            const proceed = window.confirm('Open WhatsApp chat to finish the order?');
+            if (proceed) openWhatsAppFallback();
         });
 }
 
