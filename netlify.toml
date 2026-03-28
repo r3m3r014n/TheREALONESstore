@@ -9,17 +9,29 @@
 [[plugins]]
   package = "@netlify/plugin-sitemap"
 
-# Handle WordPress/CMS probe paths - return lightweight 410 Gone responses
+# Specific page rewrites (specific to general order)
+[[redirects]]
+  from = "/collection"
+  to = "/collection.html"
+  status = 200
+
+# Handle WordPress/CMS probe paths - return 404 responses
 [[redirects]]
   from = "/wp-admin"
-  to = "/gone.html"
-  status = 410
+  to = "/404.html"
+  status = 404
   force = true
 
 [[redirects]]
   from = "/wp-admin/*"
-  to = "/gone.html"
-  status = 410
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/wordpress/*"
+  to = "/404.html"
+  status = 404
   force = true
 
 [[redirects]]
