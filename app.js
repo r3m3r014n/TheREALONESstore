@@ -1210,8 +1210,20 @@ function initializeCookieConsent() {
     const authEmail = document.getElementById('cookieAuthEmail');
     if (!banner || !accept || !decline) return;
 
+    const dismissBanner = () => {
+        banner.classList.add('hidden');
+        banner.setAttribute('aria-hidden', 'true');
+        banner.style.display = 'none';
+    };
+
     const saved = localStorage.getItem(CONSENT_KEY);
-    if (!saved) banner.classList.remove('hidden');
+    if (!saved) {
+        banner.classList.remove('hidden');
+        banner.style.display = '';
+        banner.removeAttribute('aria-hidden');
+    } else {
+        dismissBanner();
+    }
 
     const hideAuthModal = () => {
         if (!authModal) return;
@@ -1221,7 +1233,7 @@ function initializeCookieConsent() {
 
     const applyChoice = choice => {
         localStorage.setItem(CONSENT_KEY, choice);
-        banner.classList.add('hidden');
+        dismissBanner();
         hideAuthModal();
         if (choice === 'allow') {
             if (authEmail && authEmail.value) {

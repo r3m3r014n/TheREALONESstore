@@ -349,6 +349,7 @@ select {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+    z-index: 9999;
 }
 
 /* ── Developer Signature ─────────────────────────────────────── */
