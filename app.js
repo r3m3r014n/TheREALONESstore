@@ -285,6 +285,7 @@ function productAltText(product) {
 }
 
 function createProductCard(product) {
+    const isNeatfitShoe = product.category === 'Neatfit Collection';
     return `
         <article class="bg-charcoal/80 border border-gold/30 rounded-2xl overflow-hidden backdrop-blur-sm hover:border-gold hover:-translate-y-1 transition-all duration-300 cursor-pointer content-visibility-auto" onclick="openModal(${product.id})" itemscope itemtype="https://schema.org/Product">
             <meta itemprop="name" content="${product.name}">
@@ -292,6 +293,10 @@ function createProductCard(product) {
             <meta itemprop="sku" content="SM-${String(product.id).padStart(3, '0')}">
             <div class="relative h-72 overflow-hidden bg-dark">
                 ${product.badge ? `<span class="absolute top-3 left-3 z-10 bg-gold text-dark text-xs font-bold uppercase px-3 py-1 rounded-full">${product.badge}</span>` : ''}
+                <div class="absolute top-3 right-3 z-10 flex items-center gap-2">
+                    <img src="/sm-attire-logo.png" alt="SM ATTIRE brand mark" class="w-8 h-8 rounded-full object-cover border border-gold/60 bg-dark/80" loading="lazy">
+                    ${isNeatfitShoe ? '<img src="/neatfit-logo.jpg" alt="Neatfit logo" class="h-7 w-auto rounded-md object-contain border border-gold/40 bg-dark/80 px-1" loading="lazy">' : ''}
+                </div>
                 <img src="${product.image}" alt="${productAltText(product)}" loading="lazy" itemprop="image" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" onerror="this.onerror=null;this.src='https://via.placeholder.com/400x500/1a1a1a/d4af37?text=SM+ATTIRE';">
             </div>
             <div class="p-5">
