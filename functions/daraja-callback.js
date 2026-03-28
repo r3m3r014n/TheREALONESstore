@@ -19,18 +19,18 @@ exports.handler = async (event) => {
     payload = {};
   }
 
-  const callback = payload?.Body?.stkCallback;
-  if (callback) {
-    const metadata = Array.isArray(callback.CallbackMetadata?.Item) ? callback.CallbackMetadata.Item : [];
+  const stkCallback = payload?.Body?.stkCallback;
+  if (stkCallback) {
+    const metadata = Array.isArray(stkCallback.CallbackMetadata?.Item) ? stkCallback.CallbackMetadata.Item : [];
     const amountItem = metadata.find((item) => item?.Name === 'Amount');
     const mpesaReceiptItem = metadata.find((item) => item?.Name === 'MpesaReceiptNumber');
     const phoneItem = metadata.find((item) => item?.Name === 'PhoneNumber');
 
     console.info('Daraja callback received', {
-      checkoutRequestId: callback.CheckoutRequestID || null,
-      merchantRequestId: callback.MerchantRequestID || null,
-      resultCode: callback.ResultCode,
-      resultDesc: callback.ResultDesc || null,
+      checkoutRequestId: stkCallback.CheckoutRequestID || null,
+      merchantRequestId: stkCallback.MerchantRequestID || null,
+      resultCode: stkCallback.ResultCode,
+      resultDesc: stkCallback.ResultDesc || null,
       amount: amountItem?.Value ?? null,
       mpesaReceiptNumber: mpesaReceiptItem?.Value ?? null,
       phoneNumber: phoneItem?.Value ?? null

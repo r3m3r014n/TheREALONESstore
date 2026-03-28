@@ -913,7 +913,7 @@ function checkout() {
     const requestBody = {
         amount: total,
         phone: phoneInput,
-        accountReference: 'SMATTIRE',
+        accountReference: '2048379985',
         transactionDesc: 'SM ATTIRE Order'
     };
 

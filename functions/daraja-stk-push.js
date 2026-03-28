@@ -63,7 +63,9 @@ exports.handler = async (event) => {
     MPESA_CALLBACK_URL
   } = process.env;
 
-  if (!MPESA_CONSUMER_KEY || !MPESA_CONSUMER_SECRET || !MPESA_SHORTCODE || !MPESA_PASSKEY || !MPESA_CALLBACK_URL) {
+  const businessShortCode = String(MPESA_SHORTCODE || '303030').trim();
+
+  if (!MPESA_CONSUMER_KEY || !MPESA_CONSUMER_SECRET || !MPESA_PASSKEY || !MPESA_CALLBACK_URL) {
     return {
       statusCode: 503,
       headers: JSON_HEADERS,
@@ -73,7 +75,7 @@ exports.handler = async (event) => {
 
   const amount = Number(payload.amount);
   const phoneNumber = normalizeKenyanPhone(payload.phone);
-  const accountReference = String(payload.accountReference || process.env.MPESA_ACCOUNT_REFERENCE || 'SMATTIRE').trim().slice(0, 12);
+  const accountReference = String(payload.accountReference || process.env.MPESA_ACCOUNT_REFERENCE || '2048379985').trim().slice(0, 12);
   const transactionDesc = String(payload.transactionDesc || process.env.MPESA_TRANSACTION_DESC || 'SM ATTIRE Order').trim().slice(0, 64);
 
   if (!Number.isFinite(amount) || amount < 1) {
@@ -85,7 +87,7 @@ exports.handler = async (event) => {
 
   const baseUrl = getDarajaBaseUrl();
   const timestamp = toTimestamp();
-  const password = Buffer.from(`${MPESA_SHORTCODE}${MPESA_PASSKEY}${timestamp}`).toString('base64');
+  const password = Buffer.from(`${businessShortCode}${MPESA_PASSKEY}${timestamp}`).toString('base64');
 
   try {
     const token = await getAccessToken(baseUrl, MPESA_CONSUMER_KEY, MPESA_CONSUMER_SECRET);
@@ -96,13 +98,13 @@ exports.handler = async (event) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        BusinessShortCode: MPESA_SHORTCODE,
+        BusinessShortCode: businessShortCode,
         Password: password,
         Timestamp: timestamp,
         TransactionType: 'CustomerPayBillOnline',
         Amount: Math.round(amount),
         PartyA: phoneNumber,
-        PartyB: MPESA_SHORTCODE,
+        PartyB: businessShortCode,
         PhoneNumber: phoneNumber,
         CallBackURL: MPESA_CALLBACK_URL,
         AccountReference: accountReference || 'SMATTIRE',
@@ -137,4 +139,3 @@ exports.handler = async (event) => {
     };
   }
 };
-
