@@ -1,5 +1,5 @@
 const products = [
-    { id: 1, name: "Jacket & Cap", category: "Casual Streetwear", price: 3300, image: "/jacket-and-cap.jpg", badge: "Bestseller", desc: "Bundle deal: stylish jacket plus matching cap for an effortless streetwear fit." },
+    { id: 1, name: "Jacket & Cap", category: "Casual Streetwear", price: 3300, image: "/classic-denim-jacket.jpg", badge: "Bestseller", desc: "Bundle deal: stylish jacket plus matching cap for an effortless streetwear fit." },
     { id: 2, name: "Cotton Sweaters", category: "Casual Streetwear", price: 1500, image: "/cotton-sweaters.jpg", badge: "Hot", desc: "Soft cotton sweaters priced for everyday wear. Cozy, breathable, and ready for layering." },
     { id: 3, name: "Air Force 1s, T-Shirt & Cap", category: "Neatfit Collection", price: 5300, image: "/air-force-tee-cap.jpg", badge: "Shoe Lover", desc: "Complete set featuring Air Force 1s, a clean tee, and a coordinating cap for a full look." },
     { id: 4, name: "T-Shirts", category: "Casual Streetwear", price: 1000, image: "/t-shirts.jpg", badge: "", desc: "Classic tees at a friendly price. Everyday essentials for easy styling." },
@@ -8,7 +8,7 @@ const products = [
     { id: 7, name: "Pink \"Alo\" Graphic Tee with Matching Cap", category: "Casual Streetwear", price: 1500, image: "/pink-alo-tee-cap.jpg", badge: "Deal", desc: "Brand-new Pink \"Alo\" graphic tee paired with a matching cap for a clean coordinated aesthetic. Fresh streetwear set with fast delivery in Nairobi.", keywords: "Nairobi fashion, Streetwear Kenya, pink alo graphic tee, matching cap set" },
     { id: 8, name: "Shoes", category: "Casual Streetwear", price: 3500, image: "/shoes.jpg", badge: "", desc: "Versatile shoes prepped and ready to wear. Clean, dependable, and easy to style.", keywords: "Nairobi Thrift, Streetwear Kenya, everyday shoes" },
     { id: 9, name: "Pink New Balance", category: "Neatfit Collection", price: 3500, image: "/pink-new-balance.jpg", badge: "Exclusive", desc: "Pink New Balance sneakers with a sleek retro-runner aesthetic. Brand-new pair with fast delivery in Nairobi.", keywords: "Nairobi fashion, Streetwear Kenya, pink new balance sneakers, retro runner style" },
-    { id: 10, name: "White New Balance", category: "Neatfit Collection", price: 3500, image: "/white-new-balance.jpg", badge: "Trending", desc: "White New Balance sneakers for a clean, versatile look. Brand-new pick for any fit.", keywords: "Nairobi fashion, Streetwear Kenya, white new balance sneakers" },
+    { id: 10, name: "White New Balance", category: "Neatfit Collection", price: 3500, image: "/new-balance-9060.jpg", badge: "Trending", desc: "White New Balance sneakers for a clean, versatile look. Brand-new pick for any fit.", keywords: "Nairobi fashion, Streetwear Kenya, white new balance sneakers" },
     { id: 11, name: "Bag, Cap & Shoes", category: "Casual Streetwear", price: 9300, image: "/bag-cap-shoes.jpg", badge: "", desc: "Premium bundle-only price for a curated bag, cap, and shoes set — a full head-to-toe upgrade." },
     { id: 12, name: "New Balance 9060", category: "Neatfit Collection", price: 3500, image: "/new-balance-9060.jpg", badge: "Quality", desc: "New Balance 9060 sneakers with a chunky futuristic aesthetic. A Quality Vintage sneaker pick with fast delivery in Nairobi.", keywords: "Nairobi Thrift, Streetwear Kenya, Quality Vintage, new balance 9060, chunky sneaker" },
     { id: 13, name: "Nike Air & Cap", category: "Casual Streetwear", price: 4300, image: "/nike-air-and-cap.jpg", badge: "", desc: "Bundle: Nike Air sneakers paired with a cap for an instant streetwear finish.", keywords: "Nairobi Thrift, Streetwear Kenya, Nike Air bundle, cap" },
@@ -855,13 +855,14 @@ function addFromModal() {
 function renderProducts(list) {
     const productGrid = document.getElementById('productGrid');
     if (!productGrid) return;
+    const uniqueById = list.filter((product, index, source) => source.findIndex(item => item.id === product.id) === index);
 
-    if (!list.length) {
+    if (!uniqueById.length) {
         productGrid.innerHTML = '<p class="col-span-full text-center text-white/60 py-14">No products found in this category.</p>';
         return;
     }
 
-    productGrid.innerHTML = list.map(createProductCard).join('');
+    productGrid.innerHTML = uniqueById.map(createProductCard).join('');
 }
 
 function filterProducts(category) {
