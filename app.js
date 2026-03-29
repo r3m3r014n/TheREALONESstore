@@ -1,18 +1,18 @@
 const products = [
-    { id: 1, name: "Jacket & Cap", category: "Casual Streetwear", price: 3300, image: "/jacket-and-cap.jpg", badge: "Bestseller", desc: "Bundle deal: stylish jacket plus matching cap for an effortless streetwear fit." },
-    { id: 2, name: "Cotton Sweaters", category: "Casual Streetwear", price: 1500, image: "/cotton-sweaters.jpg", badge: "Hot", desc: "Soft cotton sweaters priced for everyday wear. Cozy, breathable, and ready for layering." },
-    { id: 3, name: "Air Force 1s, T-Shirt & Cap", category: "Neatfit Collection", price: 5300, image: "/air-force-tee-cap.jpg", badge: "Shoe Lover", desc: "Complete set featuring Air Force 1s, a clean tee, and a coordinating cap for a full look." },
-    { id: 4, name: "T-Shirts", category: "Casual Streetwear", price: 1000, image: "/t-shirts.jpg", badge: "", desc: "Classic tees at a friendly price. Everyday essentials for easy styling." },
-    { id: 5, name: "White Striped Shirts", category: "Casual Streetwear", price: 1000, image: "/white-striped-shirts.jpg", badge: "Trending", desc: "White striped shirts with a clean, minimalist vibe. Perfect for smart-casual fits." },
-    { id: 6, name: "Cap & Chanel Bag", category: "Casual Streetwear", price: 5800, image: "/cap-and-chanel-bag.jpg", badge: "", desc: "Cap plus Chanel-inspired bag bundle. Statement accessories for an elevated finish.", keywords: "Nairobi Thrift, Streetwear Kenya, Chanel bag bundle, statement accessories" },
-    { id: 7, name: "Pink \"Alo\" Graphic Tee with Matching Cap", category: "Casual Streetwear", price: 1500, image: "/pink-alo-tee-cap.jpg", badge: "Deal", desc: "Brand-new Pink \"Alo\" graphic tee paired with a matching cap for a clean coordinated aesthetic. Fresh streetwear set with fast delivery in Nairobi.", keywords: "Nairobi fashion, Streetwear Kenya, pink alo graphic tee, matching cap set" },
-    { id: 8, name: "Shoes", category: "Casual Streetwear", price: 3500, image: "/shoes.jpg", badge: "", desc: "Versatile shoes prepped and ready to wear. Clean, dependable, and easy to style.", keywords: "Nairobi Thrift, Streetwear Kenya, everyday shoes" },
-    { id: 9, name: "Pink New Balance", category: "Neatfit Collection", price: 3500, image: "/pink-new-balance.jpg", badge: "Exclusive", desc: "Pink New Balance sneakers with a sleek retro-runner aesthetic. Brand-new pair with fast delivery in Nairobi.", keywords: "Nairobi fashion, Streetwear Kenya, pink new balance sneakers, retro runner style" },
-    { id: 10, name: "White New Balance", category: "Neatfit Collection", price: 3500, image: "/white-new-balance.jpg", badge: "Trending", desc: "White New Balance sneakers for a clean, versatile look. Brand-new pick for any fit.", keywords: "Nairobi fashion, Streetwear Kenya, white new balance sneakers" },
-    { id: 11, name: "Bag, Cap & Shoes", category: "Casual Streetwear", price: 9300, image: "/bag-cap-shoes.jpg", badge: "", desc: "Premium bundle-only price for a curated bag, cap, and shoes set — a full head-to-toe upgrade." },
-    { id: 12, name: "New Balance 9060", category: "Neatfit Collection", price: 3500, image: "/new-balance-9060.jpg", badge: "Quality", desc: "New Balance 9060 sneakers with a chunky futuristic aesthetic. A Quality Vintage sneaker pick with fast delivery in Nairobi.", keywords: "Nairobi Thrift, Streetwear Kenya, Quality Vintage, new balance 9060, chunky sneaker" },
-    { id: 13, name: "Nike Air & Cap", category: "Casual Streetwear", price: 4300, image: "/nike-air-and-cap.jpg", badge: "", desc: "Bundle: Nike Air sneakers paired with a cap for an instant streetwear finish.", keywords: "Nairobi Thrift, Streetwear Kenya, Nike Air bundle, cap" },
-    { id: 14, name: "Nike", category: "Neatfit Collection", price: 3500, image: "/nike.jpg", badge: "", desc: "Nike sneakers brand new, prepped, and ready to wear." }
+    { id: 1, name: "Jacket & Cap", category: "Casual Streetwear", price: 3300, image: "/jacket-and-cap.jpg", badge: "Bestseller", desc: "Bundle deal: stylish jacket plus matching cap for an effortless streetwear fit.", alt: "Black jacket and cap set displayed for Nairobi streetwear looks." },
+    { id: 2, name: "Cotton Sweaters", category: "Casual Streetwear", price: 1500, image: "/cotton-sweaters.jpg", badge: "Hot", desc: "Soft cotton sweaters priced for everyday wear. Cozy, breathable, and ready for layering.", alt: "Stack of soft cotton sweaters for casual layering." },
+    { id: 3, name: "Air Force 1s, T-Shirt & Cap", category: "Neatfit Collection", price: 5300, image: "/air-force-tee-cap.jpg", badge: "Shoe Lover", desc: "Complete set featuring Air Force 1s, a clean tee, and a coordinating cap for a full look.", alt: "Air Force 1 sneakers with matching white tee and cap bundle." },
+    { id: 4, name: "Classic T-Shirts Pack", category: "Casual Streetwear", price: 1000, image: "/t-shirts.jpg", badge: "", desc: "Classic tees at a friendly price. Everyday essentials for easy styling.", alt: "Assorted classic t-shirts folded for easy everyday styling." },
+    { id: 5, name: "Black & White Striped Ribbed Tee", category: "Casual Streetwear", price: 1000, image: "/white-striped-shirts.jpg", badge: "Trending", desc: "Black and white striped ribbed tee with a clean, minimalist vibe. Perfect for smart-casual fits.", alt: "Black and white ribbed striped tee on hangers against a marble backdrop." },
+    { id: 6, name: "Cap & Chanel Bag", category: "Casual Streetwear", price: 5800, image: "/cap-and-chanel-bag.jpg", badge: "", desc: "Cap plus Chanel-inspired bag bundle. Statement accessories for an elevated finish.", keywords: "Nairobi Thrift, Streetwear Kenya, Chanel bag bundle, statement accessories", alt: "Cap paired with Chanel-inspired bag as a bundle." },
+    { id: 7, name: "Pink \"Alo\" Graphic Tee with Matching Cap", category: "Casual Streetwear", price: 1500, image: "/pink-alo-tee-cap.jpg", badge: "Deal", desc: "Brand-new Pink \"Alo\" graphic tee paired with a matching cap for a clean coordinated aesthetic. Fresh streetwear set with fast delivery in Nairobi.", keywords: "Nairobi fashion, Streetwear Kenya, pink alo graphic tee, matching cap set", alt: "Pink Alo graphic tee displayed with a matching cap." },
+    { id: 8, name: "Everyday Streetwear Shoes", category: "Casual Streetwear", price: 3500, image: "/shoes.jpg", badge: "", desc: "Versatile brand-new shoes prepped and ready to wear. Clean, dependable, and easy to style.", keywords: "Nairobi Thrift, Streetwear Kenya, everyday shoes", alt: "Pair of everyday streetwear shoes styled for casual outfits." },
+    { id: 9, name: "Pink New Balance", category: "Neatfit Collection", price: 3500, image: "/pink-new-balance.jpg", badge: "Exclusive", desc: "Pink New Balance sneakers with a sleek retro-runner aesthetic. Brand-new pair with fast delivery in Nairobi.", keywords: "Nairobi fashion, Streetwear Kenya, pink new balance sneakers, retro runner style", alt: "Pink New Balance sneakers in a retro runner silhouette." },
+    { id: 10, name: "White New Balance", category: "Neatfit Collection", price: 3500, image: "/white-new-balance.jpg", badge: "Trending", desc: "White New Balance sneakers for a clean, versatile look. Brand-new pick for any fit.", keywords: "Nairobi fashion, Streetwear Kenya, white new balance sneakers", alt: "White New Balance sneakers with a clean minimalist finish." },
+    { id: 11, name: "Bag, Cap & Shoes", category: "Casual Streetwear", price: 9300, image: "/bag-cap-shoes.jpg", badge: "", desc: "Premium bundle-only price for a curated bag, cap, and shoes set — a full head-to-toe upgrade.", alt: "Bag, cap, and shoes bundle laid out together." },
+    { id: 12, name: "New Balance 9060", category: "Neatfit Collection", price: 3500, image: "/new-balance-9060.jpg", badge: "Quality", desc: "New Balance 9060 sneakers with a chunky futuristic aesthetic. A Quality Vintage sneaker pick with fast delivery in Nairobi.", keywords: "Nairobi Thrift, Streetwear Kenya, Quality Vintage, new balance 9060, chunky sneaker", alt: "New Balance 9060 chunky sneakers in a futuristic style." },
+    { id: 13, name: "Nike Air & Cap", category: "Casual Streetwear", price: 4300, image: "/nike-air-and-cap.jpg", badge: "", desc: "Bundle: Nike Air sneakers paired with a cap for an instant streetwear finish.", keywords: "Nairobi Thrift, Streetwear Kenya, Nike Air bundle, cap", alt: "Nike Air sneakers matched with a cap as a bundle." },
+    { id: 14, name: "Nike Classic Sneakers", category: "Neatfit Collection", price: 3500, image: "/nike.jpg", badge: "", desc: "Nike sneakers brand new, prepped, and ready to wear.", keywords: "Nairobi fashion, Streetwear Kenya, Nike sneakers classic", alt: "Classic Nike sneakers ready to wear." }
 ];
 
 const WHATSAPP_NUMBER = '254701226084';
@@ -295,6 +295,7 @@ const copyDictionary = {
 };
 
 function productAltText(product) {
+    if (product.alt) return product.alt;
     return `${product.name} — ${product.category}, KES ${product.price.toLocaleString()} | Brand New, SM ATTIRE Nairobi`;
 }
 
@@ -363,7 +364,7 @@ function buildProductSchema(product) {
             contentUrl: imageUrl,
             url: imageUrl,
             name: productAltText(product),
-            description: `${product.name} — ${product.category} available at SM ATTIRE Nairobi. KES ${product.price.toLocaleString()}.`,
+            description: `${productAltText(product)}`,
             width: { '@type': 'QuantitativeValue', value: 800, unitCode: 'E37' },
             height: { '@type': 'QuantitativeValue', value: 1000, unitCode: 'E37' }
         },
@@ -375,7 +376,7 @@ function buildProductSchema(product) {
             price: product.price,
             priceValidUntil: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
             availability: 'https://schema.org/InStock',
-            itemCondition: 'https://schema.org/UsedCondition',
+            itemCondition: 'https://schema.org/NewCondition',
             seller: {
                 '@type': 'Organization',
                 name: 'SM ATTIRE',
