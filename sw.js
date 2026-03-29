@@ -1,12 +1,12 @@
-const CACHE_NAME = 'smattire-v3';
+const CACHE_NAME = 'smattire-v4';
 const STATIC_ASSETS = [
     '/',
     '/index.html',
     '/shop.html',
     '/about.html',
     '/contact.html',
-    '/app.js?v=20260328b',
-    '/styles.css?v=20260328b',
+    '/app.js?v=20260329a',
+    '/styles.css?v=20260329a',
     '/manifest.webmanifest',
     '/icon-192.png',
     '/icon-512.png',
@@ -41,6 +41,7 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
     const { request } = event;
     const url = new URL(request.url);
+    if (request.method !== 'GET') return;
 
     // Network-first for API/functions
     if (url.pathname.startsWith('/api/') || url.pathname.startsWith('/.netlify/')) {
@@ -48,6 +49,18 @@ self.addEventListener('fetch', event => {
             fetch(request).catch(() => new Response(JSON.stringify({ error: 'Offline' }), {
                 headers: { 'Content-Type': 'application/json' }
             }))
+        );
+        return;
+    }
+
+    // Network-first for navigation/documents with cache fallback for freshness.
+    if (request.destination === 'document') {
+        event.respondWith(
+            fetch(request).then(response => {
+                const clone = response.clone();
+                caches.open(CACHE_NAME).then(cache => cache.put(request, clone));
+                return response;
+            }).catch(() => caches.match(request).then(cached => cached || caches.match('/index.html')))
         );
         return;
     }

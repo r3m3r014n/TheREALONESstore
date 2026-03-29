@@ -595,11 +595,19 @@ function stopSeraVoice() {
     window.speechSynthesis.cancel();
 }
 
+function registerServiceWorker() {
+    if (!('serviceWorker' in navigator)) return;
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js?v=20260329a').catch(error => {
+            console.warn('Service worker registration failed:', error);
+        });
+    });
+}
+
 function speakSeraAssistant() {
     if (!('speechSynthesis' in window) || typeof window.SpeechSynthesisUtterance === 'undefined') return;
     seraAssistantActivated = true;
     updateJourneyAssistant();
-
     stopSeraVoice();
     const utterance = new SpeechSynthesisUtterance(getSeraMessage());
     const voice = selectSeraVoice();
@@ -1447,6 +1455,7 @@ document.addEventListener('keydown', event => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
+    registerServiceWorker();
     updateCart();
     initializeLangToggle();
     initializeOptimizedLinks();
