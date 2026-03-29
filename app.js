@@ -2,7 +2,7 @@ const products = [
     { id: 1, name: "Jacket & Cap", category: "Casual Streetwear", price: 3300, image: "/jacket-and-cap.jpg", badge: "Bestseller", desc: "Bundle deal: stylish jacket plus matching cap for an effortless streetwear fit.", alt: "Black jacket and cap set displayed for Nairobi streetwear looks." },
     { id: 2, name: "Cotton Sweaters", category: "Casual Streetwear", price: 1500, image: "/cotton-sweaters.jpg", badge: "Hot", desc: "Soft cotton sweaters priced for everyday wear. Cozy, breathable, and ready for layering.", alt: "Stack of soft cotton sweaters for casual layering." },
     { id: 3, name: "Air Force 1s, T-Shirt & Cap", category: "Neatfit Collection", price: 5300, image: "/air-force-tee-cap.jpg", badge: "Shoe Lover", desc: "Complete set featuring Air Force 1s, a clean tee, and a coordinating cap for a full look.", alt: "Air Force 1 sneakers with matching white tee and cap bundle." },
-    { id: 4, name: "Classic T-Shirts Pack", category: "Casual Streetwear", price: 1000, image: "/t-shirts.jpg", badge: "", desc: "Classic tees at a friendly price. Everyday essentials for easy styling.", alt: "Assorted classic t-shirts folded for easy everyday styling." },
+    { id: 4, name: "Classic T-Shirt", category: "Casual Streetwear", price: 1000, image: "/t-shirts.jpg", badge: "", desc: "Single classic tee at a friendly price. Everyday essential for easy styling.", alt: "Assorted classic t-shirts folded for easy everyday styling." },
     { id: 5, name: "Black & White Striped Ribbed Tee", category: "Casual Streetwear", price: 1000, image: "/white-striped-shirts.jpg", badge: "Trending", desc: "Black and white striped ribbed tee with a clean, minimalist vibe. Perfect for smart-casual fits.", alt: "Black and white ribbed striped tee on hangers against a marble backdrop." },
     { id: 6, name: "Cap & Chanel Bag", category: "Casual Streetwear", price: 5800, image: "/cap-and-chanel-bag.jpg", badge: "", desc: "Cap plus Chanel-inspired bag bundle. Statement accessories for an elevated finish.", keywords: "Nairobi Thrift, Streetwear Kenya, Chanel bag bundle, statement accessories", alt: "Cap paired with Chanel-inspired bag as a bundle." },
     { id: 7, name: "Pink \"Alo\" Graphic Tee with Matching Cap", category: "Casual Streetwear", price: 1500, image: "/pink-alo-tee-cap.jpg", badge: "Deal", desc: "Brand-new Pink \"Alo\" graphic tee paired with a matching cap for a clean coordinated aesthetic. Fresh streetwear set with fast delivery in Nairobi.", keywords: "Nairobi fashion, Streetwear Kenya, pink alo graphic tee, matching cap set", alt: "Pink Alo graphic tee displayed with a matching cap." },
@@ -364,7 +364,7 @@ function buildProductSchema(product) {
             contentUrl: imageUrl,
             url: imageUrl,
             name: productAltText(product),
-            description: `${productAltText(product)}`,
+            description: `${product.desc} KES ${product.price.toLocaleString()} — SM ATTIRE Nairobi.`,
             width: { '@type': 'QuantitativeValue', value: 800, unitCode: 'E37' },
             height: { '@type': 'QuantitativeValue', value: 1000, unitCode: 'E37' }
         },
