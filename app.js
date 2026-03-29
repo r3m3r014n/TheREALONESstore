@@ -855,7 +855,15 @@ function addFromModal() {
 function renderProducts(list) {
     const productGrid = document.getElementById('productGrid');
     if (!productGrid) return;
-    const uniqueById = list.filter((product, index, source) => source.findIndex(item => item.id === product.id) === index);
+    const seenIds = new Set();
+    const uniqueById = [];
+    list.forEach(product => {
+        if (product === null || product === undefined) return;
+        if (product.id === null || product.id === undefined) return;
+        if (seenIds.has(product.id)) return;
+        seenIds.add(product.id);
+        uniqueById.push(product);
+    });
 
     if (!uniqueById.length) {
         productGrid.innerHTML = '<p class="col-span-full text-center text-white/60 py-14">No products found in this category.</p>';
